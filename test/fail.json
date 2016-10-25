@@ -1,0 +1,4 @@
+{
+	success: false,
+	errors: ["Error 1", "Error 2"],
+}

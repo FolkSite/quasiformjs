@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8"/>
+	<title>quasiform 2</title>
+	<meta name="viewport" content="width=device-width,height=device-height,user-scalable=no"/>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage">
+
+<div data-quasiform="wrapper">
+	<div data-quasiform="errors" style="display: none;"></div>
+	<div data-quasiform="messages" style="display: none;"></div>
+	<form action="success.json" method="post" data-quasiform="form" accept-charset="utf-8">
+		<div class="row">
+			<div class="col-md-6 col-sm-12">
+				<div class="form-group">
+					<label for="name">Имя</label>
+					<input id="name" type="text" name="name" value="" placeholder="Имя" class="form-control"/>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6 col-sm-12">
+				<div class="form-group">
+					<label for="contacts">Контактная информация</label>
+					<input id="contacts" type="text" name="contacts" value="" placeholder="E-mail, телефон или другое" class="form-control"/>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6 col-sm-12">
+				<div class="form-group">
+					<label for="text">Сообщение</label>
+					<textarea id="text" name="text" placeholder="Ваше сообщение" class="form-control"></textarea>
+				</div>
+			</div>
+		</div>
+		<label form="quasiform-agree">
+			<input type="checkbox" name="checkbox-agree" value="Согласен на обработку данных" data-quasiform="checkbox-agree" checked /> Согласен на обработку данных
+		</label>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary">Отправить</button>
+		</div>
+	</form>
+</div>
+
+
+<script src="../dependencies/jquery-3.1.0.min.js"></script>
+<script src="../src/quasiform-2.0.0.js"></script>
+<script>
+	var quasiform = $('[data-quasiform="wrapper"]').quasiform();
+	//console.debug(quasiform);
+</script>
+
+
+</body>
+</html>
