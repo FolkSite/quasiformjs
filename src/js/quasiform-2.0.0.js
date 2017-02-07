@@ -60,7 +60,7 @@ function recaptchaCallBack() {
 				form.find('button[type="submit"]').attr('disabled', true);
 				wrapper.find(loaderSelector).show();
 				$.ajax({
-					contentType: false,
+					//contentType: false,
 					processData: false,
 					data: formData,
 					dataType: 'json',
@@ -90,7 +90,9 @@ function recaptchaCallBack() {
 								if (data.errors.length > 0) {
 									var errorsList = '';
 									for (i = 0; i < data.errors.length; i++) {
-										errorsList += $.fn.quasiform.options.errorOpenTag + data.errors[i] + $.fn.quasiform.options.errorCloseTag;
+										if (data.errors[i].length > 0) {
+											errorsList += $.fn.quasiform.options.errorOpenTag + data.errors[i] + $.fn.quasiform.options.errorCloseTag;
+										}
 									}
 									errorsList = $.fn.quasiform.options.errorsOpenTag + errorsList + $.fn.quasiform.options.errorsCloseTag;
 									wrapper.find(errorsWrapperSelector).html(errorsList).show();
@@ -102,13 +104,15 @@ function recaptchaCallBack() {
 								if (data.messages.length > 0) {
 									var messagesList = '';
 									for (i = 0; i < data.messages.length; i++) {
-										messagesList += $.fn.quasiform.options.messageOpenTag + data.messages[i] + $.fn.quasiform.options.messageCloseTag;
+										if (data.messages[i].length > 0) {
+											messagesList += $.fn.quasiform.options.messageOpenTag + data.messages[i] + $.fn.quasiform.options.messageCloseTag;
+										}
 									}
 									messagesList = $.fn.quasiform.options.messagesOpenTag + messagesList + $.fn.quasiform.options.messagesCloseTag;
 									wrapper.find(messagesWrapperSelector).html(messagesList).show();
 								}
 							}
-							if ($.fn.quasiform.options.hideFormOnSuccess) {
+							if ($.fn.quasiform.options.hideFormOnSuccess && 'success' in data && data.success) {
 								form.hide();
 							}
 						} else {
