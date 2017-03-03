@@ -20,7 +20,7 @@ function recaptchaCallBack() {
 	$.fn.quasiform = function(options) {
 		// Настройки
 		$.fn.quasiform.options = $.extend({
-			debug: true,
+			debug: false,
 
 			errorOpenTag: '<li>',
 			errorCloseTag: '</li>',

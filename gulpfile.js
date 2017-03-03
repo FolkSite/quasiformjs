@@ -7,6 +7,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer'); // Подключаем библиотеку для автоматического добавления префиксов
 
 var templateMainPath = 'src/';
+var distMainPath = 'dist/';
 
 gulp.task('sass-main', function() {
     return gulp.src(templateMainPath + 'sass/main.scss')
@@ -15,7 +16,7 @@ gulp.task('sass-main', function() {
         //.pipe(sourcemaps.write())
         //.pipe(autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }))
         .pipe(rename('quasiform.min.css')) // Добавляем суффикс .min
-        .pipe(gulp.dest(templateMainPath + 'css'))
+        .pipe(gulp.dest(distMainPath + 'css'))
 });
 
 gulp.task('js-main', function() {
@@ -24,9 +25,8 @@ gulp.task('js-main', function() {
         ])
         .pipe(concat('quasiform.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest(templateMainPath + 'js'));
+        .pipe(gulp.dest(distMainPath + 'js'));
 });
-
 
 gulp.task('watch-main', ['sass-main', 'js-main'], function() {
     gulp.watch(templateMainPath + 'sass/*.scss', ['sass-main']);
