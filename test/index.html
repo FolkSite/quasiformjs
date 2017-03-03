@@ -1,117 +1,119 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<meta charset="utf-8"/>
+	<meta charset="utf-8" />
 	<title>quasiform 2</title>
-	<meta name="viewport" content="width=device-width,height=device-height,user-scalable=no"/>
+	<meta name="viewport" content="width=device-width,height=device-height,user-scalable=no" />
+	<link rel="stylesheet" href="../src/css/grid.min.css" />
+	<link rel="stylesheet" href="../src/css/quasiform.min.css" />
 </head>
 <body itemscope itemtype="http://schema.org/WebPage">
 
-<div id="success">
-	<div data-quasiform="errors" style="display: none;"></div>
-	<div data-quasiform="messages" style="display: none;"></div>
-	<div data-quasiform="loader" style="display: none; background-color: #23c;">
-		Я отправляю форму
+<div class="container">
+	<h2>Форма с успешным запросом</h2>
+	<div id="success">
+		<div data-quasiform="errors" style="display: none;"></div>
+		<div data-quasiform="messages" style="display: none;"></div>
+		<div data-quasiform="loader" style="display: none; background-color: #23c;">
+			Я отправляю форму
+		</div>
+		<form action="success.json" method="post" accept-charset="utf-8">
+			<div class="row">
+				<div class="col m6 s12">
+					<div class="form-group">
+						<label for="name">Имя</label>
+						<input id="name" type="text" name="name" value="" placeholder="Имя" class="form-control"/>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col m6 s12">
+					<div class="form-group">
+						<label for="contacts">Контактная информация</label>
+						<input id="contacts" type="text" name="contacts" value="" placeholder="E-mail, телефон или другое" class="form-control"/>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col m6 s12">
+					<div class="form-group">
+						<label for="text">Сообщение</label>
+						<textarea id="text" name="text" placeholder="Ваше сообщение" class="form-control"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<label for="reCaptchaSuccess">Проверка</label>
+				<div data-quasiform="recaptcha" data-sitekey="6LeevgkTAAAAAEz1oGOtzncwPmjYPQX6EtWolaBZ" id="reCaptchaSuccess">
+				</div>
+			</div>
+			<label>
+				<input type="checkbox" name="checkbox-agree" value="Согласен на обработку данных" data-quasiform="agreement" /> Согласен на обработку данных
+			</label>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary" disabled>Отправить</button>
+			</div>
+		</form>
 	</div>
-	<form action="success.json" method="post" accept-charset="utf-8">
-		<div class="row">
-			<div class="col-md-6 col-sm-12">
-				<div class="form-group">
-					<label for="name">Имя</label>
-					<input id="name" type="text" name="name" value="" placeholder="Имя" class="form-control"/>
+
+
+	<h2>Форма с ошибочным запросом</h2>
+	<div id="fail">
+		<div data-quasiform="errors" style="display: none;"></div>
+		<div data-quasiform="messages" style="display: none;"></div>
+		<div data-quasiform="loader" style="display: none; background-color: #23c;">
+			Я отправляю форму
+		</div>
+		<form action="fail.json" method="post" accept-charset="utf-8">
+			<div class="row">
+				<div class="col m6 s12">
+					<div class="form-group">
+						<label for="name">Имя</label>
+						<input id="name" type="text" name="name" value="" placeholder="Имя" class="form-control"/>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-6 col-sm-12">
-				<div class="form-group">
-					<label for="contacts">Контактная информация</label>
-					<input id="contacts" type="text" name="contacts" value="" placeholder="E-mail, телефон или другое" class="form-control"/>
+			<div class="row">
+				<div class="col m6 s12">
+					<div class="form-group">
+						<label for="contacts">Контактная информация</label>
+						<input id="contacts" type="text" name="contacts" value="" placeholder="E-mail, телефон или другое" class="form-control"/>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-6 col-sm-12">
-				<div class="form-group">
-					<label for="text">Сообщение</label>
-					<textarea id="text" name="text" placeholder="Ваше сообщение" class="form-control"></textarea>
+			<div class="row">
+				<div class="col m6 s12">
+					<div class="form-group">
+						<label for="text">Сообщение</label>
+						<textarea id="text" name="text" placeholder="Ваше сообщение" class="form-control"></textarea>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<label for="reCaptchaSuccess">Проверка</label>
-			<div data-quasiform="recaptcha" data-sitekey="6LeevgkTAAAAAEz1oGOtzncwPmjYPQX6EtWolaBZ" id="reCaptchaSuccess">
+			<div class="row">
+				<label for="reCaptchaFail">Проверка</label>
+				<div data-quasiform="recaptcha" data-sitekey="6LeevgkTAAAAAEz1oGOtzncwPmjYPQX6EtWolaBZ" id="reCaptchaFail">
+				</div>
 			</div>
-		</div>
-		<label>
-			<input type="checkbox" name="checkbox-agree" value="Согласен на обработку данных" data-quasiform="agreement" /> Согласен на обработку данных
-		</label>
-		<div class="form-group">
-			<button type="submit" class="btn btn-primary" disabled>Отправить</button>
-		</div>
-	</form>
-</div>
-
-
-
-<hr/>
-<hr/>
-
-
-
-<div id="fail">
-	<div data-quasiform="errors" style="display: none;"></div>
-	<div data-quasiform="messages" style="display: none;"></div>
-	<div data-quasiform="loader" style="display: none; background-color: #23c;">
-		Я отправляю форму
+			<label form="quasiform-agree">
+				<input type="checkbox" name="checkbox-agree" value="Согласен на обработку данных" data-quasiform="agreement" checked /> Согласен на обработку данных
+			</label>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Отправить</button>
+			</div>
+		</form>
 	</div>
-	<form action="fail.json" method="post" accept-charset="utf-8">
-		<div class="row">
-			<div class="col-md-6 col-sm-12">
-				<div class="form-group">
-					<label for="name">Имя</label>
-					<input id="name" type="text" name="name" value="" placeholder="Имя" class="form-control"/>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-6 col-sm-12">
-				<div class="form-group">
-					<label for="contacts">Контактная информация</label>
-					<input id="contacts" type="text" name="contacts" value="" placeholder="E-mail, телефон или другое" class="form-control"/>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-6 col-sm-12">
-				<div class="form-group">
-					<label for="text">Сообщение</label>
-					<textarea id="text" name="text" placeholder="Ваше сообщение" class="form-control"></textarea>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<label for="reCaptchaFail">Проверка</label>
-			<div data-quasiform="recaptcha" data-sitekey="6LeevgkTAAAAAEz1oGOtzncwPmjYPQX6EtWolaBZ" id="reCaptchaFail">
-			</div>
-		</div>
-		<label form="quasiform-agree">
-			<input type="checkbox" name="checkbox-agree" value="Согласен на обработку данных" data-quasiform="agreement" checked /> Согласен на обработку данных
-		</label>
-		<div class="form-group">
-			<button type="submit" class="btn btn-primary">Отправить</button>
-		</div>
-	</form>
 </div>
 
 <script src="../dependencies/jquery-3.1.0.min.js"></script>
 <script src="https://www.google.com/recaptcha/api.js?onload=recaptchaCallBack&render=explicit"></script>
-<script src="../src/quasiform-2.0.0.js"></script>
+<script src="../src/quasiform/min.js"></script>
 
 <script>
-	var quasiformSuccess = $('#success').quasiform({});
-	var quasiformFail = $('#fail').quasiform({});
-	//console.debug(quasiform);
+	let optionsSuccess = {};
+	let quasiformSuccess = $('#success').quasiform(optionsSuccess);
+	
+	let optionsFail = {};
+	let quasiformFail = $('#fail').quasiform(optionsFail);
 </script>
 
 

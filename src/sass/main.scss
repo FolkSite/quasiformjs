@@ -1,0 +1,45 @@
+.quasiform {
+
+	&-errors {
+		background-color: #f00;
+		
+		&-item {
+			color: #fff;
+			font-size: 1rem;
+			list-style: none;
+		}
+	}
+
+	&-form {
+		background-color: #fff;
+		border-radius: 4px;
+		
+		&__input {
+			color: #000;
+			font-size: 1rem;
+			
+			&--has-error {
+				border: 1px solid #f00;
+			}
+		}
+		
+		&__label {
+			color: #666;
+			font-size: 1rem;
+		}
+	}
+	
+	&-messages {
+		background-color: #00f;
+		
+		&-item {
+			color: #fff;
+			font-size: 1rem;
+			list-style: none;
+		}
+	}
+
+	&-wrapper {
+		padding: 10px;
+	}
+}

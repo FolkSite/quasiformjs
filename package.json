@@ -1,10 +1,20 @@
 {
   "name": "quasiform",
-  "version": "0.0.1",
-  "description": "JavaScript-plugin for quasiForm, MODX Snippet",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "quasi-art.ru",
   "devDependencies": {
-    "grunt": "~1.0.1",
-    "grunt-contrib-jshint": "~1.0.0",
-    "grunt-contrib-uglify": "~2.0.0"
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.4.0",
+    "gulp-uglifyjs": "^0.6.2",
+    "gulp-watch": "^4.3.11"
   }
 }
