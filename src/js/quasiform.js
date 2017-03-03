@@ -33,18 +33,31 @@ function recaptchaCallBack() {
 			messagesCloseTag: '</ul>',
 
 			hideFormOnSuccess: true,
+            
+            showOnSuccess: '', // Селектор элемента, который нужно показать в случае успешной отправки формы
+			hideOnSuccess: '', // Селектор элемента, который нужно скрыть в случае успешной отправки формы
+			showOnFail: '', // Селектор элемента, который нужно показать в случае неуспешной отправки формы
+			hideOnFail: '', // Селектор элемента, который нужно скрыть в случае неуспешной отправки формы
+            
+			callbackOnSuccess: null,
+			callbackOnFail: null,
 		}, options);
 
 		// Обёртка (внутри находятся сообщения и форма)
 		var wrapper = $(this);
-		
+
+		/**
+         * Если флажок установлен, то у кнопки отправки формы удаляется атрибут disabled.
+         */
 		wrapper.on('change', '[data-quasiform="agreement"]', function(e) {
-			console.log('checkbox');
 			var checked = $(this).is(':checked');
-			if (checked) {
-				form.find('button[type="submit"]').removeAttr('disabled');
-			} else {
-				form.find('button[type="submit"]').attr('disabled', true);
+            var button = form.find('button[type="submit"]').slice(0, 1);
+            if (button.length == 1) {
+    			if (checked) {
+    				button.removeAttr('disabled');
+    			} else {
+    				button.attr('disabled', true);
+    			}
 			}
 		});
 
@@ -115,6 +128,36 @@ function recaptchaCallBack() {
 							if ($.fn.quasiform.options.hideFormOnSuccess && 'success' in data && data.success) {
 								form.hide();
 							}
+                            
+                            if ('success' in data) {
+                                if (data.success) {
+                                    // Элемент, который нужно показать после успеха
+                                    if (typeof options.showOnSuccess == 'string' && options.showOnSuccess.length > 0) {
+                                        $(options.showOnSuccess).show();
+                                    }
+                                    // Элемент, который нужно скрыть после успеха
+                                    if (typeof options.hideOnSuccess == 'string' && options.hideOnSuccess.length > 0) {
+                                        $(options.hideOnSuccess).hide();
+                                    }
+                                    // Функция, которую нужно исполнить после успеха
+                                    if ('callbackOnSuccess' in options && typeof options.callbackOnSuccess == 'function') {
+                                        options.callbackOnSuccess();
+                                    }
+                                } else {
+                                    // Элемент, который нужно показать после неуспешного запроса
+                                    if (typeof options.showOnFail == 'string' && options.showOnFail.length > 0) {
+                                        $(options.showOnFail).show();
+                                    }
+                                    // Элемент, который нужно скрыть после неуспешного запроса
+                                    if (typeof options.hideOnFail == 'string' && options.hideOnFail.length > 0) {
+                                        $(options.hideOnFail).hide();
+                                    }
+                                    // Функция, которую нужно исполнить после неуспешного запроса
+                                    if ('callbackOnFail' in options && typeof options.callbackOnFail == 'function') {
+                                        options.callbackOnFail();
+                                    }
+                                }
+                            }
 						} else {
 							console.log('Ответ сервера имеет неверный формат');
 						}

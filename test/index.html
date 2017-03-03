@@ -5,7 +5,7 @@
 	<title>quasiform 2</title>
 	<meta name="viewport" content="width=device-width,height=device-height,user-scalable=no" />
 	<link rel="stylesheet" href="../dependencies/grid.min.css" />
-	<link rel="stylesheet" href="../dist/quasiform.min.css" />
+	<link rel="stylesheet" href="../dist/css/quasiform.min.css" />
 </head>
 <body itemscope itemtype="http://schema.org/WebPage">
 
@@ -42,11 +42,11 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<!--div class="row">
 				<label for="reCaptchaSuccess">Проверка</label>
 				<div data-quasiform="recaptcha" data-sitekey="6LeevgkTAAAAAEz1oGOtzncwPmjYPQX6EtWolaBZ" id="reCaptchaSuccess">
 				</div>
-			</div>
+			</div -->
 			<label>
 				<input type="checkbox" name="checkbox-agree" value="Согласен на обработку данных" data-quasiform="agreement" /> Согласен на обработку данных
 			</label>
@@ -89,11 +89,11 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<!--div class="row">
 				<label for="reCaptchaFail">Проверка</label>
 				<div data-quasiform="recaptcha" data-sitekey="6LeevgkTAAAAAEz1oGOtzncwPmjYPQX6EtWolaBZ" id="reCaptchaFail">
 				</div>
-			</div>
+			</div-->
 			<label form="quasiform-agree">
 				<input type="checkbox" name="checkbox-agree" value="Согласен на обработку данных" data-quasiform="agreement" checked /> Согласен на обработку данных
 			</label>
@@ -106,7 +106,7 @@
 
 <script src="../dependencies/jquery-3.1.0.min.js"></script>
 <script src="https://www.google.com/recaptcha/api.js?onload=recaptchaCallBack&render=explicit"></script>
-<script src="../dist/quasiform.min.js"></script>
+<script src="../dist/js/quasiform.min.js"></script>
 
 <script>
 	let optionsSuccess = {};
