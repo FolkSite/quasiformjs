@@ -11,22 +11,79 @@
 	}
 
 	&-form {
-		background-color: #fff;
 		border-radius: 4px;
 		
-		&__input {
-			color: #000;
-			font-size: 1rem;
-			
-			&--has-error {
-				border: 1px solid #f00;
-			}
-		}
+		&__form-group {
+            margin: 0 0 2rem 0;
+        }
 		
+		&__input {
+			background-color: #fff;
+            border: none;
+            color: #666;
+            display: block;
+            padding: 5px 5px;
+            width: 100%;
+            
+            &--has-error {
+                border: 1px solid #f00;
+            }
+		}
+
 		&__label {
 			color: #666;
+			display: block;
 			font-size: 1rem;
+            padding: 5px 5px;
+            
+            &--has-error {
+                color: #f00;
+            }
 		}
+		
+		&__submit {
+			background-color: #d36;
+	        border: none;
+	        color: #fff;
+	        display: block;
+	        font-weight: bold;
+	        height: 60px;
+	        line-height: 60px;
+	        padding: 0 30px;
+	        text-transform: uppercase;
+	        width: 100%;
+
+	        &:hover {
+	            background-color: #b14;
+	        }
+			
+			&:disabled {
+	            background-color: #aaa;
+	            border: 1px solid #666;
+	            color: #eee;
+	            
+	            &:hover {
+	                background-color: #aaa;
+	                border: 1px solid #666;
+	                color: #eee;
+	            }
+	        }
+		}
+		
+		&__textarea {
+            background-color: #fff;
+            border: none;
+            color: #666;
+            line-height: 1.5rem;
+            max-width: 100%;
+            min-height: 90px;
+            padding: 5px;
+            width: 100%;
+            
+            &.has-error {
+                border: 1px solid #f00;
+            }
+        }
 	}
 	
 	&-messages {
@@ -40,6 +97,7 @@
 	}
 
 	&-wrapper {
+		background-color: #eee;
 		padding: 10px;
 	}
 }

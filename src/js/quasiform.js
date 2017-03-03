@@ -16,7 +16,7 @@ function recaptchaCallBack() {
     });
 }
 
-(function ($) {
+
 	$.fn.quasiform = function(options) {
 		// Настройки
 		$.fn.quasiform.options = $.extend({
@@ -32,7 +32,10 @@ function recaptchaCallBack() {
 			messagesOpenTag: '<ul>',
 			messagesCloseTag: '</ul>',
 
-			hideFormOnSuccess: true,
+			hideFormOnSuccess: false,
+            
+            hasErrorInputClass: 'quasiform-form__input--has-error',
+            hasErrorLabelClass: 'quasiform-form__input--has-error',
             
             showOnSuccess: '', // Селектор элемента, который нужно показать в случае успешной отправки формы
 			hideOnSuccess: '', // Селектор элемента, который нужно скрыть в случае успешной отправки формы
@@ -45,21 +48,34 @@ function recaptchaCallBack() {
 
 		// Обёртка (внутри находятся сообщения и форма)
 		var wrapper = $(this);
+        var responseData = null;
 
 		/**
          * Если флажок установлен, то у кнопки отправки формы удаляется атрибут disabled.
          */
-		wrapper.on('change', '[data-quasiform="agreement"]', function(e) {
-			var checked = $(this).is(':checked');
-            var button = form.find('button[type="submit"]').slice(0, 1);
-            if (button.length == 1) {
-    			if (checked) {
-    				button.removeAttr('disabled');
-    			} else {
-    				button.attr('disabled', true);
+        var checkboxAgreeSelector = '[data-quasiform="agreement"]';
+        var submitSelector = 'button[type="submit"]';
+        var checkboxAgree = wrapper.find(checkboxAgreeSelector).slice(0, 1);
+        var button = wrapper.find(submitSelector).slice(0, 1);
+        if (checkboxAgree.length == 1 && button.length == 1) {
+            if (checkboxAgree.is(':checked')) {
+                button.removeAttr('disabled');
+            } else {
+                button.attr('disabled', true);
+            }
+        }
+        if (checkboxAgree.length == 1) {
+    		wrapper.on('change', checkboxAgreeSelector, function(e) {
+                var button = wrapper.find(submitSelector).slice(0, 1);
+                if (button.length == 1) {
+        			if ($(this).is(':checked')) {
+        				button.removeAttr('disabled');
+        			} else {
+        				button.attr('disabled', true);
+        			}
     			}
-			}
-		});
+    		});
+        }
 
 		var form = $(wrapper).find('form').slice(0, 1);
 		if (form.length === 1) {
@@ -70,8 +86,9 @@ function recaptchaCallBack() {
 				var formData = new FormData($(form)[0]);
 				var formAction = $(form).attr('action');
 				var formType = $(form).attr('method');
-				form.find('button[type="submit"]').attr('disabled', true);
+				form.find(submitSelector).attr('disabled', true);
 				wrapper.find(loaderSelector).show();
+                responseData = null;
 				$.ajax({
 					//contentType: false,
 					processData: false,
@@ -81,7 +98,7 @@ function recaptchaCallBack() {
 					url: formAction,
 					complete: function() {
 						wrapper.find(loaderSelector).hide();
-						form.find('button[type="submit"]').removeAttr('disabled');
+						form.find(submitSelector).removeAttr('disabled');
 					},
 					error: function(xhr, ajaxOptions, thrownError) {
 						if (xhr.status == 404) {
@@ -97,6 +114,7 @@ function recaptchaCallBack() {
 					},
 					success: function(data, textStatus) {
 						if (typeof data == 'object' && data !== null) {
+                            wrapper.responseData = data;
 							// Вывод сообщений об ошибках
 							wrapper.find(errorsWrapperSelector).hide();
 							if ('errors' in data && $.isArray(data.errors)) {
@@ -125,6 +143,13 @@ function recaptchaCallBack() {
 									wrapper.find(messagesWrapperSelector).html(messagesList).show();
 								}
 							}
+                            if ('field_errors' in data && typeof data.field_errors == 'object' && data.field_errors !== null) {
+                                for (fieldName in data.field_errors) {
+                                    wrapper.find('input[name="'+fieldName+'"]').addClass(options.hasErrorInputClass);
+                                    wrapper.find('textarea[name="'+fieldName+'"]').addClass(options.hasErrorInputClass);
+                                    wrapper.find('label[for="'+fieldName+'"]').addClass(options.hasErrorLabelClass);
+                                }
+                            }
 							if ($.fn.quasiform.options.hideFormOnSuccess && 'success' in data && data.success) {
 								form.hide();
 							}
@@ -141,7 +166,7 @@ function recaptchaCallBack() {
                                     }
                                     // Функция, которую нужно исполнить после успеха
                                     if ('callbackOnSuccess' in options && typeof options.callbackOnSuccess == 'function') {
-                                        options.callbackOnSuccess();
+                                        options.callbackOnSuccess(wrapper);
                                     }
                                 } else {
                                     // Элемент, который нужно показать после неуспешного запроса
@@ -154,12 +179,18 @@ function recaptchaCallBack() {
                                     }
                                     // Функция, которую нужно исполнить после неуспешного запроса
                                     if ('callbackOnFail' in options && typeof options.callbackOnFail == 'function') {
-                                        options.callbackOnFail();
+                                        options.callbackOnFail(wrapper);
                                     }
+                                }
+                            } else {
+                                if (options.debug) {
+    		                         console.log('Ответ сервера не содержит поле success');
                                 }
                             }
 						} else {
-							console.log('Ответ сервера имеет неверный формат');
+                            if (options.debug) {
+		                         console.log('Ответ сервера имеет неверный формат');
+                            }
 						}
 					}
 				});
@@ -169,4 +200,3 @@ function recaptchaCallBack() {
 
 		return this;
 	};
-}($));
