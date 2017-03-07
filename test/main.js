@@ -1,5 +1,22 @@
 $(function () {
     /**
+     * Нулевая форма
+     */
+    let optionsPost = {
+        debug: true,
+        hasErrorInputClass: 'quasiform-form__input--has-error',
+        hasErrorLabelClass: 'quasiform-form__label--has-error',
+        hideFormOnSuccess: false,
+        callbackOnSuccess: function callbackOnSuccess(wrapper) {
+            console.debug(wrapper);
+        },
+        callbackOnFail: function callbackOnFail(wrapper) {
+            console.debug(wrapper);
+        },
+    };
+    let quasiformPost = $('#post').quasiform(optionsPost);
+	
+    /**
      * Первая форма
      */
     let optionsSuccess = {

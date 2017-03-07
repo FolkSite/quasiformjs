@@ -13,24 +13,24 @@
 	<div class="row">
 		<div class="col s12 m6">
 			<h2>Какие данные в $_POST</h2>
-			<div id="success" class="quasiform-wrapper">
+			<div id="post" class="quasiform-wrapper">
 				<div data-quasiform="errors" style="display: none;"></div>
 				<div data-quasiform="messages" style="display: none;"></div>
 				<div data-quasiform="loader" style="display: none;">
 					Я отправляю форму
 				</div>
-				<form action="post.php" method="post" accept-charset="utf-8" class="quasiform-form">
+				<form action="post.php" method="post" accept-charset="utf-8" class="quasiform-form" enctype="multipart/form-data">
 					<div class="row">
 						<div class="col m6 s12">
 							<div class="quasiform-form__form-group">
 								<label for="name" class="quasiform-form__label">Имя</label>
-								<input id="name" type="text" name="name" value="" placeholder="Имя" class="quasiform-form__input" />
+								<input id="name" type="text" name="name" value="Vasya" placeholder="Имя" class="quasiform-form__input" />
 							</div>
 						</div>
 						<div class="col m6 s12">
 							<div class="quasiform-form__form-group">
 								<label for="contacts" class="quasiform-form__label">Контактная информация</label>
-								<input id="contacts" type="text" name="contacts" value="" placeholder="E-mail, телефон или другое" class="quasiform-form__input" />
+								<input id="contacts" type="text" name="contacts" value="123-456" placeholder="E-mail, телефон или другое" class="quasiform-form__input" />
 							</div>
 						</div>
 					</div>
@@ -38,7 +38,7 @@
 						<div class="col s12">
 							<div class="quasiform-form__form-group">
 								<label for="text" class="quasiform-form__label">Сообщение</label>
-								<textarea id="text" name="text" placeholder="Ваше сообщение" class="quasiform-form__textarea"></textarea>
+								<textarea id="text" name="text" placeholder="Ваше сообщение" class="quasiform-form__textarea">Hello</textarea>
 							</div>
 						</div>
 					</div>
@@ -49,8 +49,14 @@
 					</div -->
 					<div class="quasiform-form__form-group">
 						<label>
-							<input type="checkbox" name="checkbox-agree" value="Согласен на обработку данных" data-quasiform="agreement" /> Согласен на обработку данных
+							<input type="checkbox" name="checkbox-agree" value="Согласен на обработку данных" data-quasiform="agreement" checked /> Согласен на обработку данных
 						</label>
+					</div>
+					<div class="quasiform-form__form-group">
+						<div class="col s12">
+							<label for="text" class="quasiform-form__label">Файл</label>
+							<input type="file" name="file" />
+						</div>
 					</div>
 					<div class="quasiform-form__form-group">
 						<button type="submit" class="quasiform-form__submit">Отправить</button>
