@@ -83,7 +83,10 @@ function recaptchaCallBack() {
 				var messagesWrapperSelector = '[data-quasiform="messages"]';
 				var errorsWrapperSelector = '[data-quasiform="errors"]';
 				var loaderSelector = '[data-quasiform="loader"]';
-				var formData = new FormData($(form)[0]);
+				
+				//var formData = new FormData($(form)[0]);
+				var formData = $(form).serialize();
+				
 				var formAction = $(form).attr('action');
 				var formType = $(form).attr('method');
 				form.find(submitSelector).attr('disabled', true);
