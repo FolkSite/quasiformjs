@@ -75,3 +75,8 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 			</div>
 		</form>
 	</div>
+### Server response ###
+	{
+		"success": true,
+		"messages": ["Message 1", "Message 2"]
+	}
