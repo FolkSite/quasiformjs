@@ -1,5 +1,8 @@
 # quasiformjs
-This is jQuery plugin that helps submiting and validating your forms asynchronously. Keep your validation logic on server side, and for client side validate with javascript and AJAX.
+This is jQuery plugin that helps submiting and validating your forms asynchronously. Keep your validation logic on server side, and for client side validate with javascript and AJAX.<br />
+Supports multiple reCaptcha 3.
+## Demo ##
+[https://quasi-art.ru/contacts](https://quasi-art.ru/contacts)
 ## Requirements ##
 Requires jQuery 3.1+.
 ## Options ##
@@ -22,7 +25,7 @@ Defaut: `<ul>`
 ### messagesCloseTag ###
 Defaut: `</ul>`
 ### hideFormOnSuccess ###
-Boolean flag indicating whether the form should be hide if the submit is successful
+Boolean flag indicating whether the form should be hide if the submit is successful<br />
 Defaut: `false`
 ### hasErrorInputClass ###
 Defaut: `quasiform-form__input--has-error`
