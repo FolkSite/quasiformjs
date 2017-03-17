@@ -33,8 +33,8 @@ $.fn.quasiform = function(options) {
 
 		hideFormOnSuccess: false,
         
-        hasErrorInputClass: 'quasiform-form__input--has-error',
-        hasErrorLabelClass: 'quasiform-form__input--has-error',
+        hasErrorInputClass: 'quasiform__form-input--has-error',
+        hasErrorLabelClass: 'quasiform__form-label--has-error',
 
 		callbackOnSuccess: null,
 		callbackOnFail: null,

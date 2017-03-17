@@ -1,23 +1,31 @@
 .quasiform {
 
-	&-errors {
+	&__errors {
 		background-color: #f00;
+		margin: 0;
+		padding: 1rem;
 		
-		&-item {
+		ul {
+			margin: 0;
+			padding: 0;
+		}
+		
+		li, &-item {
 			color: #fff;
 			font-size: 1rem;
+			line-height: 1.5;
 			list-style: none;
 		}
 	}
 
-	&-form {
+	&__form {
 		border-radius: 4px;
 		
 		&__form-group {
 			margin: 0 0 2rem 0;
 		}
 		
-		&__input {
+		&-input {
 			background-color: #fff;
 			border: none;
 			color: #666;
@@ -30,7 +38,7 @@
 			}
 		}
 
-		&__label {
+		&-label {
 			color: #666;
 			display: block;
 			font-size: 1rem;
@@ -41,7 +49,7 @@
 			}
 		}
 		
-		&__submit {
+		&-submit {
 			background-color: #d36;
 			border: none;
 			color: #fff;
@@ -70,7 +78,7 @@
 			}
 		}
 		
-		&__textarea {
+		&-textarea {
 			background-color: #fff;
 			border: none;
 			color: #666;
@@ -80,18 +88,30 @@
 			padding: 5px;
 			width: 100%;
 			
-			&.has-error {
+			&--has-error {
 				border: 1px solid #f00;
 			}
 		}
 	}
 	
-	&-messages {
+	&__loader {
+		text-align: center;
+	}
+	
+	&__messages {
 		background-color: #00f;
+		margin: 0;
+		padding: 1rem;
 		
-		&-item {
+		ul {
+			margin: 0;
+			padding: 0;
+		}
+		
+		li, &-item {
 			color: #fff;
 			font-size: 1rem;
+			line-height: 1.5;
 			list-style: none;
 		}
 	}
