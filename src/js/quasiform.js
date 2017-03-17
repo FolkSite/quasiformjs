@@ -35,12 +35,7 @@ $.fn.quasiform = function(options) {
         
         hasErrorInputClass: 'quasiform-form__input--has-error',
         hasErrorLabelClass: 'quasiform-form__input--has-error',
-        
-        showOnSuccess: '', // Селектор элемента, который нужно показать в случае успешной отправки формы
-		hideOnSuccess: '', // Селектор элемента, который нужно скрыть в случае успешной отправки формы
-		showOnFail: '', // Селектор элемента, который нужно показать в случае неуспешной отправки формы
-		hideOnFail: '', // Селектор элемента, который нужно скрыть в случае неуспешной отправки формы
-        
+
 		callbackOnSuccess: null,
 		callbackOnFail: null,
 	}, options);
@@ -158,27 +153,11 @@ $.fn.quasiform = function(options) {
                         
                         if ('success' in data) {
                             if (data.success) {
-                                // Элемент, который нужно показать после успеха
-                                if (typeof options.showOnSuccess == 'string' && options.showOnSuccess.length > 0) {
-                                    $(options.showOnSuccess).show();
-                                }
-                                // Элемент, который нужно скрыть после успеха
-                                if (typeof options.hideOnSuccess == 'string' && options.hideOnSuccess.length > 0) {
-                                    $(options.hideOnSuccess).hide();
-                                }
                                 // Функция, которую нужно исполнить после успеха
                                 if ('callbackOnSuccess' in options && typeof options.callbackOnSuccess == 'function') {
                                     options.callbackOnSuccess(wrapper);
                                 }
                             } else {
-                                // Элемент, который нужно показать после неуспешного запроса
-                                if (typeof options.showOnFail == 'string' && options.showOnFail.length > 0) {
-                                    $(options.showOnFail).show();
-                                }
-                                // Элемент, который нужно скрыть после неуспешного запроса
-                                if (typeof options.hideOnFail == 'string' && options.hideOnFail.length > 0) {
-                                    $(options.hideOnFail).hide();
-                                }
                                 // Функция, которую нужно исполнить после неуспешного запроса
                                 if ('callbackOnFail' in options && typeof options.callbackOnFail == 'function') {
                                     options.callbackOnFail(wrapper);
