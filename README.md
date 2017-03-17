@@ -28,9 +28,9 @@ Defaut: `</ul>`
 Boolean flag indicating whether the form should be hide if the submit is successful<br />
 Defaut: `false`
 ### hasErrorInputClass ###
-Defaut: `quasiform-form__input--has-error`
+Defaut: `quasiform__form-input--has-error`
 ### hasErrorLabelClass ###
-Defaut: `quasiform-form__input--has-error`
+Defaut: `quasiform__form-label--has-error`
 ### callbackOnSuccess ###
 Callback function to be invoked after the form has been submitted. If a success callback function is provided it is invoked after the response has been returned from the server.
 ### callbackOnFail ###
@@ -56,27 +56,28 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 	});
 ### HTML ###
 	<div id="post" class="quasiform-wrapper">
-		<div data-quasiform="errors" style="display: none;"></div>
-		<div data-quasiform="messages" style="display: none;"></div>
-		<div data-quasiform="loader" style="display: none;">
+		<div data-quasiform="errors" style="display: none;" class="quasiform__errors"></div>
+		<div data-quasiform="messages" style="display: none;" class="quasiform__messages"></div>
+		<div data-quasiform="loader" style="display: none;" class="quasiform__loader">
 			Я отправляю форму
 		</div>
-		<form action="post.php" method="post" accept-charset="utf-8" class="quasiform-form" enctype="multipart/form-data">
+		<form action="post.php" method="post" accept-charset="utf-8" class="quasiform__form" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col s12">
-					<div class="quasiform-form__form-group">
-						<label for="text" class="quasiform-form__label">Сообщение</label>
-						<textarea id="text" name="text" placeholder="Ваше сообщение" class="quasiform-form__textarea">Hello</textarea>
+					<div class="quasiform__form__form-group">
+						<label for="text" class="quasiform__form-label">Сообщение</label>
+						<textarea id="text" name="text" placeholder="Ваше сообщение" class="quasiform__form-textarea">Hello</textarea>
 					</div>
 				</div>
 			</div>
-			<div class="quasiform-form__form-group">
-				<button type="submit" class="quasiform-form__submit">Отправить</button>
+			<div class="quasiform__form__form-group">
+				<button type="submit" class="quasiform__form-submit">Отправить</button>
 			</div>
 		</form>
 	</div>
 ### Server response ###
 	{
-		"success": true,
-		"messages": ["Message 1", "Message 2"]
+		"errors": ["Error 1", "Error 2"],
+		"messages": ["Message 1", "Message 2"],
+		"success": true
 	}
