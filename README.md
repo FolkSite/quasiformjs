@@ -81,3 +81,6 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 		"messages": ["Message 1", "Message 2"],
 		"success": true
 	}
+## Roadmap ##
+* Rating
+* Custom File input
