@@ -20,6 +20,7 @@ $.fn.quasiform = function(options) {
 	// Настройки
 	$.fn.quasiform.options = $.extend({
 		debug: false,
+		formSelector: null,
 
 		errorOpenTag: '<li>',
 		errorCloseTag: '</li>',
@@ -71,7 +72,12 @@ $.fn.quasiform = function(options) {
 		});
     }
 
-	var form = $(wrapper).find('form').slice(0, 1);
+	if ($.fn.quasiform.options.formSelector) {
+		var form = $(wrapper).find($.fn.quasiform.options.formSelector).slice(0, 1);
+	} else {
+		var form = $(wrapper).find('form').slice(0, 1);
+	}
+	
 	if (form.length === 1) {
 		$(form).on('submit', function(e) {
 			var messagesWrapperSelector = '[data-quasiform="messages"]';
