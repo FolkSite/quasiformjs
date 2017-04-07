@@ -62,13 +62,9 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 			Я отправляю форму
 		</div>
 		<form action="post.php" method="post" accept-charset="utf-8" class="quasiform__form" enctype="multipart/form-data">
-			<div class="row">
-				<div class="col s12">
-					<div class="quasiform__form__form-group">
-						<label for="text" class="quasiform__form-label">Сообщение</label>
-						<textarea id="text" name="text" placeholder="Ваше сообщение" class="quasiform__form-textarea">Hello</textarea>
-					</div>
-				</div>
+			<div class="quasiform__form__form-group">
+				<label for="text" class="quasiform__form-label">Сообщение</label>
+				<textarea id="text" name="text" placeholder="Ваше сообщение" class="quasiform__form-textarea">Hello</textarea>
 			</div>
 			<div class="quasiform__form__form-group">
 				<button type="submit" class="quasiform__form-submit">Отправить</button>
