@@ -7,6 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "quasi-art.ru",
+  "dependencies": {
+    "jquery": "^3.2.1"
+  },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
@@ -15,6 +18,7 @@
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.4.0",
     "gulp-uglifyjs": "^0.6.2",
-    "gulp-watch": "^4.3.11"
+    "gulp-watch": "^4.3.11",
+    "jquery": "^3.2.1"
   }
 }
