@@ -24,9 +24,6 @@ Defaut: `</li>`
 Defaut: `<ul>`
 ### messagesCloseTag ###
 Defaut: `</ul>`
-### hideFormOnSuccess ###
-Boolean flag indicating whether the form should be hide if the submit is successful<br />
-Defaut: `false`
 ### hasErrorInputClass ###
 Defaut: `quasiform__form-input--has-error`
 ### hasErrorLabelClass ###
@@ -79,4 +76,5 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 	}
 ## Roadmap ##
 * Rating
+* Install jQuery by npm
 * Custom File input
