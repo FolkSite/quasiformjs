@@ -8,10 +8,24 @@ $(function () {
         hasErrorLabelClass: 'quasiform-form__label--has-error',
         hideFormOnSuccess: false,
         callbackOnSuccess: function callbackOnSuccess(wrapper) {
-            console.debug(wrapper);
+            console.log('callbackOnSuccess');
+            //console.debug(wrapper);
         },
         callbackOnFail: function callbackOnFail(wrapper) {
-            console.debug(wrapper);
+            console.log('callbackOnFail');
+            //console.debug(wrapper);
+        },
+        callbackOnError: function callbackOnError(wrapper) {
+            console.log('callbackOnError');
+            //console.debug(wrapper);
+        },
+        callbackBeforeSend: function callbackBeforeSend(wrapper) {
+            console.log('callbackBeforeSend');
+            //console.debug(wrapper);
+        },
+        callbackOnComplete: function callbackOnComplete(wrapper) {
+            console.log('callbackOnComplete');
+            //console.debug(wrapper);
         },
     };
     let quasiformPost = $('#post').quasiform(optionsPost);
@@ -24,11 +38,25 @@ $(function () {
         hasErrorInputClass: 'quasiform-form__input--has-error',
         hasErrorLabelClass: 'quasiform-form__label--has-error',
         hideFormOnSuccess: false,
-        callbackOnSuccess: function callbackOnSuccess(wrapper) {
-            console.debug(wrapper);
+		callbackOnSuccess: function callbackOnSuccess(wrapper) {
+            console.log('callbackOnSuccess');
+            //console.debug(wrapper);
         },
         callbackOnFail: function callbackOnFail(wrapper) {
-            console.debug(wrapper);
+            console.log('callbackOnFail');
+            //console.debug(wrapper);
+        },
+        callbackOnError: function callbackOnError(wrapper) {
+            console.log('callbackOnError');
+            //console.debug(wrapper);
+        },
+        callbackBeforeSend: function callbackBeforeSend(wrapper) {
+            console.log('callbackBeforeSend');
+            //console.debug(wrapper);
+        },
+        callbackOnComplete: function callbackOnComplete(wrapper) {
+            console.log('callbackOnComplete');
+            //console.debug(wrapper);
         },
     };
     let quasiformSuccess = $('#success').quasiform(optionsSuccess);
@@ -42,10 +70,24 @@ $(function () {
         hasErrorLabelClass: 'quasiform-form__label--has-error',
         hideFormOnSuccess: false,
         callbackOnSuccess: function callbackOnSuccess(wrapper) {
-            console.debug(wrapper);
+            console.log('callbackOnSuccess');
+            //console.debug(wrapper);
         },
         callbackOnFail: function callbackOnFail(wrapper) {
-            console.debug(wrapper);
+            console.log('callbackOnFail');
+            //console.debug(wrapper);
+        },
+        callbackOnError: function callbackOnError(wrapper) {
+            console.log('callbackOnError');
+            //console.debug(wrapper);
+        },
+        callbackBeforeSend: function callbackBeforeSend(wrapper) {
+            console.log('callbackBeforeSend');
+            //console.debug(wrapper);
+        },
+        callbackOnComplete: function callbackOnComplete(wrapper) {
+            console.log('callbackOnComplete');
+            //console.debug(wrapper);
         },
     };
     let quasiformFail = $('#fail').quasiform(optionsFail);

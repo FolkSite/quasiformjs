@@ -39,6 +39,9 @@ $.fn.quasiform = function(options) {
 
 		callbackOnSuccess: null,
 		callbackOnFail: null,
+		callbackOnError: null,
+		callbackOnComplete: null,
+		callbackBeforeSend: null,
 	}, options);
 
 	// Обёртка (внутри находятся сообщения и форма)
@@ -92,6 +95,12 @@ $.fn.quasiform = function(options) {
 			form.find(submitSelector).attr('disabled', true);
 			wrapper.find(loaderSelector).show();
             responseData = null;
+			
+			// Функция, которую нужно исполнить перед запросом
+			if ('callbackBeforeSend' in options && typeof options.callbackBeforeSend == 'function') {
+				options.callbackBeforeSend(wrapper);
+			}
+			
 			$.ajax({
 				contentType: false,
 				processData: false,
@@ -100,6 +109,10 @@ $.fn.quasiform = function(options) {
 				type: formType,
 				url: formAction,
 				complete: function() {
+					// Функция, которую нужно исполнить после завершения запроса
+					if ('callbackOnComplete' in options && typeof options.callbackOnComplete == 'function') {
+						options.callbackOnComplete(wrapper);
+					}
 					wrapper.find(loaderSelector).hide();
 					form.find(submitSelector).removeAttr('disabled');
 				},
@@ -113,6 +126,10 @@ $.fn.quasiform = function(options) {
 						console.log('Невалидный JSON');
 					} else {
 						console.log('Ошибка ' + xhr.status);
+					}
+					// Функция, которую нужно исполнить, если сервер вернул невалидный JSON или код не 200
+					if ('callbackOnError' in options && typeof options.callbackOnError == 'function') {
+						options.callbackOnError(wrapper);
 					}
 				},
 				success: function(data, textStatus) {
