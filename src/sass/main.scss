@@ -1,6 +1,6 @@
 .quasiform {
 
-	&__errors {
+	&-errors {
 		background-color: #f00;
 		margin: 0;
 		padding: 1rem;
@@ -18,14 +18,14 @@
 		}
 	}
 
-	&__form {
+	&-form {
 		border-radius: 4px;
 		
 		&__form-group {
 			margin: 0 0 2rem 0;
 		}
 		
-		&-input {
+		&__input {
 			background-color: #fff;
 			border: none;
 			color: #666;
@@ -38,7 +38,7 @@
 			}
 		}
 
-		&-label {
+		&__label {
 			color: #666;
 			display: block;
 			font-size: 1rem;
@@ -49,7 +49,7 @@
 			}
 		}
 		
-		&-submit {
+		&__submit {
 			background-color: #d36;
 			border: none;
 			color: #fff;
@@ -78,7 +78,7 @@
 			}
 		}
 		
-		&-textarea {
+		&__textarea {
 			background-color: #fff;
 			border: none;
 			color: #666;
@@ -98,7 +98,7 @@
 		text-align: center;
 	}
 	
-	&__messages {
+	&-messages {
 		background-color: #00f;
 		margin: 0;
 		padding: 1rem;
