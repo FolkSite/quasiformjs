@@ -76,5 +76,5 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 	}
 ## Roadmap ##
 * Rating
-* Install jQuery by npm
 * Custom File input
+* Demo of multiple recaptcha
