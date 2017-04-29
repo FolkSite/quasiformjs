@@ -34,7 +34,18 @@ Callback function to be invoked after the form has been submitted. If a success 
 Callback function to be invoked upon error.
 ## File Uploads ##
 The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on browsers that support these features.
-## Example ##
+## Screenshots ##
+### Custom checkbox ###
+![Report, part 1](https://raw.githubusercontent.com/mishantrop/quasiformjs/master/test/screenshots/checkbox.png "Custom checkbox")
+### Loader ###
+![Loader](https://raw.githubusercontent.com/mishantrop/quasiformjs/master/test/screenshots/loader.png "Loader")
+### Error messages ###
+![Error messages](https://raw.githubusercontent.com/mishantrop/quasiformjs/master/test/screenshots/fail.png "Error messages")
+### Star rating ###
+![Star rating](https://raw.githubusercontent.com/mishantrop/quasiformjs/master/test/screenshots/stars.png "Star rating")
+### Success response ###
+![Success response](https://raw.githubusercontent.com/mishantrop/quasiformjs/master/test/screenshots/success.png "Success response")
+## Initialization ##
 ### JavaScript ###
 	$(function () {
 	    let optionsPost = {
