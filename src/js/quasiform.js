@@ -90,6 +90,16 @@ $.fn.quasiform = function(options) {
 	}
 	
 	if (form.length === 1) {
+		var textarea = $(form).find('textarea[data-quasiform="autoheight"]');
+		$.each(textarea, function(e) {
+			$(textarea).on('input', function(e) {
+				var textarea = $(this);
+				textarea.css('height', '5px');
+				textarea.css('height', (textarea.prop('scrollHeight') + 2) + 'px');
+			});
+		});
+
+		
 		$(form).on('submit', function(e) {
 			var messagesWrapperSelector = '[data-quasiform="messages"]';
 			var errorsWrapperSelector = '[data-quasiform="errors"]';
@@ -210,6 +220,8 @@ $.fn.quasiform = function(options) {
 		});
 	}
 
+	
+
 	/**
 	 * Custom checkbox
 	 */
@@ -281,6 +293,5 @@ $.fn.quasiform = function(options) {
 		});
 	}
 	
-
 	return this;
 };
