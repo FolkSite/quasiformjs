@@ -82,6 +82,34 @@ $.fn.quasiform = function(options) {
 			}
 		});
     }
+	
+	/**
+	 * Custom checkbox
+	 */
+	var checkboxes = $(wrapper).find('input[type="checkbox"]');
+	$(checkboxes).each(function(idx, e) {
+		var checkbox = $(e);
+		var name = checkbox.attr('name');
+		var checked = checkbox.is(':checked');
+		var customCheckbox = $(wrapper).find('[data-quasiform="checkbox"][data-name="'+name+'"]');
+		if (customCheckbox.length == 1) {
+			var classOff = customCheckbox.attr('data-quasiform-checkbox-off');
+			if (checked) {
+				customCheckbox.removeClass(classOff);
+			} else {
+				customCheckbox.addClass(classOff);
+			}
+			$(checkbox).on('change', function(e) {
+				var checked = checkbox.is(':checked');
+				if (checked) {
+					customCheckbox.removeClass(classOff);
+				} else {
+					customCheckbox.addClass(classOff);
+				}
+			});
+		}
+	});
+
 
 	if ($.fn.quasiform.options.formSelector) {
 		var form = $(wrapper).find($.fn.quasiform.options.formSelector).slice(0, 1);
@@ -90,6 +118,9 @@ $.fn.quasiform = function(options) {
 	}
 	
 	if (form.length === 1) {
+		/**
+		 * Textarea Autoheight
+		 */
 		var textarea = $(form).find('textarea[data-quasiform="autoheight"]');
 		$.each(textarea, function(e) {
 			$(textarea).on('input', function(e) {
@@ -99,6 +130,53 @@ $.fn.quasiform = function(options) {
 			});
 		});
 
+		
+
+		
+		/**
+		 * Star rating
+		 */
+		var starsWrapper = $(wrapper).find('[data-quasiform="stars"]');
+		var field = $(wrapper).find('input[name="stars"]');
+		if (starsWrapper.length == 1 && field.length > 0) {
+			var starSelector = '[data-value]';
+			var stars = $(starsWrapper).find('[data-value]');
+			var starClassActive = 'quasiform-star--active';
+			
+			var value = parseInt(field.val());
+			$(starsWrapper).find(starSelector + '[data-value]').removeClass(starClassActive);
+			var i = 0;
+			for (i = 1; i <= value; i++) {
+				$(starsWrapper).find('[data-value="' + i + '"]').addClass(starClassActive);
+			}
+			
+			$(stars).hover(function(e) {
+				var star = $(this);
+				var starsWrapper = star.parent();
+				var value = parseInt(star.attr('data-value'));
+				$(starsWrapper).find('[data-value]').removeClass(starClassActive);
+				var i = 0;
+				for (i = 1; i <= value; i++) {
+					$(starsWrapper).find('[data-value="' + i + '"]').addClass(starClassActive);
+				}
+			});
+			$(stars).click(function(e) {
+				var star = $(this);
+				var value = parseInt(star.attr('data-value'));
+				field.val(value);
+				e.preventDefault();
+			});
+			$(starsWrapper).mouseout(function(e) {
+				$(starsWrapper).find('[data-value]').removeClass(starClassActive);
+				var value = parseInt(field.val());
+				if (value > 0) {
+					var i = 0;
+					for (i = 1; i <= value; i++) {
+						$(starsWrapper).find('[data-value="' + i + '"]').addClass(starClassActive);
+					}
+				}
+			});
+		}
 		
 		$(form).on('submit', function(e) {
 			var messagesWrapperSelector = '[data-quasiform="messages"]';
@@ -220,77 +298,5 @@ $.fn.quasiform = function(options) {
 		});
 	}
 
-	
-
-	/**
-	 * Custom checkbox
-	 */
-	var customCheckboxes = $(wrapper).find('[data-quasiform="checkbox"]');
-	$.each(customCheckboxes, function(idx, e) {
-		var customCheckbox = $(e);
-		var name = customCheckbox.attr('data-name');
-		var classOff = customCheckbox.attr('data-quasiform-checkbox-off');
-		var input = $(wrapper).find('input[type="checkbox"][name="'+name+'"]');
-		if (input.length > 0) {
-			if (input.is(':checked')) {
-				customCheckbox.removeClass(classOff);
-			} else {
-				customCheckbox.addClass(classOff);
-			}
-			$(checkbox).click(function(e) {
-				if (input.is(':checked')) {
-					customCheckbox.removeClass(classOff);
-				} else {
-					customCheckbox.addClass(classOff);
-				}
-			});
-		}
-	});
-
-	/**
-	 * Star rating
-	 */
-	var starsWrapper = $(wrapper).find('[data-quasiform="stars"]');
-	var field = $(wrapper).find('input[name="stars"]');
-	if (starsWrapper.length == 1 && field.length > 0) {
-		var starSelector = '[data-value]';
-		var stars = $(starsWrapper).find('[data-value]');
-		var starClassActive = 'quasiform-star--active';
-		
-		var value = parseInt(field.val());
-		$(starsWrapper).find(starSelector + '[data-value]').removeClass(starClassActive);
-		var i = 0;
-		for (i = 1; i <= value; i++) {
-			$(starsWrapper).find('[data-value="' + i + '"]').addClass(starClassActive);
-		}
-		
-		$(stars).hover(function(e) {
-			var star = $(this);
-			var starsWrapper = star.parent();
-			var value = parseInt(star.attr('data-value'));
-			$(starsWrapper).find('[data-value]').removeClass(starClassActive);
-			var i = 0;
-			for (i = 1; i <= value; i++) {
-				$(starsWrapper).find('[data-value="' + i + '"]').addClass(starClassActive);
-			}
-		});
-		$(stars).click(function(e) {
-			var star = $(this);
-			var value = parseInt(star.attr('data-value'));
-			field.val(value);
-			e.preventDefault();
-		});
-		$(starsWrapper).mouseout(function(e) {
-			$(starsWrapper).find('[data-value]').removeClass(starClassActive);
-			var value = parseInt(field.val());
-			if (value > 0) {
-				var i = 0;
-				for (i = 1; i <= value; i++) {
-					$(starsWrapper).find('[data-value="' + i + '"]').addClass(starClassActive);
-				}
-			}
-		});
-	}
-	
 	return this;
 };
