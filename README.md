@@ -75,6 +75,6 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 		"success": true
 	}
 ## Roadmap ##
-* Rating
+* Customization of Star Rating
 * Custom File input
 * Demo of multiple recaptcha
