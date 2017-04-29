@@ -202,5 +202,49 @@ $.fn.quasiform = function(options) {
 		});
 	}
 
+	/**
+	 * Выбор рейтинга для отзыва
+	 */
+	
+	var starsWrapper = $(wrapper).find('[data-quasiform="stars"]');
+	
+	if (starsWrapper.length == 1) {
+		var starSelector = '[data-value]';
+		var stars = $(starsWrapper).find('[data-value]');
+		var starClassActive = 'quasiform-star--active';
+		$(stars).hover(function(e) {
+			console.log('hover');
+			var star = $(this);
+			var starsWrapper = star.parent();
+			var value = parseInt(star.attr('data-value'));
+			starsWrapper.find(starSelector + '[data-value]').removeClass(starClassActive);
+			var i = 0;
+			for (i = 1; i <= value; i++) {
+				starsWrapper.find(starSelector + '[data-value="' + i + '"]').addClass(starClassActive);
+			}
+		});
+		$(stars).click(function(e) {
+			console.log('click');
+			var star = $(this);
+			var field = form.find('input[name="stars"]');
+			var value = parseInt(star.attr('data-value'));
+			field.val(value);
+			e.preventDefault();
+		});
+		$(starsWrapper).mouseout(function(e) {
+			console.log('mouseout');
+			var field = form.find('input[name="stars"]');
+			starsWrapper.find(starSelector + '[data-value]').removeClass(starClassActive);
+			var value = parseInt(field.val());
+			if (value > 0) {
+				var i = 0;
+				for (i = 1; i <= value; i++) {
+					starsWrapper.find(starSelector + '[data-value="' + i + '"]').addClass(starClassActive);
+				}
+			}
+		});
+	}
+	
+
 	return this;
 };

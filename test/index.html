@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width,height=device-height,user-scalable=no" />
 	<link rel="stylesheet" href="../dependencies/grid.min.css" />
 	<link rel="stylesheet" href="../dist/css/quasiform.min.css?v=4" />
+	<link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css" />
 </head>
 <body itemscope itemtype="http://schema.org/WebPage">
 
@@ -56,6 +57,42 @@
 						<div class="col s12">
 							<label for="text" class="quasiform-form__label">Файл</label>
 							<input type="file" name="file" />
+						</div>
+					</div>
+					<div class="quasiform-form__form-group">
+						<button type="submit" class="quasiform-form__submit">Отправить</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+		<div class="col s12 m6">
+			<h2>Stars</h2>
+			<div id="stars" class="quasiform-wrapper">
+				<div data-quasiform="errors" style="display: none;" class="quasiform-errors"></div>
+				<div data-quasiform="messages" style="display: none;" class="quasiform-messages"></div>
+				<div data-quasiform="loader" style="display: none;" class="quasiform-loader">
+					Я отправляю форму
+				</div>
+				<form action="post.php" method="post" accept-charset="utf-8" class="quasiform-form" enctype="multipart/form-data">
+					<div class="row">
+						<div class="col s12">
+							<div class="quasiform-form__form-group">
+								 <div class="quasiform-stars" data-quasiform="stars">
+								  <div class="quasiform-star" data-value="1"><i class="fa fa-star"></i></div>
+								  <div class="quasiform-star" data-value="2"><i class="fa fa-star"></i></div>
+								  <div class="quasiform-star" data-value="3"><i class="fa fa-star"></i></div>
+								  <div class="quasiform-star" data-value="4"><i class="fa fa-star"></i></div>
+								  <div class="quasiform-star" data-value="5"><i class="fa fa-star"></i></div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col s12">
+							<div class="quasiform-form__form-group">
+								<label for="name" class="quasiform-form__label">Количество звёзд</label>
+								<input id="stars" type="text" name="stars" value="0" placeholder="Количество звёзд" class="quasiform-form__input" />
+							</div>
 						</div>
 					</div>
 					<div class="quasiform-form__form-group">
