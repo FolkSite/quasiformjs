@@ -281,7 +281,6 @@ $.fn.quasiform = function(options) {
 			e.preventDefault();
 		});
 		$(starsWrapper).mouseout(function(e) {
-			var field = $(starsWrapper).find('input[name="stars"]');
 			$(starsWrapper).find('[data-value]').removeClass(starClassActive);
 			var value = parseInt(field.val());
 			if (value > 0) {
