@@ -42,6 +42,8 @@ $.fn.quasiform = function(options) {
 		callbackOnError: null,
 		callbackOnComplete: null,
 		callbackBeforeSend: null,
+		callbackOnAgree: null,
+		callbackOnDisagree: null,
 	}, options);
 
 	// Обёртка (внутри находятся сообщения и форма)
@@ -68,8 +70,14 @@ $.fn.quasiform = function(options) {
             if (button.length == 1) {
     			if ($(this).is(':checked')) {
     				button.removeAttr('disabled');
+					if ('callbackOnAgree' in options && typeof options.callbackOnAgree == 'function') {
+						options.callbackOnAgree(wrapper);
+					}
     			} else {
     				button.attr('disabled', true);
+					if ('callbackOnDisagree' in options && typeof options.callbackOnDisagree == 'function') {
+						options.callbackOnDisagree(wrapper);
+					}
     			}
 			}
 		});
@@ -203,43 +211,71 @@ $.fn.quasiform = function(options) {
 	}
 
 	/**
-	 * Выбор рейтинга для отзыва
+	 * Custom checkbox
 	 */
-	
+	var customCheckboxes = $(wrapper).find('[data-quasiform="checkbox"]');
+	$.each(customCheckboxes, function(idx, e) {
+		var customCheckbox = $(e);
+		var name = customCheckbox.attr('data-name');
+		var classOff = customCheckbox.attr('data-quasiform-checkbox-off');
+		var input = $(wrapper).find('input[type="checkbox"][name="'+name+'"]');
+		if (input.length > 0) {
+			if (input.is(':checked')) {
+				customCheckbox.removeClass(classOff);
+			} else {
+				customCheckbox.addClass(classOff);
+			}
+			$(checkbox).click(function(e) {
+				if (input.is(':checked')) {
+					customCheckbox.removeClass(classOff);
+				} else {
+					customCheckbox.addClass(classOff);
+				}
+			});
+		}
+	});
+
+	/**
+	 * Star rating
+	 */
 	var starsWrapper = $(wrapper).find('[data-quasiform="stars"]');
-	
-	if (starsWrapper.length == 1) {
+	var field = $(wrapper).find('input[name="stars"]');
+	if (starsWrapper.length == 1 && field.length > 0) {
 		var starSelector = '[data-value]';
 		var stars = $(starsWrapper).find('[data-value]');
 		var starClassActive = 'quasiform-star--active';
+		
+		var value = parseInt(field.val());
+		$(starsWrapper).find(starSelector + '[data-value]').removeClass(starClassActive);
+		var i = 0;
+		for (i = 1; i <= value; i++) {
+			$(starsWrapper).find('[data-value="' + i + '"]').addClass(starClassActive);
+		}
+		
 		$(stars).hover(function(e) {
-			console.log('hover');
 			var star = $(this);
 			var starsWrapper = star.parent();
 			var value = parseInt(star.attr('data-value'));
-			starsWrapper.find(starSelector + '[data-value]').removeClass(starClassActive);
+			$(starsWrapper).find('[data-value]').removeClass(starClassActive);
 			var i = 0;
 			for (i = 1; i <= value; i++) {
-				starsWrapper.find(starSelector + '[data-value="' + i + '"]').addClass(starClassActive);
+				$(starsWrapper).find('[data-value="' + i + '"]').addClass(starClassActive);
 			}
 		});
 		$(stars).click(function(e) {
-			console.log('click');
 			var star = $(this);
-			var field = form.find('input[name="stars"]');
 			var value = parseInt(star.attr('data-value'));
 			field.val(value);
 			e.preventDefault();
 		});
 		$(starsWrapper).mouseout(function(e) {
-			console.log('mouseout');
-			var field = form.find('input[name="stars"]');
-			starsWrapper.find(starSelector + '[data-value]').removeClass(starClassActive);
+			var field = $(starsWrapper).find('input[name="stars"]');
+			$(starsWrapper).find('[data-value]').removeClass(starClassActive);
 			var value = parseInt(field.val());
 			if (value > 0) {
 				var i = 0;
 				for (i = 1; i <= value; i++) {
-					starsWrapper.find(starSelector + '[data-value="' + i + '"]').addClass(starClassActive);
+					$(starsWrapper).find('[data-value="' + i + '"]').addClass(starClassActive);
 				}
 			}
 		});
