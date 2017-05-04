@@ -86,6 +86,8 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 		"success": true
 	}
 ## Roadmap ##
+* Onchange event for name="stars"
+* Callback when stars was changed (input or view)
 * Spinner
 * Customization of Star Rating
 * Custom File input
