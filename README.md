@@ -86,6 +86,7 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 		"success": true
 	}
 ## Roadmap ##
+* Check if response is not json
 * Onchange event for name="stars"
 * Callback when stars was changed (input or view)
 * Spinner
@@ -94,3 +95,4 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 * Demo of multiple recaptcha
 * Positive UX (show success before response complete)
 * Client validation
+* Not only json response
