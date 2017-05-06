@@ -4,6 +4,7 @@ $(function () {
      */
     let optionsPost = {
         debug: true,
+		format: 'html',
         hasErrorInputClass: 'quasiform-form__input--has-error',
         hasErrorLabelClass: 'quasiform-form__label--has-error',
         hideFormOnSuccess: false,
@@ -29,7 +30,7 @@ $(function () {
         },
     };
     let quasiformPost = $('#post').quasiform(optionsPost);
-	
+
     /**
      * Первая форма
      */
@@ -91,17 +92,19 @@ $(function () {
         },
     };
     let quasiformFail = $('#fail').quasiform(optionsFail);
-	
+
 	/**
      * Звёзды
      */
     let optionsStars = {
         debug: true,
         hideFormOnSuccess: false,
+		callbackOnStarsChange: function callbackOnStarsChange(wrapper) {
+			console.log('callbackOnStarsChange');
+		}
     };
     let quasiformStars = $('#stars').quasiform(optionsStars);
-	
-	
+
 	/**
 	 * Чекбокс
 	 */
@@ -116,4 +119,20 @@ $(function () {
 		}
 	};
 	let quasiformCheckbox = $('#checkbox').quasiform(optionsCheckbox);
+	
+	/**
+	 * HTML-ответ
+	 */
+	let optionsHtml = {
+		debug: true,
+		format: 'html',
+		hideFormOnSuccess: false,
+		callbackOnAgree: function callbackOnAgree(wrapper) {
+			console.log('agree');
+		},
+		callbackOnDisagree: function callbackOnDisagree(wrapper) {
+			console.log('disagree');
+		}
+	};
+	let quasiformHtml = $('#html').quasiform(optionsHtml);
 });

@@ -95,4 +95,3 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 * Demo of multiple recaptcha
 * Positive UX (show success before response complete)
 * Client validation
-* Not only json response

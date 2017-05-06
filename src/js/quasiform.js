@@ -11,15 +11,17 @@ function recaptchaCallBack() {
         var sitekey = $(recaptcha).attr('data-sitekey');
         if (sitekey !== undefined) {
             recaptchaOptions.sitekey = $(recaptcha).attr('data-sitekey');
-        }
+        } else {
+			console.log('sitekey is undefined');
+		}
         grecaptcha.render($(recaptcha).attr('id'), recaptchaOptions);
     });
 }
 
 $.fn.quasiform = function(options) {
-	// Настройки
 	$.fn.quasiform.options = $.extend({
 		debug: false,
+		format: 'json', // json, html
 		formSelector: null,
 
 		errorOpenTag: '<li>',
@@ -44,11 +46,13 @@ $.fn.quasiform = function(options) {
 		callbackBeforeSend: null,
 		callbackOnAgree: null,
 		callbackOnDisagree: null,
+		callbackOnStarsChange: null,
 	}, options);
 
 	// Обёртка (внутри находятся сообщения и форма)
 	var wrapper = $(this);
     var responseData = null;
+	var options = $.fn.quasiform.options;
 
 	/**
      * Если флажок установлен, то у кнопки отправки формы удаляется атрибут disabled.
@@ -110,9 +114,8 @@ $.fn.quasiform = function(options) {
 		}
 	});
 
-
-	if ($.fn.quasiform.options.formSelector) {
-		var form = $(wrapper).find($.fn.quasiform.options.formSelector).slice(0, 1);
+	if (options.formSelector) {
+		var form = $(wrapper).find(options.formSelector).slice(0, 1);
 	} else {
 		var form = $(wrapper).find('form').slice(0, 1);
 	}
@@ -130,9 +133,6 @@ $.fn.quasiform = function(options) {
 			});
 		});
 
-		
-
-		
 		/**
 		 * Star rating
 		 */
@@ -163,8 +163,25 @@ $.fn.quasiform = function(options) {
 			$(stars).click(function(e) {
 				var star = $(this);
 				var value = parseInt(star.attr('data-value'));
-				field.val(value);
+				var valueOld = field.val();
+				if (value != valueOld) {
+					field.val(value);
+					if ('callbackOnStarsChange' in options && typeof options.callbackOnStarsChange == 'function') {
+						options.callbackOnStarsChange(wrapper);
+					}
+				}
 				e.preventDefault();
+			});
+			$(field).change(function(e) {
+				var value = parseInt(field.val());
+				$(starsWrapper).find(starSelector + '[data-value]').removeClass(starClassActive);
+				var i = 0;
+				for (i = 1; i <= value; i++) {
+					$(starsWrapper).find('[data-value="' + i + '"]').addClass(starClassActive);
+				}
+				if ('callbackOnStarsChange' in options && typeof options.callbackOnStarsChange == 'function') {
+					options.callbackOnStarsChange(wrapper);
+				}
 			});
 			$(starsWrapper).mouseout(function(e) {
 				$(starsWrapper).find('[data-value]').removeClass(starClassActive);
@@ -182,6 +199,9 @@ $.fn.quasiform = function(options) {
 			var messagesWrapperSelector = '[data-quasiform="messages"]';
 			var errorsWrapperSelector = '[data-quasiform="errors"]';
 			var loaderSelector = '[data-quasiform="loader"]';
+			
+			wrapper.find(errorsWrapperSelector).hide();
+			wrapper.find(messagesWrapperSelector).hide();
 			
 			var formData = new FormData($(form)[0]);
 			//var formData = $(form).serialize();
@@ -201,7 +221,7 @@ $.fn.quasiform = function(options) {
 				contentType: false,
 				processData: false,
 				data: formData,
-				dataType: 'json',
+				dataType: options.format,
 				type: formType,
 				url: formAction,
 				complete: function() {
@@ -229,34 +249,33 @@ $.fn.quasiform = function(options) {
 					}
 				},
 				success: function(data, textStatus) {
-					if (typeof data == 'object' && data !== null) {
+					if (options.format == 'json' && typeof data == 'object' && data !== null) {
                         wrapper.responseData = data;
 						// Вывод сообщений об ошибках
-						wrapper.find(errorsWrapperSelector).hide();
 						if ('errors' in data && $.isArray(data.errors)) {
 							if (data.errors.length > 0) {
 								var errorsList = '';
 								for (i = 0; i < data.errors.length; i++) {
 									if (data.errors[i].length > 0) {
-										errorsList += $.fn.quasiform.options.errorOpenTag + data.errors[i] + $.fn.quasiform.options.errorCloseTag;
+										errorsList += options.errorOpenTag + data.errors[i] + options.errorCloseTag;
 									}
 								}
-								errorsList = $.fn.quasiform.options.errorsOpenTag + errorsList + $.fn.quasiform.options.errorsCloseTag;
-								wrapper.find(errorsWrapperSelector).html(errorsList).show();
+								errorsList = options.errorsOpenTag + errorsList + options.errorsCloseTag;
+								wrapper.find(errorsWrapperSelector).html(errorsList).fadeIn(10);
 							}
 						}
 						// Вывод информационных сообщений
-						wrapper.find(messagesWrapperSelector).hide();
+						
 						if ('messages' in data && $.isArray(data.messages)) {
 							if (data.messages.length > 0) {
 								var messagesList = '';
 								for (i = 0; i < data.messages.length; i++) {
 									if (data.messages[i].length > 0) {
-										messagesList += $.fn.quasiform.options.messageOpenTag + data.messages[i] + $.fn.quasiform.options.messageCloseTag;
+										messagesList += options.messageOpenTag + data.messages[i] + options.messageCloseTag;
 									}
 								}
-								messagesList = $.fn.quasiform.options.messagesOpenTag + messagesList + $.fn.quasiform.options.messagesCloseTag;
-								wrapper.find(messagesWrapperSelector).html(messagesList).show();
+								messagesList = options.messagesOpenTag + messagesList + options.messagesCloseTag;
+								wrapper.find(messagesWrapperSelector).html(messagesList).fadeIn(10);
 							}
 						}
                         if ('field_errors' in data && typeof data.field_errors == 'object' && data.field_errors !== null) {
@@ -266,7 +285,7 @@ $.fn.quasiform = function(options) {
                                 wrapper.find('label[for="'+fieldName+'"]').addClass(options.hasErrorLabelClass);
                             }
                         }
-						if ($.fn.quasiform.options.hideFormOnSuccess && 'success' in data && data.success) {
+						if (options.hideFormOnSuccess && 'success' in data && data.success) {
 							form.hide();
 						}
                         
@@ -287,6 +306,8 @@ $.fn.quasiform = function(options) {
 		                         console.log('Ответ сервера не содержит поле success');
                             }
                         }
+					} else if (options.format == 'html' && typeof data == 'string') {
+						wrapper.find('[data-quasiform="html"]').html(data).fadeIn(10);
 					} else {
                         if (options.debug) {
 	                         console.log('Ответ сервера имеет неверный формат');
