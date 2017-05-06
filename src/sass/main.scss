@@ -25,14 +25,14 @@
             float: left;
             height: 30px;
             line-height: 30px;
-			margin: 0 10px 0 0;
+            margin: 0 10px 0 0;
             text-align: center;
             width: 30px;
             &--off {
                 background-color: #ccc;
                 border: 1px solid #ddd;
                 i.fa {
-	            	color: #eee;
+                    color: #eee;
                 }
             }
         }
@@ -55,14 +55,14 @@
             display: block;
             font-size: 1rem;
             padding: 5px 5px;
-			&--checkbox {
-				cursor: pointer;
-				display: block;
-				line-height: 30px;
-				&:hover {
-					color: #d36;
-				}
-			}
+            &--checkbox {
+                cursor: pointer;
+                display: block;
+                line-height: 30px;
+                &:hover {
+                    color: #d36;
+                }
+            }
             &--has-error {
                 color: #f00;
             }
@@ -86,8 +86,8 @@
                 border: 1px solid #ddd;
                 color: #eee;
                 &:hover {
-	                background-color: #ccc;
-	                border: 1px solid #ddd;
+                    background-color: #ccc;
+                    border: 1px solid #ddd;
                     color: #eee;
                 }
             }
@@ -107,8 +107,8 @@
         }
     }
     &-loader {
-		color: #d36;
-		padding: 1rem;
+        color: #d36;
+        padding: 1rem;
         text-align: center;
     }
     &-messages {
@@ -151,22 +151,4 @@
     }
 }
 
-
-.options-table {
-    border-collapse: collapse;
-    font-size: 14px;
-    margin-bottom: 40px;
-	
-	th {
-	    border: 1px solid #666;
-	    padding: 5px;
-	    vertical-align: top;
-	    word-break: break-word;
-	}
-	td {
-	    border: 1px solid #666;
-	    padding: 5px;
-	    vertical-align: top;
-	    word-break: break-word;
-	}
-}
+@import "_docs.scss";

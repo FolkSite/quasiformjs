@@ -1,10 +1,10 @@
-var gulp = require('gulp'); // Подключаем Gulp
-var sass = require('gulp-sass'); //Подключаем Sass пакет,
-var concat = require('gulp-concat'); // Подключаем gulp-concat (для конкатенации файлов)
-var uglify = require('gulp-uglifyjs'); // Подключаем gulp-uglifyjs (для сжатия JS)
-var rename = require('gulp-rename'); // Подключаем библиотеку для переименования файлов
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglifyjs');
+var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
-var autoprefixer = require('gulp-autoprefixer'); // Подключаем библиотеку для автоматического добавления префиксов
+var autoprefixer = require('gulp-autoprefixer');
 var ts = require('gulp-typescript');
 var merge = require('merge2');
 
@@ -32,27 +32,24 @@ gulp.task('js-main', function() {
         .pipe(gulp.dest(distMainPath + 'js'));
 });
 
-
 gulp.task('watch-main', ['sass-main', 'js-main'], function() {
     gulp.watch(templateMainPath + 'sass/*.scss', ['sass-main']);
     gulp.watch(templateMainPath + 'js/*.js', ['js-main']);
 });
 
-
 gulp.task('ts', function () {
-    return gulp.src(templateMainPath + 'js/quasiform.ts')
+    return gulp.src(templateMainPath + 'ts/quasiform.ts')
         .pipe(ts({
             noImplicitAny: true,
 			allowSyntheticDefaultImports: true,
-            out: 'quasiform.ts.js'
+            out: 'quasiform.min.js'
         }))
-		//.pipe(concat('quasiform.ts.js'))
-        .pipe(gulp.dest(distMainPath + 'js'));
+        .pipe(gulp.dest(distMainPath + 'ts'));
 });
 
 gulp.task('watch-typescript', ['xxx'], function() {
-    gulp.watch(templateMainPath + 'js/*.ts', ['xxx']);
+    gulp.watch(templateMainPath + 'ts/*.ts', ['xxx']);
 });
 
 gulp.task('default', ['watch-main']);
-gulp.task('typescript', ['ts']);
+gulp.task('ts', ['ts']);
