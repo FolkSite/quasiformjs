@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+	"allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "target": "es5",
+	"out": "quasiform.ts.js"
+  },
+  "files": [
+    "src/js/quasiform.ts"
+  ]
+}

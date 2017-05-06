@@ -1,6 +1,6 @@
 {
   "name": "quasiform",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "",
   "main": "index.php",
   "scripts": {
@@ -11,6 +11,7 @@
     "jquery": "^3.2.1"
   },
   "devDependencies": {
+    "@types/jquery": "^2.0.43",
     "font-awesome": "^4.7.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",

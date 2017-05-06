@@ -86,9 +86,8 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 		"success": true
 	}
 ## Roadmap ##
+* TypeScript: http://stackoverflow.com/questions/34811716/converting-a-jquery-plugin-to-typescript/34812932#34812932
 * Check if response is not json
-* Onchange event for name="stars"
-* Callback when stars was changed (input or view)
 * Spinner
 * Customization of Star Rating
 * Custom File input
