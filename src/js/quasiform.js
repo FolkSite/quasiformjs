@@ -29,6 +29,10 @@ $.fn.quasiform = function (options) {
         errorCloseTag: '</li>',
         errorsOpenTag: '<ul>',
         errorsCloseTag: '</ul>',
+        fieldErrorOpenTag: '<li>',
+        fieldErrorCloseTag: '</li>',
+        fieldErrorsOpenTag: '<ul>',
+        fieldErrorsCloseTag: '</ul>',
         messageOpenTag: '<li>',
         messageCloseTag: '</li>',
         messagesOpenTag: '<ul>',
@@ -279,15 +283,11 @@ $.fn.quasiform = function (options) {
 								if (data.field_errors[fieldName].length > 0) {
 									var fieldErrorsList = '';
 									for (i = 0; i < data.field_errors[fieldName].length; i++) {
-										fieldErrorsList += options.errorOpenTag + data.field_errors[fieldName][i] + options.errorCloseTag;
+										fieldErrorsList += options.fieldErrorOpenTag + data.field_errors[fieldName][i] + options.fieldErrorCloseTag;
 									}
-									fieldErrorsList = options.errorsOpenTag + errorsList + options.errorsCloseTag;
+									fieldErrorsList = options.fieldErrorsOpenTag + errorsList + options.fieldErrorsCloseTag;
 									$('[data-quasiform-field-errors="'+fieldName+'"]').html(fieldErrorsList).fadeIn(10);
 								}
-								
-								
-								//console.log('fieldError: ' + data.field_errors[fieldName][i]);
-								
                             }
                         }
                         if (options.hideFormOnSuccess && 'success' in data && data.success) {
