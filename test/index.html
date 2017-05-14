@@ -345,6 +345,12 @@ let quasiformSuccess = $('#success').quasiform(optionsSuccess);
 									<div class="quasiform-form__form-group">
 										<label for="name" class="quasiform-form__label">Name</label>
 										<input id="name" type="text" name="name" value="" placeholder="Имя" class="quasiform-form__input" />
+										<div class="quasiform-form__field-errors" data-quasiform-field-errors="name" style="display: none;">
+											<ul>
+												<li>Поле обязательно для заполнения</li>
+												<li>Поле должно быть пустым</li>
+											</ul>
+										</div>
 									</div>
 								</div>
 								<div class="col m6 s12">

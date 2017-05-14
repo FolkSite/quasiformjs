@@ -194,8 +194,8 @@ $.fn.quasiform = function (options) {
             var loaderSelector = '[data-quasiform="loader"]';
             wrapper.find(errorsWrapperSelector).hide();
             wrapper.find(messagesWrapperSelector).hide();
-            var form = $(form)[0];
-            var formData = new FormData(form);
+            var formD = $(form)[0];
+            var formData = new FormData(formD);
             //var formData = $(form).serialize();
             var formAction = $(form).attr('action');
             var formType = $(form).attr('method');
@@ -275,6 +275,19 @@ $.fn.quasiform = function (options) {
                                 wrapper.find('input[name="' + fieldName + '"]').addClass(options.hasErrorInputClass);
                                 wrapper.find('textarea[name="' + fieldName + '"]').addClass(options.hasErrorInputClass);
                                 wrapper.find('label[for="' + fieldName + '"]').addClass(options.hasErrorLabelClass);
+								
+								if (data.field_errors[fieldName].length > 0) {
+									var fieldErrorsList = '';
+									for (i = 0; i < data.field_errors[fieldName].length; i++) {
+										fieldErrorsList += options.errorOpenTag + data.field_errors[fieldName][i] + options.errorCloseTag;
+									}
+									fieldErrorsList = options.errorsOpenTag + errorsList + options.errorsCloseTag;
+									$('[data-quasiform-field-errors="'+fieldName+'"]').html(fieldErrorsList).fadeIn(10);
+								}
+								
+								
+								//console.log('fieldError: ' + data.field_errors[fieldName][i]);
+								
                             }
                         }
                         if (options.hideFormOnSuccess && 'success' in data && data.success) {

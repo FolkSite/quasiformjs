@@ -36,6 +36,20 @@
                 }
             }
         }
+        &__field-errors {
+            margin: 0;
+            padding: 0.5rem 1rem 0.5rem 0;
+            ul {
+                margin: 0;
+                padding: 0;
+            }
+            li {
+                color: #f00;
+                font-size: 0.8rem;
+                line-height: 1.5;
+                list-style: none;
+            }
+        }
         &__form-group {
             margin: 0 0 2rem 0;
         }
