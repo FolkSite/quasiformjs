@@ -325,6 +325,8 @@ $.fn.quasiform = function (options) {
             });
             e.preventDefault();
         });
-    }
+    } else {
+		console.log('Form not found');
+	}
     return this;
 };
