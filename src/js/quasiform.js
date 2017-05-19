@@ -121,7 +121,8 @@ $.fn.quasiform = function (options) {
     else {
         var form = $(wrapper).find('form').slice(0, 1);
     }
-    if (form.length === 1) {
+
+    if (form.length == 1) {
         /**
          * Textarea Autoheight
          */
