@@ -280,15 +280,15 @@ $.fn.quasiform = function (options) {
                                 wrapper.find('input[name="' + fieldName + '"]').addClass(options.hasErrorInputClass);
                                 wrapper.find('textarea[name="' + fieldName + '"]').addClass(options.hasErrorInputClass);
                                 wrapper.find('label[for="' + fieldName + '"]').addClass(options.hasErrorLabelClass);
-								
-								if (data.field_errors[fieldName].length > 0) {
-									var fieldErrorsList = '';
-									for (i = 0; i < data.field_errors[fieldName].length; i++) {
-										fieldErrorsList += options.fieldErrorOpenTag + data.field_errors[fieldName][i] + options.fieldErrorCloseTag;
-									}
-									fieldErrorsList = options.fieldErrorsOpenTag + errorsList + options.fieldErrorsCloseTag;
-									$('[data-quasiform-field-errors="'+fieldName+'"]').html(fieldErrorsList).fadeIn(10);
-								}
+                                
+                                if (data.field_errors[fieldName].length > 0) {
+                                    var fieldErrorsList = '';
+                                    for (i = 0; i < data.field_errors[fieldName].length; i++) {
+                                        fieldErrorsList += options.fieldErrorOpenTag + data.field_errors[fieldName][i] + options.fieldErrorCloseTag;
+                                    }
+                                    fieldErrorsList = options.fieldErrorsOpenTag + errorsList + options.fieldErrorsCloseTag;
+                                    $('[data-quasiform-field-errors="'+fieldName+'"]').html(fieldErrorsList).fadeIn(10);
+                                }
                             }
                         }
                         if (options.hideFormOnSuccess && 'success' in data && data.success) {
@@ -327,7 +327,7 @@ $.fn.quasiform = function (options) {
             e.preventDefault();
         });
     } else {
-		console.log('Form not found');
-	}
+        console.log('Form not found');
+    }
     return this;
 };
