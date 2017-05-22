@@ -86,7 +86,7 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 		"success": true
 	}
 ## Roadmap ##
-* Error labels
+* Detect offline
 * TypeScript: http://stackoverflow.com/questions/34811716/converting-a-jquery-plugin-to-typescript/34812932#34812932
 * Check if response is not json
 * Spinner
