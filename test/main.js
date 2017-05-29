@@ -1,4 +1,12 @@
 $(function () {
+	/**
+	 * Spinner
+	 */
+	let optionsSpinner = {
+	    hideFormOnSuccess: false,
+	};
+	let quasiformSpinner = $('#spinner').quasiform(optionsSpinner);
+	
     /**
      * Нулевая форма
      */

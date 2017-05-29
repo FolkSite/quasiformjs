@@ -87,11 +87,10 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 	}
 ## Roadmap ##
 * Detect offline
-* TypeScript: http://stackoverflow.com/questions/34811716/converting-a-jquery-plugin-to-typescript/34812932#34812932
 * Check if response is not json
-* Spinner
+* Customization of Spinner
 * Customization of Star Rating
-* Custom File input
+* Custom File Input
 * Demo of multiple recaptcha
 * Positive UX (show success before response complete)
 * Client validation

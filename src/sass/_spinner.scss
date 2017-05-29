@@ -1,0 +1,72 @@
+.spinner {
+	background-color: #fff;
+    border: none;
+    display: inline-flex;
+    overflow: hidden;
+    text-align: center;
+    &--first {
+        margin: 39px 0 0 0;
+    }
+	&__decrease {
+	    background-color: #d36;
+	    border: 0;
+	    display: block;
+	    float: left;
+	    height: 40px;
+	    font-size: 20px;
+	    font-weight: bold;
+	    outline: none;
+	    width: 42px;
+		&:active {
+		    background-color: #ccc;
+		}
+		&:focus {
+			background-color: #b14;
+		}
+		&:hover {
+			background-color: #b14;
+		}
+	}
+	&__increase {
+	    background-color: #d36;
+	    border: 0;
+	    display: block;
+	    float: left;
+	    height: 40px;
+	    font-size: 20px;
+	    font-weight: bold;
+	    outline: none;
+	    width: 42px;
+		&:active {
+		    background-color: #ccc;
+		}
+		&:focus {
+			background-color: #b14;
+		}
+		&:hover {
+			background-color: #b14;
+		}
+	}
+    &__input {
+        border: 0;
+        color: #000;
+        display: block;
+        float: left;
+        height: 40px;
+        outline: none;
+        padding: 5px 0;
+        text-align: center;
+        width: 75px;
+    }
+    &__label {
+        cursor: default;
+        display: block;
+        font-size: 1rem;
+		line-height: 1.5;
+        text-align: center;
+    }
+    &-wrapper {
+        padding: 10px;
+        text-align: center;
+    }
+}

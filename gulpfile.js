@@ -41,7 +41,7 @@ gulp.task('sync-main', ['sass-main'], function() {
         host: 'quasiform.local',
         open: 'external'
     });
-    gulp.watch(distMainPath + 'css').on('change', reload);
+    gulp.watch(distMainPath + 'css/quasiform.min.css').on('change', reload);
 });
 
 gulp.task('default', ['watch-main']);
