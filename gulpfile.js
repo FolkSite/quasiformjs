@@ -1,17 +1,15 @@
 var gulp = require('gulp');
+var browserSync = require('browser-sync').create();
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglifyjs');
 var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
-var ts = require('gulp-typescript');
-var merge = require('merge2');
 
 var templateMainPath = 'src/';
 var distMainPath = 'dist/';
-
-//var tsProject = ts.createProject(templateMainPath + 'js/tsconfig.json');
+var reload = browserSync.reload;
 
 gulp.task('sass-main', function() {
     return gulp.src(templateMainPath + 'sass/main.scss')
@@ -33,23 +31,17 @@ gulp.task('js-main', function() {
 });
 
 gulp.task('watch-main', ['sass-main', 'js-main'], function() {
-    gulp.watch(templateMainPath + 'sass/*.scss', ['sass-main']);
+    gulp.watch(templateMainPath + 'sass/*.scss', ['sass-main', 'sync-main']);
     gulp.watch(templateMainPath + 'js/*.js', ['js-main']);
 });
 
-gulp.task('ts', function () {
-    return gulp.src(templateMainPath + 'ts/quasiform.ts')
-        .pipe(ts({
-            noImplicitAny: true,
-			allowSyntheticDefaultImports: true,
-            out: 'quasiform.min.js'
-        }))
-        .pipe(gulp.dest(distMainPath + 'ts'));
-});
-
-gulp.task('watch-typescript', ['xxx'], function() {
-    gulp.watch(templateMainPath + 'ts/*.ts', ['xxx']);
+gulp.task('sync-main', ['sass-main'], function() {
+    browserSync.init({
+        proxy: 'http://quasiform.local/test/',
+        host: 'quasiform.local',
+        open: 'external'
+    });
+    gulp.watch(distMainPath + 'css').on('change', reload);
 });
 
 gulp.task('default', ['watch-main']);
-gulp.task('ts', ['ts']);

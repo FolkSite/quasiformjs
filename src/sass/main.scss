@@ -23,11 +23,11 @@
             color: #d36;
             display: block;
             float: left;
-            height: 30px;
+            height: 2rem;
             line-height: 30px;
             margin: 0 10px 0 0;
             text-align: center;
-            width: 30px;
+            width: 2rem;
             &--off {
                 background-color: #ccc;
                 border: 1px solid #ddd;
@@ -72,7 +72,7 @@
             &--checkbox {
                 cursor: pointer;
                 display: block;
-                line-height: 30px;
+                line-height: 2;
                 &:hover {
                     color: #d36;
                 }
