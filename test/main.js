@@ -1,4 +1,4 @@
-$(function () {
+function initForms() {
 	/**
 	 * Spinner
 	 */
@@ -143,4 +143,10 @@ $(function () {
         }
     };
     let quasiformHtml = $('#html').quasiform(optionsHtml);
-});
+}
+
+if (document.readyState === 'complete' || document.readyState !== 'loading') {
+  initForms();
+} else {
+  document.addEventListener('DOMContentLoaded', initForms);
+}

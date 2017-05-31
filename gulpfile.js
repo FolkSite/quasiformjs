@@ -26,7 +26,7 @@ gulp.task('js-main', function() {
             templateMainPath + 'js/quasiform.js',
         ])
         .pipe(concat('quasiform.min.js'))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(gulp.dest(distMainPath + 'js'));
 });
 

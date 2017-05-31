@@ -10,14 +10,14 @@ function recaptchaCallBack() {
         var recaptchaOptions = {
             sitekey: null,
         };
-        var sitekey = $(recaptcha).attr('data-sitekey');
+        var sitekey = $(recaptcha).getAttribute('data-sitekey');
         if (sitekey !== undefined) {
-            recaptchaOptions.sitekey = $(recaptcha).attr('data-sitekey');
+            recaptchaOptions.sitekey = $(recaptcha).getAttribute('data-sitekey');
         }
         else {
             console.log('sitekey is undefined');
         }
-        grecaptcha.render($(recaptcha).attr('id'), recaptchaOptions);
+        grecaptcha.render($(recaptcha).getAttribute('id'), recaptchaOptions);
     });
 }
 $.fn.quasiform = function (options) {
@@ -50,7 +50,8 @@ $.fn.quasiform = function (options) {
         callbackOnStarsChange: null,
     }, options);
     // Обёртка (внутри находятся сообщения и форма)
-    var wrapper = $(this);
+    //var wrapper = $(this);
+	var wrapper = document.querySelector('#' + $(this).attr('id'));
     var responseData = null;
     var options = $.fn.quasiform.options;
     /**
@@ -58,28 +59,28 @@ $.fn.quasiform = function (options) {
      */
     var checkboxAgreeSelector = '[data-quasiform="agreement"]';
     var submitSelector = 'button[type="submit"]';
-    var checkboxAgree = wrapper.find(checkboxAgreeSelector).slice(0, 1);
-    var button = wrapper.find(submitSelector).slice(0, 1);
-    if (checkboxAgree.length == 1 && button.length == 1) {
-        if (checkboxAgree.is(':checked')) {
-            button.removeAttr('disabled');
+    var checkboxAgree = wrapper.querySelector(checkboxAgreeSelector);
+    var button = wrapper.querySelector(submitSelector);
+    if (checkboxAgree !== null && button !== null) {
+        if (checkboxAgree.checked) {
+            button.removeAttribute('disabled');
         }
         else {
-            button.attr('disabled', 'disabled');
+            button.setAttribute('disabled', 'disabled');
         }
     }
-    if (checkboxAgree.length == 1) {
-        wrapper.on('change', checkboxAgreeSelector, function (e) {
-            var button = wrapper.find(submitSelector).slice(0, 1);
-            if (button.length == 1) {
-                if ($(this).is(':checked')) {
-                    button.removeAttr('disabled');
+    if (checkboxAgree !== null && typeof checkboxAgree == 'object') {
+        checkboxAgree.addEventListener('change', function (e) {
+            var button = wrapper.querySelector(submitSelector);
+            if (button !== null && typeof button == 'object') {
+                if (checkboxAgree.checked) {
+                    button.removeAttribute('disabled');
                     if ('callbackOnAgree' in options && typeof options.callbackOnAgree == 'function') {
                         options.callbackOnAgree(wrapper);
                     }
                 }
                 else {
-                    button.attr('disabled', 'disabled');
+                    button.setAttribute('disabled', 'disabled');
                     if ('callbackOnDisagree' in options && typeof options.callbackOnDisagree == 'function') {
                         options.callbackOnDisagree(wrapper);
                     }
@@ -90,162 +91,160 @@ $.fn.quasiform = function (options) {
     /**
      * Custom checkbox
      */
-    var checkboxes = $(wrapper).find('input[type="checkbox"]');
-    $(checkboxes).each(function (idx, e) {
-        var checkbox = $(e);
-        var name = checkbox.attr('name');
-        var checked = checkbox.is(':checked');
-        var customCheckbox = $(wrapper).find('[data-quasiform="checkbox"][data-name="' + name + '"]');
-        if (customCheckbox.length == 1) {
-            var classOff = customCheckbox.attr('data-quasiform-checkbox-off');
+    var checkboxes = wrapper.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((checkbox, idx) => {
+        var name = checkbox.getAttribute('name');
+        var checked = checkbox.checked;
+        var customCheckbox = wrapper.querySelector('[data-quasiform="checkbox"][data-name="' + name + '"]');
+        if (customCheckbox !== null) {
+            var classOff = customCheckbox.getAttribute('data-quasiform-checkbox-off');
             if (checked) {
-                customCheckbox.removeClass(classOff);
+                customCheckbox.classList.remove(classOff);
             }
             else {
-                customCheckbox.addClass(classOff);
+                customCheckbox.classList.add(classOff);
             }
             $(checkbox).on('change', function (e) {
-                var checked = checkbox.is(':checked');
+                var checked = checkbox.checked;
                 if (checked) {
-                    customCheckbox.removeClass(classOff);
+                    customCheckbox.classList.add(classOff);
                 }
                 else {
-                    customCheckbox.addClass(classOff);
+                    customCheckbox.classList.add(classOff);
                 }
             });
         }
     });
     if (options.formSelector) {
-        var form = $(wrapper).find(options.formSelector).slice(0, 1);
+        var form = wrapper.querySelector(options.formSelector);
     }
     else {
-        var form = $(wrapper).find('form').slice(0, 1);
+        var form = wrapper.querySelector('form');
     }
 
-    if (form.length == 1) {
+    if (form !== null && typeof form == 'object') {
         /**
          * Textarea Autoheight
          */
-        var textarea = $(form).find('textarea[data-quasiform="autoheight"]');
-        $.each(textarea, function (e) {
-            $(textarea).on('input', function (e) {
-                var textarea = $(this);
-                textarea.css('height', '5px');
-                textarea.css('height', (textarea.prop('scrollHeight') + 2) + 'px');
+		var textareas = document.querySelectorAll('textarea[data-quasiform="autoheight"]');
+        textareas.forEach((textarea, index) => {
+            textarea.addEventListener('input', function (e) {
+                textarea.style.height = '5px';
+                textarea.style.height = (textarea.scrollHeight + 2) + 'px';
             });
         });
         /**
          * Star rating
          */
-        var starsWrapper = $(wrapper).find('[data-quasiform="stars"]');
-        var field = $(wrapper).find('input[name="stars"]');
-        if (starsWrapper.length == 1 && field.length > 0) {
+        var starsWrapper = wrapper.querySelector('[data-quasiform="stars"]');
+        var field = wrapper.querySelector('input[name="stars"]');
+        if (starsWrapper !== null && field !== null) {
             var starSelector = '[data-value]';
-            var stars = $(starsWrapper).find('[data-value]');
+            var stars = starsWrapper.querySelectorAll('[data-value]');
             var starClassActive = 'quasiform-star--active';
-            var value = parseInt(field.val());
-            $(starsWrapper).find(starSelector + '[data-value]').removeClass(starClassActive);
+            var value = parseInt(field.value);
+            starsWrapper.querySelector(starSelector + '[data-value]').classList.remove(starClassActive);
             var i = 0;
             for (i = 1; i <= value; i++) {
-                $(starsWrapper).find('[data-value="' + i + '"]').addClass(starClassActive);
+                starsWrapper.querySelector('[data-value="' + i + '"]').classList.add(starClassActive);
             }
-            $(stars).hover(function (e) {
-                var star = $(this);
-                var starsWrapper = star.parent();
-                var value = parseInt(star.attr('data-value'));
-                $(starsWrapper).find('[data-value]').removeClass(starClassActive);
+			stars.forEach((star, index) => {
+				star.addEventListener('mouseover', function(e) {
+					var value = parseInt(star.getAttribute('data-value'));
+                	var i = 0;
+                	for (i = 1; i <= stars.length; i++) {
+						if (i <= value) {
+                    		starsWrapper.querySelector('[data-value="' + i + '"]').classList.add(starClassActive);
+						} else {
+							starsWrapper.querySelector('[data-value="' + i + '"]').classList.remove(starClassActive);
+						}
+                	}
+				});
+				star.addEventListener('mousedown', function(e) {
+					var value = parseInt(star.getAttribute('data-value'));
+					var valueOld = field.value;
+					if (value != valueOld) {
+						field.value = value;
+						if ('callbackOnStarsChange' in options && typeof options.callbackOnStarsChange == 'function') {
+							options.callbackOnStarsChange(wrapper);
+						}
+					}
+					return false;
+				});
+			});
+            field.addEventListener('change', function (e) {
+                var value = parseInt(field.value);
+                starsWrapper.querySelector(starSelector + '[data-value]').classList.remove(starClassActive);
                 var i = 0;
                 for (i = 1; i <= value; i++) {
-                    $(starsWrapper).find('[data-value="' + i + '"]').addClass(starClassActive);
-                }
-            });
-            $(stars).click(function (e) {
-                var star = $(this);
-                var value = parseInt(star.attr('data-value'));
-                var valueOld = field.val();
-                if (value != valueOld) {
-                    field.val(value);
-                    if ('callbackOnStarsChange' in options && typeof options.callbackOnStarsChange == 'function') {
-                        options.callbackOnStarsChange(wrapper);
-                    }
-                }
-                e.preventDefault();
-            });
-            $(field).change(function (e) {
-                var value = parseInt(field.val());
-                $(starsWrapper).find(starSelector + '[data-value]').removeClass(starClassActive);
-                var i = 0;
-                for (i = 1; i <= value; i++) {
-                    $(starsWrapper).find('[data-value="' + i + '"]').addClass(starClassActive);
+                    starsWrapper.querySelector('[data-value="' + i + '"]').classList.add(starClassActive);
                 }
                 if ('callbackOnStarsChange' in options && typeof options.callbackOnStarsChange == 'function') {
                     options.callbackOnStarsChange(wrapper);
                 }
             });
             $(starsWrapper).mouseout(function (e) {
-                $(starsWrapper).find('[data-value]').removeClass(starClassActive);
-                var value = parseInt(field.val());
+                starsWrapper.querySelector('[data-value]').classList.remove(starClassActive);
+                var value = parseInt(field.value);
                 if (value > 0) {
                     var i = 0;
                     for (i = 1; i <= value; i++) {
-                        $(starsWrapper).find('[data-value="' + i + '"]').addClass(starClassActive);
+                        starsWrapper.querySelector('[data-value="' + i + '"]').classList.add(starClassActive);
                     }
                 }
             });
         }
 		
-		var spinners = $(form).find('[data-quasiform="spinner"]');
+		var spinners = form.querySelectorAll('[data-quasiform="spinner"]');
 		if (spinners.length > 0) {
-			$(spinners).each(function(index, e) {
-				var spinner = $(e);
-				
-				var increase = $(spinner).find('[data-quasiform="spinner__increase"]');
-				$(increase).on('click', function(e) {
+			spinners.forEach((spinner, index) => {
+				var increase = spinner.querySelector('[data-quasiform="spinner__increase"]');
+				increase.addEventListener('mousedown', function(e) {
+					console.log('A');
 					var button = $(this);
-					var spinner = $(button).parent();
-					var min = parseInt($(spinner).attr('data-min'));
-					var max = parseInt($(spinner).attr('data-max'));
-					var input = $(spinner).find('input');
-					var valueOld = parseInt($(input).val());
-					var step = parseInt($(spinner).attr('data-one'));
+					var min = parseInt(spinner.getAttribute('data-min'));
+					var max = parseInt(spinner.getAttribute('data-max'));
+					var input = spinner.querySelector('input');
+					var valueOld = parseInt(input.value);
+					var step = parseInt(spinner.getAttribute('data-one'));
 					var k = 1;
 					var valueNew = valueOld + step * k;
 					if (valueNew <= max) {
-						$(input).val(valueNew);
+						input.value = valueNew;
 					}
 				});
 				
-				var decrease = $(spinner).find('[data-quasiform="spinner__decrease"]');
-				$(decrease).on('click', function(e) {
+				var decrease = spinner.querySelector('[data-quasiform="spinner__decrease"]');
+				decrease.addEventListener('mousedown', function(e) {
+					console.log('B');
 					var button = $(this);
-					var spinner = $(button).parent();
-					var min = parseInt($(spinner).attr('data-min'));
-					var max = parseInt($(spinner).attr('data-max'));
-					var input = $(spinner).find('input');
-					var valueOld = parseInt($(input).val());
-					var step = parseInt($(spinner).attr('data-one'));
+					var min = parseInt(spinner.getAttribute('data-min'));
+					var max = parseInt(spinner.getAttribute('data-max'));
+					var input = spinner.querySelector('input');
+					var valueOld = parseInt(input.value);
+					var step = parseInt(spinner.getAttribute('data-one'));
 					var k = -1;
 					var valueNew = valueOld + step * k;
 					if (valueNew >= min) {
-						$(input).val(valueNew);
+						input.value = valueNew;
 					}
 				});
 			});
 		}
 		
-        $(form).on('submit', function (e) {
+        form.addEventListener('submit', function(e) {
             var messagesWrapperSelector = '[data-quasiform="messages"]';
             var errorsWrapperSelector = '[data-quasiform="errors"]';
             var loaderSelector = '[data-quasiform="loader"]';
-            wrapper.find(errorsWrapperSelector).hide();
-            wrapper.find(messagesWrapperSelector).hide();
+            wrapper.querySelector(errorsWrapperSelector).style.display = 'none';
+            wrapper.querySelector(messagesWrapperSelector).style.display = 'none';
             var formD = $(form)[0];
             var formData = new FormData(formD);
             //var formData = $(form).serialize();
-            var formAction = $(form).attr('action');
-            var formType = $(form).attr('method');
-            form.find(submitSelector).attr('disabled', 'disabled');
-            wrapper.find(loaderSelector).show();
+            var formAction = form.getAttribute('action');
+            var formType = form.getAttribute('method');
+            form.querySelector(submitSelector).setAttribute('disabled', 'disabled');
+            wrapper.querySelector(loaderSelector).style.display = 'block';
             responseData = null;
             // Функция, которую нужно исполнить перед запросом
             if ('callbackBeforeSend' in options && typeof options.callbackBeforeSend == 'function') {
@@ -263,8 +262,9 @@ $.fn.quasiform = function (options) {
                     if ('callbackOnComplete' in options && typeof options.callbackOnComplete == 'function') {
                         options.callbackOnComplete(wrapper);
                     }
-                    wrapper.find(loaderSelector).hide();
-                    form.find(submitSelector).removeAttr('disabled');
+                    wrapper.querySelector(loaderSelector).style.display = 'none';
+                    //form.querySelector(submitSelector).classList.remove('disabled');
+		            form.querySelector(submitSelector).removeAttribute('disabled');
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     if (xhr.status == 404) {
@@ -289,7 +289,7 @@ $.fn.quasiform = function (options) {
                     if (options.format == 'json' && typeof data == 'object' && data !== null) {
                         wrapper.responseData = data;
                         // Вывод сообщений об ошибках
-                        if ('errors' in data && $.isArray(data.errors)) {
+                        if ('errors' in data && Array.isArray(data.errors)) {
                             if (data.errors.length > 0) {
                                 var errorsList = '';
                                 for (i = 0; i < data.errors.length; i++) {
@@ -298,11 +298,12 @@ $.fn.quasiform = function (options) {
                                     }
                                 }
                                 errorsList = options.errorsOpenTag + errorsList + options.errorsCloseTag;
-                                wrapper.find(errorsWrapperSelector).html(errorsList).fadeIn(10);
+                                wrapper.querySelector(errorsWrapperSelector).innerHTML = errorsList;
+                                wrapper.querySelector(errorsWrapperSelector).style.display = 'block';
                             }
                         }
                         // Вывод информационных сообщений
-                        if ('messages' in data && $.isArray(data.messages)) {
+                        if ('messages' in data && Array.isArray(data.messages)) {
                             if (data.messages.length > 0) {
                                 var messagesList = '';
                                 for (i = 0; i < data.messages.length; i++) {
@@ -311,15 +312,25 @@ $.fn.quasiform = function (options) {
                                     }
                                 }
                                 messagesList = options.messagesOpenTag + messagesList + options.messagesCloseTag;
-                                wrapper.find(messagesWrapperSelector).html(messagesList).fadeIn(10);
+                                wrapper.querySelector(messagesWrapperSelector).innerHTML = messagesList;
+                                wrapper.querySelector(messagesWrapperSelector).style.display = 'block';
                             }
                         }
                         if ('field_errors' in data && typeof data.field_errors == 'object' && data.field_errors !== null) {
                             var fieldName;
                             for (fieldName in data.field_errors) {
-                                wrapper.find('input[name="' + fieldName + '"]').addClass(options.hasErrorInputClass);
-                                wrapper.find('textarea[name="' + fieldName + '"]').addClass(options.hasErrorInputClass);
-                                wrapper.find('label[for="' + fieldName + '"]').addClass(options.hasErrorLabelClass);
+                                var input = wrapper.querySelector('input[name="' + fieldName + '"]');
+								if (input !== null) {
+									input.classList.add(options.hasErrorInputClass);
+								}
+                                var textarea = wrapper.querySelector('textarea[name="' + fieldName + '"]');
+								if (textarea !== null) {
+									textarea.classList.add(options.hasErrorInputClass);
+								}
+                                var label = wrapper.querySelector('label[for="' + fieldName + '"]');
+								if (label !== null) {
+									label.classList.add(options.hasErrorLabelClass);
+								}
                                 
                                 if (data.field_errors[fieldName].length > 0) {
                                     var fieldErrorsList = '';
@@ -327,12 +338,13 @@ $.fn.quasiform = function (options) {
                                         fieldErrorsList += options.fieldErrorOpenTag + data.field_errors[fieldName][i] + options.fieldErrorCloseTag;
                                     }
                                     fieldErrorsList = options.fieldErrorsOpenTag + errorsList + options.fieldErrorsCloseTag;
-                                    $('[data-quasiform-field-errors="'+fieldName+'"]').html(fieldErrorsList).fadeIn(10);
+                                    $('[data-quasiform-field-errors="'+fieldName+'"]').innerHTML = fieldErrorsList;
+                                    $('[data-quasiform-field-errors="'+fieldName+'"]').style.display = 'block';
                                 }
                             }
                         }
                         if (options.hideFormOnSuccess && 'success' in data && data.success) {
-                            form.hide();
+                            formstyle.display = 'none';
                         }
                         if ('success' in data) {
                             if (data.success) {
@@ -355,7 +367,8 @@ $.fn.quasiform = function (options) {
                         }
                     }
                     else if (options.format == 'html' && typeof data == 'string') {
-                        wrapper.find('[data-quasiform="html"]').html(data).fadeIn(10);
+                        wrapper.querySelector('[data-quasiform="html"]').innerHTML = data;
+                        wrapper.querySelector('[data-quasiform="html"]').style.display = 'block';
                     }
                     else {
                         if (options.debug) {
