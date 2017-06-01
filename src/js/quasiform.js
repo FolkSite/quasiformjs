@@ -104,10 +104,10 @@ $.fn.quasiform = function (options) {
             else {
                 customCheckbox.classList.add(classOff);
             }
-            $(checkbox).on('change', function (e) {
+            checkbox.addEventListener('change', function () {
                 var checked = checkbox.checked;
                 if (checked) {
-                    customCheckbox.classList.add(classOff);
+                    customCheckbox.classList.remove(classOff);
                 }
                 else {
                     customCheckbox.classList.add(classOff);
@@ -334,8 +334,8 @@ $.fn.quasiform = function (options) {
                                         fieldErrorsList += options.fieldErrorOpenTag + data.field_errors[fieldName][i] + options.fieldErrorCloseTag;
                                     }
                                     fieldErrorsList = options.fieldErrorsOpenTag + errorsList + options.fieldErrorsCloseTag;
-                                    $('[data-quasiform-field-errors="'+fieldName+'"]').innerHTML = fieldErrorsList;
-                                    $('[data-quasiform-field-errors="'+fieldName+'"]').style.display = 'block';
+                                    wrapper.querySelector('[data-quasiform-field-errors="'+fieldName+'"]').innerHTML = fieldErrorsList;
+                                    wrapper.querySelector('[data-quasiform-field-errors="'+fieldName+'"]').style.display = 'block';
                                 }
                             }
                         }
