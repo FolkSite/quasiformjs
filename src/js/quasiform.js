@@ -183,7 +183,7 @@ $.fn.quasiform = function (options) {
                     options.callbackOnStarsChange(wrapper);
                 }
             });
-            $(starsWrapper).mouseout(function (e) {
+            starsWrapper.addEventListener('mouseout', function (e) {
                 starsWrapper.querySelector('[data-value]').classList.remove(starClassActive);
                 var value = parseInt(field.value);
                 if (value > 0) {
