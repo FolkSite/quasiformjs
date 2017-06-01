@@ -198,26 +198,8 @@ $.fn.quasiform = function (options) {
 		var spinners = form.querySelectorAll('[data-quasiform="spinner"]');
 		if (spinners.length > 0) {
 			spinners.forEach((spinner, index) => {
-				var increase = spinner.querySelector('[data-quasiform="spinner__increase"]');
-				increase.addEventListener('mousedown', function(e) {
-					console.log('A');
-					var button = $(this);
-					var min = parseInt(spinner.getAttribute('data-min'));
-					var max = parseInt(spinner.getAttribute('data-max'));
-					var input = spinner.querySelector('input');
-					var valueOld = parseInt(input.value);
-					var step = parseInt(spinner.getAttribute('data-one'));
-					var k = 1;
-					var valueNew = valueOld + step * k;
-					if (valueNew <= max) {
-						input.value = valueNew;
-					}
-				});
-				
 				var decrease = spinner.querySelector('[data-quasiform="spinner__decrease"]');
 				decrease.addEventListener('mousedown', function(e) {
-					console.log('B');
-					var button = $(this);
 					var min = parseInt(spinner.getAttribute('data-min'));
 					var max = parseInt(spinner.getAttribute('data-max'));
 					var input = spinner.querySelector('input');
@@ -226,6 +208,20 @@ $.fn.quasiform = function (options) {
 					var k = -1;
 					var valueNew = valueOld + step * k;
 					if (valueNew >= min) {
+						input.value = valueNew;
+					}
+				});
+				
+				var increase = spinner.querySelector('[data-quasiform="spinner__increase"]');
+				increase.addEventListener('mousedown', function(e) {
+					var min = parseInt(spinner.getAttribute('data-min'));
+					var max = parseInt(spinner.getAttribute('data-max'));
+					var input = spinner.querySelector('input');
+					var valueOld = parseInt(input.value);
+					var step = parseInt(spinner.getAttribute('data-one'));
+					var k = 1;
+					var valueNew = valueOld + step * k;
+					if (valueNew <= max) {
 						input.value = valueNew;
 					}
 				});
