@@ -50,7 +50,6 @@ $.fn.quasiform = function (options) {
         callbackOnStarsChange: null,
     }, options);
     // Обёртка (внутри находятся сообщения и форма)
-    //var wrapper = $(this);
 	var wrapper = document.querySelector('#' + $(this).attr('id'));
     var responseData = null;
     var options = $.fn.quasiform.options;
