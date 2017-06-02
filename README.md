@@ -86,6 +86,7 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 		"success": true
 	}
 ## Roadmap ##
+* Rendering response result to separate method
 * Native: https://github.com/oneuijs/You-Dont-Need-jQuery
 * Replace ajax by https://fetch.spec.whatwg.org/
 * ES6
