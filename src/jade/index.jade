@@ -1,0 +1,416 @@
+doctype html
+html(lang='ru')
+    head
+        meta(charset='utf-8')
+        title quasiform
+        meta(name='viewport', content='width=device-width,height=device-height,user-scalable=no')
+        link(rel='stylesheet', href='../dependencies/grid.min.css')
+        link(rel='stylesheet', href='../dist/css/quasiform.min.css?v=4')
+        link(rel='stylesheet', href='../node_modules/font-awesome/css/font-awesome.min.css')
+    body(itemscope='', itemtype='http://schema.org/WebPage')
+        .container
+            h1 quasiform
+            div
+                p
+                    | This is jQuery plugin that helps submiting and validating your forms asynchronously. Keep your validation logic on server side, and for client side validate with javascript and AJAX.
+                p Supports multiple reCaptcha 3.
+            h2 Options
+            table.options-table
+                thead
+                    tr
+                        th name
+                        th default value
+                tr
+                    td debug
+                    td false
+                tr
+                    td format
+                    td json
+                tr
+                    td formSelector
+                    td null
+                tr
+                    td errorOpenTag
+                    td
+                        code &lt;li&gt;
+                tr
+                    td errorCloseTag
+                    td
+                        code </li>
+                tr
+                    td errorsOpenTag
+                    td
+                        code <ul>
+                tr
+                    td errorsCloseTag
+                    td
+                        code </ul>
+                tr
+                    td messageOpenTag
+                    td
+                        code <li>
+                tr
+                    td messageCloseTag
+                    td
+                        code </li>
+                tr
+                    td messagesOpenTag
+                    td
+                        code <ul>
+                tr
+                    td messagesCloseTag
+                    td
+                        code </ul>
+                tr
+                    td hideFormOnSuccess
+                    td false
+                tr
+                    td hasErrorInputClass
+                    td quasiform__form-input--has-error
+                tr
+                    td hasErrorLabelClass
+                    td quasiform__form-label--has-error
+                tr
+                    td callbackOnSuccess
+                    td null
+                tr
+                    td callbackOnFail
+                    td null
+                tr
+                    td callbackOnError
+                    td null
+                tr
+                    td callbackOnComplete
+                    td null
+                tr
+                    td callbackBeforeSend
+                    td null
+                tr
+                    td callbackOnAgree
+                    td null
+                tr
+                    td callbackOnDisagree
+                    td null
+                tr
+                    td callbackOnStarsChange
+                    td null
+            .row
+                .col.s12.m12
+                    h2 Form not found
+                    .row
+                        .col.s12.m6
+                            #ne.quasiform-wrapper
+                                .quasiform-errors(data-quasiform='errors', style='display: none;')
+                                .quasiform-messages(data-quasiform='messages', style='display: none;')
+                                .quasiform-loader(data-quasiform='loader', style='display: none;')
+                                    i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+                        .col.s12.m6
+                            code
+                                pre(style='overflow-x: scroll;').
+                                    let optionsNotExists = {
+                                        hideFormOnSuccess: false,
+                                    };
+                                    let quasiformNotExists = $('#ne').quasiform(optionsNotExists);
+                .col.s12.m12
+                    h2 Spinner
+                    .row
+                        .col.s12.m6
+                            #spinner.quasiform-wrapper
+                                .quasiform-errors(data-quasiform='errors', style='display: none;')
+                                .quasiform-messages(data-quasiform='messages', style='display: none;')
+                                .quasiform-loader(data-quasiform='loader', style='display: none;')
+                                    i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+                                form.quasiform-form(action='success.json', method='post', accept-charset='utf-8', enctype='multipart/form-data')
+                                    .row
+                                        .col.m12.s12
+                                            .quasiform-form__form-group
+                                                .spinner-wrapper(data-quasiform='spinner', data-min='1', data-max='10', data-one='1')
+                                                    label.spinner__label Количество
+                                                    .spinner
+                                                        button.spinner__decrease(type='button', data-quasiform='spinner__decrease') —
+                                                        input.spinner__input(type='text', name='count', maxlength='3', readonly='true', value='1')
+                                                        button.spinner__increase(type='button', data-quasiform='spinner__increase') +
+                                            .quasiform-form__form-group
+                                                button.quasiform-form__submit(type='submit') Send
+                        .col.s12.m6
+                            code
+                                pre(style='overflow-x: scroll;').
+                                    let optionsSpinner = {
+                                        hideFormOnSuccess: false,
+                                    };
+                                    let quasiformSpinner = $('#spinner').quasiform(optionsSpinner);
+                .col.s12.m12
+                    h2 Custom checkbox
+                    .row
+                        .col.s12.m6
+                            #checkbox.quasiform-wrapper
+                                .quasiform-errors(data-quasiform='errors', style='display: none;')
+                                .quasiform-messages(data-quasiform='messages', style='display: none;')
+                                .quasiform-loader(data-quasiform='loader', style='display: none;')
+                                    i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+                                form.quasiform-form(action='success.json', method='post', accept-charset='utf-8', enctype='multipart/form-data')
+                                    .row
+                                        .col.m12.s12
+                                            .quasiform-form__form-group
+                                                label.quasiform-form__label--checkbox
+                                                    .quasiform-form-checkbox(data-quasiform='checkbox', data-name='remember', data-quasiform-checkbox-off='quasiform-form-checkbox--off')
+                                                        i.fa.fa-check
+                                                    input(type='checkbox', name='remember', value='1', style='display: none;')
+                                                    |  Remember
+                                            .quasiform-form__form-group
+                                                label.quasiform-form__label--checkbox
+                                                    .quasiform-form-checkbox(data-quasiform='checkbox', data-name='checkbox-agree', data-quasiform-checkbox-off='quasiform-form-checkbox--off')
+                                                        i.fa.fa-check
+                                                    input(type='checkbox', name='checkbox-agree', value='1', data-quasiform='agreement', checked='', style='display: none;')
+                                                    |  Agree
+                                            .quasiform-form__form-group
+                                                button.quasiform-form__submit(type='submit') Send
+                        .col.s12.m6
+                            code
+                                pre(style='overflow-x: scroll;').
+                                    let optionsCheckbox = {
+                                        hideFormOnSuccess: false,
+                                        callbackOnAgree: function callbackOnAgree(wrapper) {
+                                            console.log('agree');
+                                        },
+                                        callbackOnDisagree: function callbackOnDisagree(wrapper) {
+                                            console.log('disagree');
+                                        }
+                                    };
+                                    let quasiformCheckbox = $('#checkbox').quasiform(optionsCheckbox);
+                .col.s12.m12
+                    h2 Stars
+                    .row
+                        .col.s12.m6
+                            #stars.quasiform-wrapper
+                                .quasiform-errors(data-quasiform='errors', style='display: none;')
+                                .quasiform-messages(data-quasiform='messages', style='display: none;')
+                                .quasiform-loader(data-quasiform='loader', style='display: none;')
+                                    i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+                                form.quasiform-form(action='success.json', method='post', accept-charset='utf-8', enctype='multipart/form-data')
+                                    .row
+                                        .col.s12
+                                            .quasiform-form__form-group
+                                                .quasiform-stars(data-quasiform='stars')
+                                                    .quasiform-star(data-value='1')
+                                                        i.fa.fa-star
+                                                    .quasiform-star(data-value='2')
+                                                        i.fa.fa-star
+                                                    .quasiform-star(data-value='3')
+                                                        i.fa.fa-star
+                                                    .quasiform-star(data-value='4')
+                                                        i.fa.fa-star
+                                                    .quasiform-star(data-value='5')
+                                                        i.fa.fa-star
+                                        .col.s12
+                                            .quasiform-form__form-group
+                                                label.quasiform-form__label(for='name') Rating
+                                                input#stars.quasiform-form__input(type='text', name='stars', value='4', placeholder='Rating')
+                                    .quasiform-form__form-group
+                                        button.quasiform-form__submit(type='submit') Send
+                        .col.s12.m6
+                            code
+                                pre(style='overflow-x: scroll;').
+                                    let optionsStars = {
+                                        hideFormOnSuccess: false,
+                                        callbackOnStarsChange: function callbackOnStarsChange(wrapper) {
+                                            console.log('callbackOnStarsChange');
+                                        }
+                                    };
+                                    let quasiformStars = $('#stars').quasiform(optionsStars);
+                .col.s12.m12
+                    h2 Dump of $_POST
+                    .row
+                        .col.s12.m6
+                            #post.quasiform-wrapper
+                                .quasiform-errors(data-quasiform='errors', style='display: none;')
+                                .quasiform-messages(data-quasiform='messages', style='display: none;')
+                                .quasiform-loader(data-quasiform='loader', style='display: none;')
+                                    i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+                                .quasiform-html(data-quasiform='html', style='display: none;')
+                                    // HTML response will be here
+                                form.quasiform-form(action='post.php', method='post', accept-charset='utf-8', enctype='multipart/form-data')
+                                    .row
+                                        .col.m6.s12
+                                            .quasiform-form__form-group
+                                                label.quasiform-form__label(for='name') Name
+                                                input#name.quasiform-form__input(type='text', name='name', value='Vasya', placeholder='Имя')
+                                        .col.m6.s12
+                                            .quasiform-form__form-group
+                                                label.quasiform-form__label(for='contacts') Contacts
+                                                input#contacts.quasiform-form__input(type='text', name='contacts', value='123-456', placeholder='E-mail, телефон или другое')
+                                    .quasiform-form__form-group
+                                        label
+                                            input(type='checkbox', name='checkbox-agree', value='1', data-quasiform='agreement', checked='')
+                                            |  Agree
+                                    .quasiform-form__form-group
+                                        .col.s12
+                                            label.quasiform-form__label(for='text') Файл
+                                            input(type='file', name='file')
+                                    .quasiform-form__form-group
+                                        button.quasiform-form__submit(type='submit') Send
+                        .col.s12.m6
+                            code
+                                pre(style='overflow-x: scroll;').
+                                    let optionsPost = {
+                                        hideFormOnSuccess: false,
+                                        format: 'html',
+                                    };
+                                    let quasiformPost = $('#post').quasiform(optionsPost);
+                .col.s12.m12
+                    h2 Success response
+                    .row
+                        .col.s12.m6
+                            #success.quasiform-wrapper
+                                .quasiform-errors(data-quasiform='errors', style='display: none;')
+                                .quasiform-messages(data-quasiform='messages', style='display: none;')
+                                .quasiform-loader(data-quasiform='loader', style='display: none;')
+                                    i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+                                form.quasiform-form(action='success.json', method='post', accept-charset='utf-8')
+                                    .row
+                                        .col.m6.s12
+                                            .quasiform-form__form-group
+                                                label.quasiform-form__label(for='name') Name
+                                                input#name.quasiform-form__input(type='text', name='name', value='', placeholder='Имя')
+                                        .col.m6.s12
+                                            .quasiform-form__form-group
+                                                label.quasiform-form__label(for='contacts') Contacts
+                                                input#contacts.quasiform-form__input(type='text', name='contacts', value='', placeholder='E-mail, телефон или другое')
+                                    .row
+                                        .col.s12
+                                            .quasiform-form__form-group
+                                                label.quasiform-form__label(for='text') Message
+                                                textarea#text.quasiform-form__textarea(name='text', placeholder='Message', data-quasiform='autoheight')
+                                        div class="row">
+                                        <label for="reCaptchaSuccess">Проверка</label>
+                                        <div data-quasiform="recaptcha" data-sitekey="6LeevgkTAAAAAEz1oGOtzncwPmjYPQX6EtWolaBZ" id="reCaptchaSuccess">
+                                        </div>
+                                        </div
+                                    .quasiform-form__form-group
+                                        label
+                                            input(type='checkbox', name='checkbox-agree', value='Agree', data-quasiform='agreement', checked='')
+                                            |  Agree
+                                    .quasiform-form__form-group
+                                        button.quasiform-form__submit(type='submit') Send
+                        .col.s12.m6
+                            code
+                                pre(style='overflow-x: scroll;').
+                                    let optionsSuccess = {
+                                        hasErrorInputClass: 'quasiform-form__input--has-error',
+                                        hasErrorLabelClass: 'quasiform-form__label--has-error',
+                                        hideFormOnSuccess: false,
+                                        callbackOnSuccess: function callbackOnSuccess(wrapper) {
+                                            console.log('callbackOnSuccess');
+                                        },
+                                        callbackOnFail: function callbackOnFail(wrapper) {
+                                            console.log('callbackOnFail');
+                                        },
+                                        callbackOnError: function callbackOnError(wrapper) {
+                                            console.log('callbackOnError');
+                                        },
+                                        callbackBeforeSend: function callbackBeforeSend(wrapper) {
+                                            console.log('callbackBeforeSend');
+                                        },
+                                        callbackOnComplete: function callbackOnComplete(wrapper) {
+                                            console.log('callbackOnComplete');
+                                        },
+                                    };
+                                    let quasiformSuccess = $('#success').quasiform(optionsSuccess);
+                .col.s12.m12
+                    h2 Fail response (success: false)
+                    .row
+                        .col.s12.m6
+                            #fail.quasiform-wrapper
+                                .quasiform-errors(data-quasiform='errors', style='display: none;')
+                                .quasiform-messages(data-quasiform='messages', style='display: none;')
+                                .quasiform-loader(data-quasiform='loader', style='display: none;')
+                                    i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+                                form(action='fail.json', method='post', accept-charset='utf-8')
+                                    .row
+                                        .col.m6.s12
+                                            .quasiform-form__form-group
+                                                label.quasiform-form__label(for='name') Name
+                                                input#name.quasiform-form__input(type='text', name='name', value='', placeholder='Имя')
+                                                .quasiform-form__field-errors(data-quasiform-field-errors='name', style='display: none;')
+                                                    ul
+                                                        li Поле обязательно для заполнения
+                                                        li Поле должно быть пустым
+                                        .col.m6.s12
+                                            .quasiform-form__form-group
+                                                label.quasiform-form__label(for='contacts') Contacts
+                                                input#contacts.quasiform-form__input(type='text', name='contacts', value='', placeholder='E-mail, телефон или другое')
+                                    .row
+                                        .col.s12
+                                            .quasiform-form__form-group
+                                                label.quasiform-form__label(for='text') Message
+                                                textarea#text.quasiform-form__textarea(name='text', placeholder='Message', data-quasiform='autoheight')
+                                        div class="row">
+                                        <label for="reCaptchaFail">Проверка</label>
+                                        <div data-quasiform="recaptcha" data-sitekey="6LeevgkTAAAAAEz1oGOtzncwPmjYPQX6EtWolaBZ" id="reCaptchaFail">
+                                        </div>
+                                        </div
+                                    .quasiform-form__form-group
+                                        label(form='quasiform__agree')
+                                            input(type='checkbox', name='checkbox-agree', value='Agree', data-quasiform='agreement', checked='')
+                                            |  Agree
+                                    .quasiform-form__form-group
+                                        button.quasiform-form__submit(type='submit') Send
+                        .col.s12.m6
+                            code
+                                pre(style='overflow-x: scroll;').
+                                    let optionsFail = {
+                                        hasErrorInputClass: 'quasiform-form__input--has-error',
+                                        hasErrorLabelClass: 'quasiform-form__label--has-error',
+                                        hideFormOnSuccess: false,
+                                        callbackOnSuccess: function callbackOnSuccess(wrapper) {
+                                            console.log('callbackOnSuccess');
+                                        },
+                                        callbackOnFail: function callbackOnFail(wrapper) {
+                                            console.log('callbackOnFail');
+                                        },
+                                        callbackOnError: function callbackOnError(wrapper) {
+                                            console.log('callbackOnError');
+                                        },
+                                        callbackBeforeSend: function callbackBeforeSend(wrapper) {
+                                            console.log('callbackBeforeSend');
+                                        },
+                                        callbackOnComplete: function callbackOnComplete(wrapper) {
+                                            console.log('callbackOnComplete');
+                                        },
+                                    };
+                                    let quasiformFail = $('#fail').quasiform(optionsFail);
+                .col.s12.m12
+                    h2 HTML response
+                    .row
+                        .col.s12.m6
+                            #html.quasiform-wrapper
+                                .quasiform-errors(data-quasiform='errors', style='display: none;')
+                                .quasiform-messages(data-quasiform='messages', style='display: none;')
+                                .quasiform-loader(data-quasiform='loader', style='display: none;')
+                                    i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+                                .quasiform-html(data-quasiform='html', style='display: none;')
+                                    // HTML response will be here
+                                form.quasiform-form(action='response.html', method='post', accept-charset='utf-8')
+                                    .row
+                                        .col.m6.s12
+                                            .quasiform-form__form-group
+                                                label.quasiform-form__label(for='name') Name
+                                                input#name.quasiform-form__input(type='text', name='name', value='', placeholder='Имя')
+                                        .quasiform-form__form-group
+                                            label
+                                                input(type='checkbox', name='checkbox-agree', value='Agree', data-quasiform='agreement', checked='')
+                                                |  Agree
+                                        .quasiform-form__form-group
+                                            button.quasiform-form__submit(type='submit') Send
+                    .col.s12.m6
+                        code
+                            pre(style='overflow-x: scroll;').
+                                let optionsHtml = {
+                                    format: 'html',
+                                    hideFormOnSuccess: false,
+                                };
+                                let quasiformHtml = $('#html').quasiform(optionsHtml);
+        script(src='../node_modules/jquery/dist/jquery.min.js')
+        // script src="https://www.google.com/recaptcha/api.js?onload=recaptchaCallBack&render=explicit"></script>
+        script(src='../dist/js/quasiform.min.js?v=4')
+        script(src='main.js?v=4')

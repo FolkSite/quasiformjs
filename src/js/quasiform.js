@@ -20,6 +20,7 @@ function recaptchaCallBack() {
         grecaptcha.render($(recaptcha).getAttribute('id'), recaptchaOptions);
     });
 }
+
 $.fn.quasiform = function (options) {
     $.fn.quasiform.options = $.extend({
         debug: false,
@@ -59,7 +60,7 @@ $.fn.quasiform = function (options) {
     var checkboxAgreeSelector = '[data-quasiform="agreement"]';
     var submitSelector = 'button[type="submit"]';
     var checkboxAgree = wrapper.querySelector(checkboxAgreeSelector);
-    var button = wrapper.querySelector(submitSelector);
+    let button = wrapper.querySelector(submitSelector);
     if (checkboxAgree !== null && button !== null) {
         if (checkboxAgree.checked) {
             button.removeAttribute('disabled');
@@ -70,7 +71,7 @@ $.fn.quasiform = function (options) {
     }
     if (checkboxAgree !== null && typeof checkboxAgree == 'object') {
         checkboxAgree.addEventListener('change', function (e) {
-            var button = wrapper.querySelector(submitSelector);
+            let button = wrapper.querySelector(submitSelector);
             if (button !== null && typeof button == 'object') {
                 if (checkboxAgree.checked) {
                     button.removeAttribute('disabled');
@@ -247,7 +248,13 @@ $.fn.quasiform = function (options) {
             }
 			
 			var headers = new Headers();
-			headers.append('Content-Type', 'application/json; charset=utf-8');
+			switch (options.format) {
+				case 'json':
+					headers.append('Content-Type', 'application/json; charset=utf-8');
+					break;
+				case 'html':
+					break;
+			}
 			fetch(formAction, {headers: headers, method: formMethod, body: formData})
 			.then(response => {
 				// Функция, которую нужно исполнить после завершения запроса
@@ -256,17 +263,12 @@ $.fn.quasiform = function (options) {
 				}
 				wrapper.querySelector(loaderSelector).style.display = 'none';
 				form.querySelector(submitSelector).removeAttribute('disabled');
-				let resp = response.text();
-			    try {
-			        resp = JSON.parse(resp);
-					return resp;
-			    } catch(err) {
-					console.error('Response is not JSON');
-					if ('callbackOnError' in options && typeof options.callbackOnError == 'function') {
-                        options.callbackOnError(wrapper);
-                    }
-					return {};
-			    }
+				switch (options.format) {
+					case 'json':
+						return response.json();
+					case 'html':
+						return response.text();
+				}
 			})
 			.then(function(data) {
 				if (options.format == 'json' && typeof data == 'object' && data !== null) {
@@ -274,7 +276,7 @@ $.fn.quasiform = function (options) {
 					// Вывод сообщений об ошибках
 					if ('errors' in data && Array.isArray(data.errors)) {
 						if (data.errors.length > 0) {
-							var errorsList = '';
+							let errorsList = '';
 							for (i = 0; i < data.errors.length; i++) {
 								if (data.errors[i].length > 0) {
 									errorsList += options.errorOpenTag + data.errors[i] + options.errorCloseTag;
@@ -288,7 +290,7 @@ $.fn.quasiform = function (options) {
 					// Display info messages
 					if ('messages' in data && Array.isArray(data.messages)) {
 						if (data.messages.length > 0) {
-							var messagesList = '';
+							let messagesList = '';
 							for (i = 0; i < data.messages.length; i++) {
 								if (data.messages[i].length > 0) {
 									messagesList += options.messageOpenTag + data.messages[i] + options.messageCloseTag;
@@ -301,27 +303,27 @@ $.fn.quasiform = function (options) {
 					}
 					// Display errors in fields
 					if ('field_errors' in data && typeof data.field_errors == 'object' && data.field_errors !== null) {
-						var fieldName;
+						let fieldName;
 						for (fieldName in data.field_errors) {
-							var input = wrapper.querySelector('input[name="' + fieldName + '"]');
+							let input = wrapper.querySelector('input[name="' + fieldName + '"]');
 							if (input !== null) {
 								input.classList.add(options.hasErrorInputClass);
 							}
-							var textarea = wrapper.querySelector('textarea[name="' + fieldName + '"]');
+							let textarea = wrapper.querySelector('textarea[name="' + fieldName + '"]');
 							if (textarea !== null) {
 								textarea.classList.add(options.hasErrorInputClass);
 							}
-							var label = wrapper.querySelector('label[for="' + fieldName + '"]');
+							let label = wrapper.querySelector('label[for="' + fieldName + '"]');
 							if (label !== null) {
 								label.classList.add(options.hasErrorLabelClass);
 							}
 							
 							if (data.field_errors[fieldName].length > 0) {
-								var fieldErrorsList = '';
+								let fieldErrorsList = '';
 								for (i = 0; i < data.field_errors[fieldName].length; i++) {
 									fieldErrorsList += options.fieldErrorOpenTag + data.field_errors[fieldName][i] + options.fieldErrorCloseTag;
 								}
-								fieldErrorsList = options.fieldErrorsOpenTag + errorsList + options.fieldErrorsCloseTag;
+								fieldErrorsList = options.fieldErrorsOpenTag + fieldErrorsList + options.fieldErrorsCloseTag;
 								wrapper.querySelector('[data-quasiform-field-errors="'+fieldName+'"]').innerHTML = fieldErrorsList;
 								wrapper.querySelector('[data-quasiform-field-errors="'+fieldName+'"]').style.display = 'block';
 							}
@@ -365,7 +367,7 @@ $.fn.quasiform = function (options) {
             e.preventDefault();
         });
     } else {
-        console.log('Form not found');
+        console.log('Form not found, wrapper id: ' + wrapper.id);
     }
     return this;
 };

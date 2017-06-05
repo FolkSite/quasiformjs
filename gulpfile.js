@@ -1,11 +1,12 @@
-var gulp = require('gulp');
-var browserSync = require('browser-sync').create();
-var sass = require('gulp-sass');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglifyjs');
-var rename = require('gulp-rename');
-var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
+var browserSync = require('browser-sync').create();
+var concat = require('gulp-concat');
+var gulp = require('gulp');
+var jade = require('gulp-jade');
+var rename = require('gulp-rename');
+var sass = require('gulp-sass');
+var sourcemaps = require('gulp-sourcemaps');
+var uglify = require('gulp-uglifyjs');
 
 var templateMainPath = 'src/';
 var distMainPath = 'dist/';
@@ -22,7 +23,7 @@ gulp.task('sass-main', function() {
         .pipe(reload({
             stream: true
         }))
-		.pipe(browserSync.stream());;
+		.pipe(browserSync.stream());
 });
 
 gulp.task('js-main', function() {
@@ -53,5 +54,16 @@ gulp.task('sync', ['sass-main', 'js-main'], function() {
     browserSync.reload();
 });
 
-//gulp.task('default', ['watch-main']);
+gulp.task('jade-test', function() {
+  var YOUR_LOCALS = {};
+ 
+  gulp.src(templateMainPath + 'jade/index.jade')
+    .pipe(jade({
+      locals: YOUR_LOCALS
+    }))
+    .pipe(gulp.dest('test/'));
+});
+
+gulp.task('jade', ['jade-test']);
 gulp.task('default', ['sync']);
+gulp.task('watch', ['watch-main']);
