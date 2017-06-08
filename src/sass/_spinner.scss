@@ -1,5 +1,5 @@
 .spinner {
-	background-color: #fff;
+    background-color: #fff;
     border: none;
     display: inline-flex;
     overflow: hidden;
@@ -7,46 +7,48 @@
     &--first {
         margin: 39px 0 0 0;
     }
-	&__decrease {
-	    background-color: #d36;
-	    border: 0;
-	    display: block;
-	    float: left;
-	    height: 40px;
-	    font-size: 20px;
-	    font-weight: bold;
-	    outline: none;
-	    width: 42px;
-		&:active {
-		    background-color: #ccc;
-		}
-		&:focus {
-			background-color: #b14;
-		}
-		&:hover {
-			background-color: #b14;
-		}
-	}
-	&__increase {
-	    background-color: #d36;
-	    border: 0;
-	    display: block;
-	    float: left;
-	    height: 40px;
-	    font-size: 20px;
-	    font-weight: bold;
-	    outline: none;
-	    width: 42px;
-		&:active {
-		    background-color: #ccc;
-		}
-		&:focus {
-			background-color: #b14;
-		}
-		&:hover {
-			background-color: #b14;
-		}
-	}
+    &__decrease {
+        background-color: #d36;
+        border: 0;
+        color: #fff;
+        display: block;
+        float: left;
+        height: 40px;
+        font-size: 20px;
+        font-weight: bold;
+        outline: none;
+        width: 42px;
+        &:active {
+            background-color: #ccc;
+        }
+        &:focus {
+            background-color: #b14;
+        }
+        &:hover {
+            background-color: #b14;
+        }
+    }
+    &__increase {
+        background-color: #d36;
+        border: 0;
+        color: #fff;
+        display: block;
+        float: left;
+        height: 40px;
+        font-size: 20px;
+        font-weight: bold;
+        outline: none;
+        width: 42px;
+        &:active {
+            background-color: #ccc;
+        }
+        &:focus {
+            background-color: #b14;
+        }
+        &:hover {
+            background-color: #b14;
+        }
+    }
     &__input {
         border: 0;
         color: #000;
@@ -62,7 +64,7 @@
         cursor: default;
         display: block;
         font-size: 1rem;
-		line-height: 1.5;
+        line-height: 1.5;
         text-align: center;
     }
     &-wrapper {

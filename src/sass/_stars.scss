@@ -1,0 +1,20 @@
+.quasiform {
+    &-stars {
+        padding: 10px 0;
+        font-size: 0;
+    }
+    &-star {
+        color: #666;
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: middle;
+        i.fa {
+            font-size: 2rem;
+        }
+        &--active {
+            i.fa {
+                color: #d36;
+            }
+        }
+    }
+}

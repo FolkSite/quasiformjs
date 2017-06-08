@@ -1,0 +1,30 @@
+.quasiform-form__input-file {
+    &-button {
+        background-color: #fff;
+        color: #222;
+        display: block;
+        overflow: hidden;
+        text-align: center;
+        padding: 20px 30px;
+        &:hover {
+            background-color: #ddd;
+            color: #444;
+            .quasiform-form__input-file-span {
+                color: #444;
+            }
+        }
+        i.fa {
+            margin: 0 5px 0 0;
+        }
+    }
+    &-span {
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        font-weight: 400;
+        text-decoration: none;
+        text-transform: uppercase;;
+        user-select: none;
+    }
+}

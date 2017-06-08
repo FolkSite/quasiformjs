@@ -1,20 +1,20 @@
 function initForms() {
-	/**
-	 * Form does not exists
-	 */
-	let optionsNotExists = {
-	    hideFormOnSuccess: false,
-	};
-	let quasiformNotExists = $('#ne').quasiform(optionsNotExists);
-	
-	/**
-	 * Spinner
-	 */
-	let optionsSpinner = {
-	    hideFormOnSuccess: false,
-	};
-	let quasiformSpinner = $('#spinner').quasiform(optionsSpinner);
-	
+    /**
+     * Form does not exists
+     */
+    let optionsNotExists = {
+        hideFormOnSuccess: false,
+    };
+    let quasiformNotExists = $('#ne').quasiform(optionsNotExists);
+    
+    /**
+     * Spinner
+     */
+    let optionsSpinner = {
+        hideFormOnSuccess: false,
+    };
+    let quasiformSpinner = $('#spinner').quasiform(optionsSpinner);
+    
     /**
      * Нулевая форма
      */

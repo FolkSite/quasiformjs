@@ -240,13 +240,19 @@ html(lang='ru')
                                                 label.quasiform-form__label(for='contacts') Contacts
                                                 input#contacts.quasiform-form__input(type='text', name='contacts', value='123-456', placeholder='E-mail, телефон или другое')
                                     .quasiform-form__form-group
-                                        label
-                                            input(type='checkbox', name='checkbox-agree', value='1', data-quasiform='agreement', checked='')
+                                        label.quasiform-form__label--checkbox
+                                            .quasiform-form-checkbox(data-quasiform='checkbox', data-name='checkbox-agree', data-quasiform-checkbox-off='quasiform-form-checkbox--off')
+                                                i.fa.fa-check
+                                            input(type='checkbox', name='checkbox-agree', value='1', data-quasiform='agreement', checked='', style='display: none;')
                                             |  Agree
                                     .quasiform-form__form-group
                                         .col.s12
-                                            label.quasiform-form__label(for='text') Файл
-                                            input(type='file', name='file')
+                                            label.quasiform-form__input-file-button(data-quasiform='input-file',for='file-2')
+                                                input(type='file', name='file', id='file-2')
+                                                i.fa.fa-file-text-o
+                                                span.quasiform-form__input-file-span(data-quasiform='input-file-label')
+                                                    Прикрепить файл
+
                                     .quasiform-form__form-group
                                         button.quasiform-form__submit(type='submit') Send
                         .col.s12.m6
@@ -281,14 +287,11 @@ html(lang='ru')
                                             .quasiform-form__form-group
                                                 label.quasiform-form__label(for='text') Message
                                                 textarea#text.quasiform-form__textarea(name='text', placeholder='Message', data-quasiform='autoheight')
-                                        div class="row">
-                                        <label for="reCaptchaSuccess">Проверка</label>
-                                        <div data-quasiform="recaptcha" data-sitekey="6LeevgkTAAAAAEz1oGOtzncwPmjYPQX6EtWolaBZ" id="reCaptchaSuccess">
-                                        </div>
-                                        </div
                                     .quasiform-form__form-group
-                                        label
-                                            input(type='checkbox', name='checkbox-agree', value='Agree', data-quasiform='agreement', checked='')
+                                        label.quasiform-form__label--checkbox
+                                            .quasiform-form-checkbox(data-quasiform='checkbox', data-name='checkbox-agree', data-quasiform-checkbox-off='quasiform-form-checkbox--off')
+                                                i.fa.fa-check
+                                            input(type='checkbox', name='checkbox-agree', value='1', data-quasiform='agreement', checked='', style='display: none;')
                                             |  Agree
                                     .quasiform-form__form-group
                                         button.quasiform-form__submit(type='submit') Send
@@ -344,14 +347,11 @@ html(lang='ru')
                                             .quasiform-form__form-group
                                                 label.quasiform-form__label(for='text') Message
                                                 textarea#text.quasiform-form__textarea(name='text', placeholder='Message', data-quasiform='autoheight')
-                                        div class="row">
-                                        <label for="reCaptchaFail">Проверка</label>
-                                        <div data-quasiform="recaptcha" data-sitekey="6LeevgkTAAAAAEz1oGOtzncwPmjYPQX6EtWolaBZ" id="reCaptchaFail">
-                                        </div>
-                                        </div
                                     .quasiform-form__form-group
-                                        label(form='quasiform__agree')
-                                            input(type='checkbox', name='checkbox-agree', value='Agree', data-quasiform='agreement', checked='')
+                                        label.quasiform-form__label--checkbox
+                                            .quasiform-form-checkbox(data-quasiform='checkbox', data-name='checkbox-agree', data-quasiform-checkbox-off='quasiform-form-checkbox--off')
+                                                i.fa.fa-check
+                                            input(type='checkbox', name='checkbox-agree', value='1', data-quasiform='agreement', checked='', style='display: none;')
                                             |  Agree
                                     .quasiform-form__form-group
                                         button.quasiform-form__submit(type='submit') Send
@@ -396,12 +396,16 @@ html(lang='ru')
                                             .quasiform-form__form-group
                                                 label.quasiform-form__label(for='name') Name
                                                 input#name.quasiform-form__input(type='text', name='name', value='', placeholder='Имя')
-                                        .quasiform-form__form-group
-                                            label
-                                                input(type='checkbox', name='checkbox-agree', value='Agree', data-quasiform='agreement', checked='')
+                                        .col.m6.s12
+                                            .quasiform-form__form-group
+                                            label.quasiform-form__label--checkbox
+                                                .quasiform-form-checkbox(data-quasiform='checkbox', data-name='checkbox-agree', data-quasiform-checkbox-off='quasiform-form-checkbox--off')
+                                                    i.fa.fa-check
+                                                input(type='checkbox', name='checkbox-agree', value='1', data-quasiform='agreement', checked='', style='display: none;')
                                                 |  Agree
-                                        .quasiform-form__form-group
-                                            button.quasiform-form__submit(type='submit') Send
+                                        .col.m12.s12
+                                            .quasiform-form__form-group
+                                                button.quasiform-form__submit(type='submit') Send
                     .col.s12.m6
                         code
                             pre(style='overflow-x: scroll;').

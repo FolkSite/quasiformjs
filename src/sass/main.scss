@@ -52,16 +52,21 @@
         }
         &__form-group {
             margin: 0 0 2rem 0;
+			overflow: hidden;
         }
         &__input {
             background-color: #fff;
-            border: none;
-            color: #666;
+            border: 1px solid transparent;
+            color: #222;
             display: block;
             padding: 5px 5px;
             width: 100%;
             &--has-error {
                 border: 1px solid #f00;
+            }
+            &:focus {
+                border: 1px solid #d36;
+                outline: none;
             }
         }
         &__label {
@@ -71,11 +76,14 @@
             padding: 5px 5px;
             &--checkbox {
                 cursor: pointer;
-                display: block;
+                display: inline-block;
                 line-height: 2;
                 &:hover {
                     color: #d36;
                 }
+            }
+            &--disabled {
+                color: #ccc;
             }
             &--has-error {
                 color: #f00;
@@ -108,8 +116,9 @@
         }
         &__textarea {
             background-color: #fff;
-            border: none;
-            color: #666;
+            border: 1px solid transparent;
+            color: #222;
+            display: block;
             line-height: 1.5rem;
             max-width: 100%;
             min-height: 90px;
@@ -117,6 +126,10 @@
             width: 100%;
             &--has-error {
                 border: 1px solid #f00;
+            }
+            &:focus {
+                border: 1px solid #d36;
+                outline: none;
             }
         }
     }
@@ -141,24 +154,6 @@
             list-style: none;
         }
     }
-    &-stars {
-        padding: 10px 0;
-        font-size: 0;
-    }
-    &-star {
-        color: #666;
-        cursor: pointer;
-        display: inline-block;
-        vertical-align: middle;
-        i.fa {
-            font-size: 2rem;
-        }
-        &--active {
-            i.fa {
-                color: #d36;
-            }
-        }
-    }
     &-wrapper {
         background-color: #eee;
         padding: 10px;
@@ -166,4 +161,6 @@
 }
 
 @import "_docs.scss";
+@import "_input-file.scss";
 @import "_spinner.scss";
+@import "_stars.scss";

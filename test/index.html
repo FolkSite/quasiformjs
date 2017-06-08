@@ -1,10 +1,204 @@
-<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><title>quasiform</title><meta name="viewport" content="width=device-width,height=device-height,user-scalable=no"><link rel="stylesheet" href="../dependencies/grid.min.css"><link rel="stylesheet" href="../dist/css/quasiform.min.css?v=4"><link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css"></head><body itemscope="" itemtype="http://schema.org/WebPage"><div class="container"><h1>quasiform</h1><div><p>This is jQuery plugin that helps submiting and validating your forms asynchronously. Keep your validation logic on server side, and for client side validate with javascript and AJAX.</p><p>Supports multiple reCaptcha 3.</p></div><h2>Options</h2><table class="options-table"><thead><tr><th>name</th><th>default value</th></tr></thead><tr><td>debug</td><td>false</td></tr><tr><td>format</td><td>json</td></tr><tr><td>formSelector</td><td>null</td></tr><tr><td>errorOpenTag</td><td><code>&lt;li&gt;</code></td></tr><tr><td>errorCloseTag</td><td><code></li></code></td></tr><tr><td>errorsOpenTag</td><td><code><ul></code></td></tr><tr><td>errorsCloseTag</td><td><code></ul></code></td></tr><tr><td>messageOpenTag</td><td><code><li></code></td></tr><tr><td>messageCloseTag</td><td><code></li></code></td></tr><tr><td>messagesOpenTag</td><td><code><ul></code></td></tr><tr><td>messagesCloseTag</td><td><code></ul></code></td></tr><tr><td>hideFormOnSuccess</td><td>false</td></tr><tr><td>hasErrorInputClass</td><td>quasiform__form-input--has-error</td></tr><tr><td>hasErrorLabelClass</td><td>quasiform__form-label--has-error</td></tr><tr><td>callbackOnSuccess</td><td>null</td></tr><tr><td>callbackOnFail</td><td>null</td></tr><tr><td>callbackOnError</td><td>null</td></tr><tr><td>callbackOnComplete</td><td>null</td></tr><tr><td>callbackBeforeSend</td><td>null</td></tr><tr><td>callbackOnAgree</td><td>null</td></tr><tr><td>callbackOnDisagree</td><td>null</td></tr><tr><td>callbackOnStarsChange</td><td>null</td></tr></table><div class="row"><div class="col s12 m12"><h2>Form not found</h2><div class="row"><div class="col s12 m6"><div id="ne" class="quasiform-wrapper"><div data-quasiform="errors" style="display: none;" class="quasiform-errors"></div><div data-quasiform="messages" style="display: none;" class="quasiform-messages"></div><div data-quasiform="loader" style="display: none;" class="quasiform-loader"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div></div></div><div class="col s12 m6"><code><pre style="overflow-x: scroll;">let optionsNotExists = {
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>quasiform</title>
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no">
+    <link rel="stylesheet" href="../dependencies/grid.min.css">
+    <link rel="stylesheet" href="../dist/css/quasiform.min.css?v=4">
+    <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css">
+  </head>
+  <body itemscope="" itemtype="http://schema.org/WebPage">
+    <div class="container">
+      <h1>quasiform</h1>
+      <div>
+        <p>This is jQuery plugin that helps submiting and validating your forms asynchronously. Keep your validation logic on server side, and for client side validate with javascript and AJAX.</p>
+        <p>Supports multiple reCaptcha 3.</p>
+      </div>
+      <h2>Options</h2>
+      <table class="options-table">
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>default value</th>
+          </tr>
+        </thead>
+        <tr>
+          <td>debug</td>
+          <td>false</td>
+        </tr>
+        <tr>
+          <td>format</td>
+          <td>json</td>
+        </tr>
+        <tr>
+          <td>formSelector</td>
+          <td>null</td>
+        </tr>
+        <tr>
+          <td>errorOpenTag</td>
+          <td><code>&lt;li&gt;</code></td>
+        </tr>
+        <tr>
+          <td>errorCloseTag</td>
+          <td><code></li></code></td>
+        </tr>
+        <tr>
+          <td>errorsOpenTag</td>
+          <td><code><ul></code></td>
+        </tr>
+        <tr>
+          <td>errorsCloseTag</td>
+          <td><code></ul></code></td>
+        </tr>
+        <tr>
+          <td>messageOpenTag</td>
+          <td><code><li></code></td>
+        </tr>
+        <tr>
+          <td>messageCloseTag</td>
+          <td><code></li></code></td>
+        </tr>
+        <tr>
+          <td>messagesOpenTag</td>
+          <td><code><ul></code></td>
+        </tr>
+        <tr>
+          <td>messagesCloseTag</td>
+          <td><code></ul></code></td>
+        </tr>
+        <tr>
+          <td>hideFormOnSuccess</td>
+          <td>false</td>
+        </tr>
+        <tr>
+          <td>hasErrorInputClass</td>
+          <td>quasiform__form-input--has-error</td>
+        </tr>
+        <tr>
+          <td>hasErrorLabelClass</td>
+          <td>quasiform__form-label--has-error</td>
+        </tr>
+        <tr>
+          <td>callbackOnSuccess</td>
+          <td>null</td>
+        </tr>
+        <tr>
+          <td>callbackOnFail</td>
+          <td>null</td>
+        </tr>
+        <tr>
+          <td>callbackOnError</td>
+          <td>null</td>
+        </tr>
+        <tr>
+          <td>callbackOnComplete</td>
+          <td>null</td>
+        </tr>
+        <tr>
+          <td>callbackBeforeSend</td>
+          <td>null</td>
+        </tr>
+        <tr>
+          <td>callbackOnAgree</td>
+          <td>null</td>
+        </tr>
+        <tr>
+          <td>callbackOnDisagree</td>
+          <td>null</td>
+        </tr>
+        <tr>
+          <td>callbackOnStarsChange</td>
+          <td>null</td>
+        </tr>
+      </table>
+      <div class="row">
+        <div class="col s12 m12">
+          <h2>Form not found</h2>
+          <div class="row">
+            <div class="col s12 m6">
+              <div id="ne" class="quasiform-wrapper">
+                <div data-quasiform="errors" style="display: none;" class="quasiform-errors"></div>
+                <div data-quasiform="messages" style="display: none;" class="quasiform-messages"></div>
+                <div data-quasiform="loader" style="display: none;" class="quasiform-loader"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>
+              </div>
+            </div>
+            <div class="col s12 m6"><code>
+                <pre style="overflow-x: scroll;">let optionsNotExists = {
     hideFormOnSuccess: false,
 };
-let quasiformNotExists = $('#ne').quasiform(optionsNotExists);</pre></code></div></div></div><div class="col s12 m12"><h2>Spinner</h2><div class="row"><div class="col s12 m6"><div id="spinner" class="quasiform-wrapper"><div data-quasiform="errors" style="display: none;" class="quasiform-errors"></div><div data-quasiform="messages" style="display: none;" class="quasiform-messages"></div><div data-quasiform="loader" style="display: none;" class="quasiform-loader"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div><form action="success.json" method="post" accept-charset="utf-8" enctype="multipart/form-data" class="quasiform-form"><div class="row"><div class="col m12 s12"><div class="quasiform-form__form-group"><div data-quasiform="spinner" data-min="1" data-max="10" data-one="1" class="spinner-wrapper"><label class="spinner__label">Количество</label><div class="spinner"><button type="button" data-quasiform="spinner__decrease" class="spinner__decrease">—</button><input type="text" name="count" maxlength="3" readonly="true" value="1" class="spinner__input"><button type="button" data-quasiform="spinner__increase" class="spinner__increase">+</button></div></div></div><div class="quasiform-form__form-group"><button type="submit" class="quasiform-form__submit">Send</button></div></div></div></form></div></div><div class="col s12 m6"><code><pre style="overflow-x: scroll;">let optionsSpinner = {
+let quasiformNotExists = $('#ne').quasiform(optionsNotExists);</pre></code></div>
+          </div>
+        </div>
+        <div class="col s12 m12">
+          <h2>Spinner</h2>
+          <div class="row">
+            <div class="col s12 m6">
+              <div id="spinner" class="quasiform-wrapper">
+                <div data-quasiform="errors" style="display: none;" class="quasiform-errors"></div>
+                <div data-quasiform="messages" style="display: none;" class="quasiform-messages"></div>
+                <div data-quasiform="loader" style="display: none;" class="quasiform-loader"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>
+                <form action="success.json" method="post" accept-charset="utf-8" enctype="multipart/form-data" class="quasiform-form">
+                  <div class="row">
+                    <div class="col m12 s12">
+                      <div class="quasiform-form__form-group">
+                        <div data-quasiform="spinner" data-min="1" data-max="10" data-one="1" class="spinner-wrapper">
+                          <label class="spinner__label">Количество</label>
+                          <div class="spinner">
+                            <button type="button" data-quasiform="spinner__decrease" class="spinner__decrease">—</button>
+                            <input type="text" name="count" maxlength="3" readonly="true" value="1" class="spinner__input">
+                            <button type="button" data-quasiform="spinner__increase" class="spinner__increase">+</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="quasiform-form__form-group">
+                        <button type="submit" class="quasiform-form__submit">Send</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col s12 m6"><code>
+                <pre style="overflow-x: scroll;">let optionsSpinner = {
     hideFormOnSuccess: false,
 };
-let quasiformSpinner = $('#spinner').quasiform(optionsSpinner);</pre></code></div></div></div><div class="col s12 m12"><h2>Custom checkbox</h2><div class="row"><div class="col s12 m6"><div id="checkbox" class="quasiform-wrapper"><div data-quasiform="errors" style="display: none;" class="quasiform-errors"></div><div data-quasiform="messages" style="display: none;" class="quasiform-messages"></div><div data-quasiform="loader" style="display: none;" class="quasiform-loader"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div><form action="success.json" method="post" accept-charset="utf-8" enctype="multipart/form-data" class="quasiform-form"><div class="row"><div class="col m12 s12"><div class="quasiform-form__form-group"><label class="quasiform-form__label--checkbox"><div data-quasiform="checkbox" data-name="remember" data-quasiform-checkbox-off="quasiform-form-checkbox--off" class="quasiform-form-checkbox"><i class="fa fa-check"></i></div><input type="checkbox" name="remember" value="1" style="display: none;"> Remember</label></div><div class="quasiform-form__form-group"><label class="quasiform-form__label--checkbox"><div data-quasiform="checkbox" data-name="checkbox-agree" data-quasiform-checkbox-off="quasiform-form-checkbox--off" class="quasiform-form-checkbox"><i class="fa fa-check"></i></div><input type="checkbox" name="checkbox-agree" value="1" data-quasiform="agreement" checked="" style="display: none;"> Agree</label></div><div class="quasiform-form__form-group"><button type="submit" class="quasiform-form__submit">Send</button></div></div></div></form></div></div><div class="col s12 m6"><code><pre style="overflow-x: scroll;">let optionsCheckbox = {
+let quasiformSpinner = $('#spinner').quasiform(optionsSpinner);</pre></code></div>
+          </div>
+        </div>
+        <div class="col s12 m12">
+          <h2>Custom checkbox</h2>
+          <div class="row">
+            <div class="col s12 m6">
+              <div id="checkbox" class="quasiform-wrapper">
+                <div data-quasiform="errors" style="display: none;" class="quasiform-errors"></div>
+                <div data-quasiform="messages" style="display: none;" class="quasiform-messages"></div>
+                <div data-quasiform="loader" style="display: none;" class="quasiform-loader"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>
+                <form action="success.json" method="post" accept-charset="utf-8" enctype="multipart/form-data" class="quasiform-form">
+                  <div class="row">
+                    <div class="col m12 s12">
+                      <div class="quasiform-form__form-group">
+                        <label class="quasiform-form__label--checkbox">
+                          <div data-quasiform="checkbox" data-name="remember" data-quasiform-checkbox-off="quasiform-form-checkbox--off" class="quasiform-form-checkbox"><i class="fa fa-check"></i></div>
+                          <input type="checkbox" name="remember" value="1" style="display: none;"> Remember
+                        </label>
+                      </div>
+                      <div class="quasiform-form__form-group">
+                        <label class="quasiform-form__label--checkbox">
+                          <div data-quasiform="checkbox" data-name="checkbox-agree" data-quasiform-checkbox-off="quasiform-form-checkbox--off" class="quasiform-form-checkbox"><i class="fa fa-check"></i></div>
+                          <input type="checkbox" name="checkbox-agree" value="1" data-quasiform="agreement" checked="" style="display: none;"> Agree
+                        </label>
+                      </div>
+                      <div class="quasiform-form__form-group">
+                        <button type="submit" class="quasiform-form__submit">Send</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col s12 m6"><code>
+                <pre style="overflow-x: scroll;">let optionsCheckbox = {
     hideFormOnSuccess: false,
     callbackOnAgree: function callbackOnAgree(wrapper) {
         console.log('agree');
@@ -13,20 +207,151 @@ let quasiformSpinner = $('#spinner').quasiform(optionsSpinner);</pre></code></di
         console.log('disagree');
     }
 };
-let quasiformCheckbox = $('#checkbox').quasiform(optionsCheckbox);</pre></code></div></div></div><div class="col s12 m12"><h2>Stars</h2><div class="row"><div class="col s12 m6"><div id="stars" class="quasiform-wrapper"><div data-quasiform="errors" style="display: none;" class="quasiform-errors"></div><div data-quasiform="messages" style="display: none;" class="quasiform-messages"></div><div data-quasiform="loader" style="display: none;" class="quasiform-loader"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div><form action="success.json" method="post" accept-charset="utf-8" enctype="multipart/form-data" class="quasiform-form"><div class="row"><div class="col s12"><div class="quasiform-form__form-group"><div data-quasiform="stars" class="quasiform-stars"><div data-value="1" class="quasiform-star"><i class="fa fa-star"></i></div><div data-value="2" class="quasiform-star"><i class="fa fa-star"></i></div><div data-value="3" class="quasiform-star"><i class="fa fa-star"></i></div><div data-value="4" class="quasiform-star"><i class="fa fa-star"></i></div><div data-value="5" class="quasiform-star"><i class="fa fa-star"></i></div></div></div></div><div class="col s12"><div class="quasiform-form__form-group"><label for="name" class="quasiform-form__label">Rating</label><input id="stars" type="text" name="stars" value="4" placeholder="Rating" class="quasiform-form__input"></div></div></div><div class="quasiform-form__form-group"><button type="submit" class="quasiform-form__submit">Send</button></div></form></div></div><div class="col s12 m6"><code><pre style="overflow-x: scroll;">let optionsStars = {
+let quasiformCheckbox = $('#checkbox').quasiform(optionsCheckbox);</pre></code></div>
+          </div>
+        </div>
+        <div class="col s12 m12">
+          <h2>Stars</h2>
+          <div class="row">
+            <div class="col s12 m6">
+              <div id="stars" class="quasiform-wrapper">
+                <div data-quasiform="errors" style="display: none;" class="quasiform-errors"></div>
+                <div data-quasiform="messages" style="display: none;" class="quasiform-messages"></div>
+                <div data-quasiform="loader" style="display: none;" class="quasiform-loader"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>
+                <form action="success.json" method="post" accept-charset="utf-8" enctype="multipart/form-data" class="quasiform-form">
+                  <div class="row">
+                    <div class="col s12">
+                      <div class="quasiform-form__form-group">
+                        <div data-quasiform="stars" class="quasiform-stars">
+                          <div data-value="1" class="quasiform-star"><i class="fa fa-star"></i></div>
+                          <div data-value="2" class="quasiform-star"><i class="fa fa-star"></i></div>
+                          <div data-value="3" class="quasiform-star"><i class="fa fa-star"></i></div>
+                          <div data-value="4" class="quasiform-star"><i class="fa fa-star"></i></div>
+                          <div data-value="5" class="quasiform-star"><i class="fa fa-star"></i></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col s12">
+                      <div class="quasiform-form__form-group">
+                        <label for="name" class="quasiform-form__label">Rating</label>
+                        <input id="stars" type="text" name="stars" value="4" placeholder="Rating" class="quasiform-form__input">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="quasiform-form__form-group">
+                    <button type="submit" class="quasiform-form__submit">Send</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col s12 m6"><code>
+                <pre style="overflow-x: scroll;">let optionsStars = {
     hideFormOnSuccess: false,
     callbackOnStarsChange: function callbackOnStarsChange(wrapper) {
         console.log('callbackOnStarsChange');
     }
 };
-let quasiformStars = $('#stars').quasiform(optionsStars);</pre></code></div></div></div><div class="col s12 m12"><h2>Dump of $_POST</h2><div class="row"><div class="col s12 m6"><div id="post" class="quasiform-wrapper"><div data-quasiform="errors" style="display: none;" class="quasiform-errors"></div><div data-quasiform="messages" style="display: none;" class="quasiform-messages"></div><div data-quasiform="loader" style="display: none;" class="quasiform-loader"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div><div data-quasiform="html" style="display: none;" class="quasiform-html"><!-- HTML response will be here--></div><form action="post.php" method="post" accept-charset="utf-8" enctype="multipart/form-data" class="quasiform-form"><div class="row"><div class="col m6 s12"><div class="quasiform-form__form-group"><label for="name" class="quasiform-form__label">Name</label><input id="name" type="text" name="name" value="Vasya" placeholder="Имя" class="quasiform-form__input"></div></div><div class="col m6 s12"><div class="quasiform-form__form-group"><label for="contacts" class="quasiform-form__label">Contacts</label><input id="contacts" type="text" name="contacts" value="123-456" placeholder="E-mail, телефон или другое" class="quasiform-form__input"></div></div></div><div class="quasiform-form__form-group"><label><input type="checkbox" name="checkbox-agree" value="1" data-quasiform="agreement" checked=""> Agree</label></div><div class="quasiform-form__form-group"><div class="col s12"><label for="text" class="quasiform-form__label">Файл</label><input type="file" name="file"></div></div><div class="quasiform-form__form-group"><button type="submit" class="quasiform-form__submit">Send</button></div></form></div></div><div class="col s12 m6"><code><pre style="overflow-x: scroll;">let optionsPost = {
+let quasiformStars = $('#stars').quasiform(optionsStars);</pre></code></div>
+          </div>
+        </div>
+        <div class="col s12 m12">
+          <h2>Dump of $_POST</h2>
+          <div class="row">
+            <div class="col s12 m6">
+              <div id="post" class="quasiform-wrapper">
+                <div data-quasiform="errors" style="display: none;" class="quasiform-errors"></div>
+                <div data-quasiform="messages" style="display: none;" class="quasiform-messages"></div>
+                <div data-quasiform="loader" style="display: none;" class="quasiform-loader"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>
+                <div data-quasiform="html" style="display: none;" class="quasiform-html">
+                  <!-- HTML response will be here-->
+                </div>
+                <form action="post.php" method="post" accept-charset="utf-8" enctype="multipart/form-data" class="quasiform-form">
+                  <div class="row">
+                    <div class="col m6 s12">
+                      <div class="quasiform-form__form-group">
+                        <label for="name" class="quasiform-form__label">Name</label>
+                        <input id="name" type="text" name="name" value="Vasya" placeholder="Имя" class="quasiform-form__input">
+                      </div>
+                    </div>
+                    <div class="col m6 s12">
+                      <div class="quasiform-form__form-group">
+                        <label for="contacts" class="quasiform-form__label">Contacts</label>
+                        <input id="contacts" type="text" name="contacts" value="123-456" placeholder="E-mail, телефон или другое" class="quasiform-form__input">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="quasiform-form__form-group">
+                    <label class="quasiform-form__label--checkbox">
+                      <div data-quasiform="checkbox" data-name="checkbox-agree" data-quasiform-checkbox-off="quasiform-form-checkbox--off" class="quasiform-form-checkbox"><i class="fa fa-check"></i></div>
+                      <input type="checkbox" name="checkbox-agree" value="1" data-quasiform="agreement" checked="" style="display: none;"> Agree
+                    </label>
+                  </div>
+                  <div class="quasiform-form__form-group">
+                    <div class="col s12">
+                      <label data-quasiform="input-file" for="file-2" class="quasiform-form__input-file-button">
+                        <input type="file" name="file" id="file-2"><i class="fa fa-file-text-o"></i><span data-quasiform="input-file-label" class="quasiform-form__input-file-span">Прикрепить файл</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="quasiform-form__form-group">
+                    <button type="submit" class="quasiform-form__submit">Send</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col s12 m6"><code>
+                <pre style="overflow-x: scroll;">let optionsPost = {
     hideFormOnSuccess: false,
     format: 'html',
 };
-let quasiformPost = $('#post').quasiform(optionsPost);</pre></code></div></div></div><div class="col s12 m12"><h2>Success response</h2><div class="row"><div class="col s12 m6"><div id="success" class="quasiform-wrapper"><div data-quasiform="errors" style="display: none;" class="quasiform-errors"></div><div data-quasiform="messages" style="display: none;" class="quasiform-messages"></div><div data-quasiform="loader" style="display: none;" class="quasiform-loader"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div><form action="success.json" method="post" accept-charset="utf-8" class="quasiform-form"><div class="row"><div class="col m6 s12"><div class="quasiform-form__form-group"><label for="name" class="quasiform-form__label">Name</label><input id="name" type="text" name="name" value="" placeholder="Имя" class="quasiform-form__input"></div></div><div class="col m6 s12"><div class="quasiform-form__form-group"><label for="contacts" class="quasiform-form__label">Contacts</label><input id="contacts" type="text" name="contacts" value="" placeholder="E-mail, телефон или другое" class="quasiform-form__input"></div></div></div><div class="row"><div class="col s12"><div class="quasiform-form__form-group"><label for="text" class="quasiform-form__label">Message</label><textarea id="text" name="text" placeholder="Message" data-quasiform="autoheight" class="quasiform-form__textarea"></textarea></div></div><div>class="row"></div><label for="reCaptchaSuccess">Проверка</label>
-<div data-quasiform="recaptcha" data-sitekey="6LeevgkTAAAAAEz1oGOtzncwPmjYPQX6EtWolaBZ" id="reCaptchaSuccess">
-</div>
-</div</div><div class="quasiform-form__form-group"><label><input type="checkbox" name="checkbox-agree" value="Agree" data-quasiform="agreement" checked=""> Agree</label></div><div class="quasiform-form__form-group"><button type="submit" class="quasiform-form__submit">Send</button></div></form></div></div><div class="col s12 m6"><code><pre style="overflow-x: scroll;">let optionsSuccess = {
+let quasiformPost = $('#post').quasiform(optionsPost);</pre></code></div>
+          </div>
+        </div>
+        <div class="col s12 m12">
+          <h2>Success response</h2>
+          <div class="row">
+            <div class="col s12 m6">
+              <div id="success" class="quasiform-wrapper">
+                <div data-quasiform="errors" style="display: none;" class="quasiform-errors"></div>
+                <div data-quasiform="messages" style="display: none;" class="quasiform-messages"></div>
+                <div data-quasiform="loader" style="display: none;" class="quasiform-loader"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>
+                <form action="success.json" method="post" accept-charset="utf-8" class="quasiform-form">
+                  <div class="row">
+                    <div class="col m6 s12">
+                      <div class="quasiform-form__form-group">
+                        <label for="name" class="quasiform-form__label">Name</label>
+                        <input id="name" type="text" name="name" value="" placeholder="Имя" class="quasiform-form__input">
+                      </div>
+                    </div>
+                    <div class="col m6 s12">
+                      <div class="quasiform-form__form-group">
+                        <label for="contacts" class="quasiform-form__label">Contacts</label>
+                        <input id="contacts" type="text" name="contacts" value="" placeholder="E-mail, телефон или другое" class="quasiform-form__input">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12">
+                      <div class="quasiform-form__form-group">
+                        <label for="text" class="quasiform-form__label">Message</label>
+                        <textarea id="text" name="text" placeholder="Message" data-quasiform="autoheight" class="quasiform-form__textarea"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="quasiform-form__form-group">
+                    <label class="quasiform-form__label--checkbox">
+                      <div data-quasiform="checkbox" data-name="checkbox-agree" data-quasiform-checkbox-off="quasiform-form-checkbox--off" class="quasiform-form-checkbox"><i class="fa fa-check"></i></div>
+                      <input type="checkbox" name="checkbox-agree" value="1" data-quasiform="agreement" checked="" style="display: none;"> Agree
+                    </label>
+                  </div>
+                  <div class="quasiform-form__form-group">
+                    <button type="submit" class="quasiform-form__submit">Send</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col s12 m6"><code>
+                <pre style="overflow-x: scroll;">let optionsSuccess = {
     hasErrorInputClass: 'quasiform-form__input--has-error',
     hasErrorLabelClass: 'quasiform-form__label--has-error',
     hideFormOnSuccess: false,
@@ -46,10 +371,60 @@ let quasiformPost = $('#post').quasiform(optionsPost);</pre></code></div></div><
         console.log('callbackOnComplete');
     },
 };
-let quasiformSuccess = $('#success').quasiform(optionsSuccess);</pre></code></div></div></div><div class="col s12 m12"><h2>Fail response (success: false)</h2><div class="row"><div class="col s12 m6"><div id="fail" class="quasiform-wrapper"><div data-quasiform="errors" style="display: none;" class="quasiform-errors"></div><div data-quasiform="messages" style="display: none;" class="quasiform-messages"></div><div data-quasiform="loader" style="display: none;" class="quasiform-loader"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div><form action="fail.json" method="post" accept-charset="utf-8"><div class="row"><div class="col m6 s12"><div class="quasiform-form__form-group"><label for="name" class="quasiform-form__label">Name</label><input id="name" type="text" name="name" value="" placeholder="Имя" class="quasiform-form__input"><div data-quasiform-field-errors="name" style="display: none;" class="quasiform-form__field-errors"><ul><li>Поле обязательно для заполнения</li><li>Поле должно быть пустым</li></ul></div></div></div><div class="col m6 s12"><div class="quasiform-form__form-group"><label for="contacts" class="quasiform-form__label">Contacts</label><input id="contacts" type="text" name="contacts" value="" placeholder="E-mail, телефон или другое" class="quasiform-form__input"></div></div></div><div class="row"><div class="col s12"><div class="quasiform-form__form-group"><label for="text" class="quasiform-form__label">Message</label><textarea id="text" name="text" placeholder="Message" data-quasiform="autoheight" class="quasiform-form__textarea"></textarea></div></div><div>class="row"></div><label for="reCaptchaFail">Проверка</label>
-<div data-quasiform="recaptcha" data-sitekey="6LeevgkTAAAAAEz1oGOtzncwPmjYPQX6EtWolaBZ" id="reCaptchaFail">
-</div>
-</div</div><div class="quasiform-form__form-group"><label form="quasiform__agree"><input type="checkbox" name="checkbox-agree" value="Agree" data-quasiform="agreement" checked=""> Agree</label></div><div class="quasiform-form__form-group"><button type="submit" class="quasiform-form__submit">Send</button></div></form></div></div><div class="col s12 m6"><code><pre style="overflow-x: scroll;">let optionsFail = {
+let quasiformSuccess = $('#success').quasiform(optionsSuccess);</pre></code></div>
+          </div>
+        </div>
+        <div class="col s12 m12">
+          <h2>Fail response (success: false)</h2>
+          <div class="row">
+            <div class="col s12 m6">
+              <div id="fail" class="quasiform-wrapper">
+                <div data-quasiform="errors" style="display: none;" class="quasiform-errors"></div>
+                <div data-quasiform="messages" style="display: none;" class="quasiform-messages"></div>
+                <div data-quasiform="loader" style="display: none;" class="quasiform-loader"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>
+                <form action="fail.json" method="post" accept-charset="utf-8">
+                  <div class="row">
+                    <div class="col m6 s12">
+                      <div class="quasiform-form__form-group">
+                        <label for="name" class="quasiform-form__label">Name</label>
+                        <input id="name" type="text" name="name" value="" placeholder="Имя" class="quasiform-form__input">
+                        <div data-quasiform-field-errors="name" style="display: none;" class="quasiform-form__field-errors">
+                          <ul>
+                            <li>Поле обязательно для заполнения</li>
+                            <li>Поле должно быть пустым</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col m6 s12">
+                      <div class="quasiform-form__form-group">
+                        <label for="contacts" class="quasiform-form__label">Contacts</label>
+                        <input id="contacts" type="text" name="contacts" value="" placeholder="E-mail, телефон или другое" class="quasiform-form__input">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12">
+                      <div class="quasiform-form__form-group">
+                        <label for="text" class="quasiform-form__label">Message</label>
+                        <textarea id="text" name="text" placeholder="Message" data-quasiform="autoheight" class="quasiform-form__textarea"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="quasiform-form__form-group">
+                    <label class="quasiform-form__label--checkbox">
+                      <div data-quasiform="checkbox" data-name="checkbox-agree" data-quasiform-checkbox-off="quasiform-form-checkbox--off" class="quasiform-form-checkbox"><i class="fa fa-check"></i></div>
+                      <input type="checkbox" name="checkbox-agree" value="1" data-quasiform="agreement" checked="" style="display: none;"> Agree
+                    </label>
+                  </div>
+                  <div class="quasiform-form__form-group">
+                    <button type="submit" class="quasiform-form__submit">Send</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col s12 m6"><code>
+                <pre style="overflow-x: scroll;">let optionsFail = {
     hasErrorInputClass: 'quasiform-form__input--has-error',
     hasErrorLabelClass: 'quasiform-form__label--has-error',
     hideFormOnSuccess: false,
@@ -69,8 +444,57 @@ let quasiformSuccess = $('#success').quasiform(optionsSuccess);</pre></code></di
         console.log('callbackOnComplete');
     },
 };
-let quasiformFail = $('#fail').quasiform(optionsFail);</pre></code></div></div></div><div class="col s12 m12"><h2>HTML response</h2><div class="row"><div class="col s12 m6"><div id="html" class="quasiform-wrapper"><div data-quasiform="errors" style="display: none;" class="quasiform-errors"></div><div data-quasiform="messages" style="display: none;" class="quasiform-messages"></div><div data-quasiform="loader" style="display: none;" class="quasiform-loader"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div><div data-quasiform="html" style="display: none;" class="quasiform-html"><!-- HTML response will be here--></div><form action="response.html" method="post" accept-charset="utf-8" class="quasiform-form"><div class="row"><div class="col m6 s12"><div class="quasiform-form__form-group"><label for="name" class="quasiform-form__label">Name</label><input id="name" type="text" name="name" value="" placeholder="Имя" class="quasiform-form__input"></div></div><div class="quasiform-form__form-group"><label><input type="checkbox" name="checkbox-agree" value="Agree" data-quasiform="agreement" checked=""> Agree</label></div><div class="quasiform-form__form-group"><button type="submit" class="quasiform-form__submit">Send</button></div></div></form></div></div></div><div class="col s12 m6"><code><pre style="overflow-x: scroll;">let optionsHtml = {
+let quasiformFail = $('#fail').quasiform(optionsFail);</pre></code></div>
+          </div>
+        </div>
+        <div class="col s12 m12">
+          <h2>HTML response</h2>
+          <div class="row">
+            <div class="col s12 m6">
+              <div id="html" class="quasiform-wrapper">
+                <div data-quasiform="errors" style="display: none;" class="quasiform-errors"></div>
+                <div data-quasiform="messages" style="display: none;" class="quasiform-messages"></div>
+                <div data-quasiform="loader" style="display: none;" class="quasiform-loader"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>
+                <div data-quasiform="html" style="display: none;" class="quasiform-html">
+                  <!-- HTML response will be here-->
+                </div>
+                <form action="response.html" method="post" accept-charset="utf-8" class="quasiform-form">
+                  <div class="row">
+                    <div class="col m6 s12">
+                      <div class="quasiform-form__form-group">
+                        <label for="name" class="quasiform-form__label">Name</label>
+                        <input id="name" type="text" name="name" value="" placeholder="Имя" class="quasiform-form__input">
+                      </div>
+                    </div>
+                    <div class="col m6 s12">
+                      <div class="quasiform-form__form-group"></div>
+                      <label class="quasiform-form__label--checkbox">
+                        <div data-quasiform="checkbox" data-name="checkbox-agree" data-quasiform-checkbox-off="quasiform-form-checkbox--off" class="quasiform-form-checkbox"><i class="fa fa-check"></i></div>
+                        <input type="checkbox" name="checkbox-agree" value="1" data-quasiform="agreement" checked="" style="display: none;"> Agree
+                      </label>
+                    </div>
+                    <div class="col m12 s12">
+                      <div class="quasiform-form__form-group">
+                        <button type="submit" class="quasiform-form__submit">Send</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6"><code>
+              <pre style="overflow-x: scroll;">let optionsHtml = {
     format: 'html',
     hideFormOnSuccess: false,
 };
-let quasiformHtml = $('#html').quasiform(optionsHtml);</pre></code></div></div></div></div><script src="../node_modules/jquery/dist/jquery.min.js"></script><!-- script src="https://www.google.com/recaptcha/api.js?onload=recaptchaCallBack&render=explicit"></script>--><script src="../dist/js/quasiform.min.js?v=4"></script><script src="main.js?v=4"></script></body></html>
+let quasiformHtml = $('#html').quasiform(optionsHtml);</pre></code></div>
+        </div>
+      </div>
+    </div>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <!-- script src="https://www.google.com/recaptcha/api.js?onload=recaptchaCallBack&render=explicit"></script>-->
+    <script src="../dist/js/quasiform.min.js?v=4"></script>
+    <script src="main.js?v=4"></script>
+  </body>
+</html>
