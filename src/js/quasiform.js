@@ -54,6 +54,9 @@ $.fn.quasiform = function (options) {
     }, options);
     // Обёртка (внутри находятся сообщения и форма)
     var wrapper = document.querySelector('#' + $(this).attr('id'));
+    if (typeof wrapper !== 'object' || wrapper === null) {
+        return false;
+    }
     var responseData = null;
     var options = $.fn.quasiform.options;
     /**
