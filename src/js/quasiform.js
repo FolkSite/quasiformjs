@@ -1,3 +1,5 @@
+"use strict";
+
 /**
 * @author https://quasi-art.ru
 * @date 30.12.2014-07.02.2017
@@ -152,7 +154,8 @@ $.fn.quasiform = function (options) {
                 star.addEventListener('mouseover', function(e) {
                     var value = parseInt(star.getAttribute('data-value'));
                     var i = 0;
-                    for (i = 1; i <= stars.length; i++) {
+                    let l = stars.length;
+                    for (i = 1; i <= l; i++) {
                         if (i <= value) {
                             starsWrapper.querySelector('[data-value="' + i + '"]').classList.add(starClassActive);
                         } else {
@@ -185,11 +188,16 @@ $.fn.quasiform = function (options) {
             });
             starsWrapper.addEventListener('mouseout', function (e) {
                 starsWrapper.querySelector('[data-value]').classList.remove(starClassActive);
+                var l = starsWrapper.querySelectorAll('[data-value]').length;
                 var value = parseInt(field.value);
                 if (value > 0) {
                     var i = 0;
-                    for (i = 1; i <= value; i++) {
-                        starsWrapper.querySelector('[data-value="' + i + '"]').classList.add(starClassActive);
+                    for (i = 1; i <= l; i++) {
+                        if (i <= value) {
+                            starsWrapper.querySelector('[data-value="' + i + '"]').classList.add(starClassActive);
+                        } else {
+                            starsWrapper.querySelector('[data-value="' + i + '"]').classList.remove(starClassActive);
+                        }
                     }
                 }
             });
@@ -277,9 +285,10 @@ $.fn.quasiform = function (options) {
                     wrapper.responseData = data;
                     // Вывод сообщений об ошибках
                     if ('errors' in data && Array.isArray(data.errors)) {
-                        if (data.errors.length > 0) {
+                        let l = data.errors.length;
+                        if (l > 0) {
                             let errorsList = '';
-                            for (i = 0; i < data.errors.length; i++) {
+                            for (i = 0; i < l; i++) {
                                 if (data.errors[i].length > 0) {
                                     errorsList += options.errorOpenTag + data.errors[i] + options.errorCloseTag;
                                 }
@@ -293,7 +302,8 @@ $.fn.quasiform = function (options) {
                     if ('messages' in data && Array.isArray(data.messages)) {
                         if (data.messages.length > 0) {
                             let messagesList = '';
-                            for (i = 0; i < data.messages.length; i++) {
+                            let l = data.messages.length;
+                            for (i = 0; i < l; i++) {
                                 if (data.messages[i].length > 0) {
                                     messagesList += options.messageOpenTag + data.messages[i] + options.messageCloseTag;
                                 }
@@ -322,7 +332,8 @@ $.fn.quasiform = function (options) {
                             
                             if (data.field_errors[fieldName].length > 0) {
                                 let fieldErrorsList = '';
-                                for (i = 0; i < data.field_errors[fieldName].length; i++) {
+                                let l = data.field_errors[fieldName].length;
+                                for (i = 0; i < l; i++) {
                                     fieldErrorsList += options.fieldErrorOpenTag + data.field_errors[fieldName][i] + options.fieldErrorCloseTag;
                                 }
                                 fieldErrorsList = options.fieldErrorsOpenTag + fieldErrorsList + options.fieldErrorsCloseTag;
@@ -376,7 +387,6 @@ $.fn.quasiform = function (options) {
         console.log('initCustomFileInput('+selector+')');
         var inputWrapper = wrapper.querySelector(selector);
         if (typeof inputWrapper == 'object' && inputWrapper !== null) {
-            //console.log('Input ' + selector + ' exists');
             var input = inputWrapper.querySelector('input');
             var span = inputWrapper.querySelector('span');
             input.style.display = 'none';
@@ -387,18 +397,10 @@ $.fn.quasiform = function (options) {
                 } else {
                     fileName = e.target.value.split( '\\' ).pop();
                 }
-                console.log('Selected file: ' + fileName);
                 if (fileName) {
                     span.innerHTML = fileName;
                 }
-
-                /*if( fileName )
-                    label.querySelector('span').innerHTML = fileName;
-                else
-                    label.innerHTML = labelVal;*/
             });
-        } else {
-            //console.log('Input ' + selector + ' does not exists');
         }
     }
     

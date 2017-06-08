@@ -406,14 +406,14 @@ html(lang='ru')
                                         .col.m12.s12
                                             .quasiform-form__form-group
                                                 button.quasiform-form__submit(type='submit') Send
-                    .col.s12.m6
-                        code
-                            pre(style='overflow-x: scroll;').
-                                let optionsHtml = {
-                                    format: 'html',
-                                    hideFormOnSuccess: false,
-                                };
-                                let quasiformHtml = $('#html').quasiform(optionsHtml);
+                        .col.s12.m6
+                            code
+                                pre(style='overflow-x: scroll;').
+                                    let optionsHtml = {
+                                        format: 'html',
+                                        hideFormOnSuccess: false,
+                                    };
+                                    let quasiformHtml = $('#html').quasiform(optionsHtml);
         script(src='../node_modules/jquery/dist/jquery.min.js')
         // script src="https://www.google.com/recaptcha/api.js?onload=recaptchaCallBack&render=explicit"></script>
         script(src='../dist/js/quasiform.min.js?v=4')
