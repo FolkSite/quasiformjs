@@ -247,8 +247,7 @@ $.fn.quasiform = function (options) {
             var loaderSelector = '[data-quasiform="loader"]';
             wrapper.querySelector(errorsWrapperSelector).style.display = 'none';
             wrapper.querySelector(messagesWrapperSelector).style.display = 'none';
-            var formD = $(form)[0];
-            var formData = new FormData(formD);
+            var formData = new FormData(form);
             //var formData = $(form).serialize();
             var formAction = form.getAttribute('action');
             var formMethod = form.getAttribute('method');
@@ -263,7 +262,9 @@ $.fn.quasiform = function (options) {
             var headers = new Headers();
             switch (options.format) {
                 case 'json':
-                    headers.append('Content-Type', 'application/json; charset=utf-8');
+                    //headers.append('Content-Type', 'application/json; charset=utf-8');
+                    //headers.append('Cache-Control', 'no-cache');
+                    //headers.append('Content-Type', 'multipart/form-data');
                     break;
                 case 'html':
                     break;
@@ -340,8 +341,11 @@ $.fn.quasiform = function (options) {
                                     fieldErrorsList += options.fieldErrorOpenTag + data.field_errors[fieldName][i] + options.fieldErrorCloseTag;
                                 }
                                 fieldErrorsList = options.fieldErrorsOpenTag + fieldErrorsList + options.fieldErrorsCloseTag;
-                                wrapper.querySelector('[data-quasiform-field-errors="'+fieldName+'"]').innerHTML = fieldErrorsList;
-                                wrapper.querySelector('[data-quasiform-field-errors="'+fieldName+'"]').style.display = 'block';
+                                let errorLabel = wrapper.querySelector('[data-quasiform-field-errors="'+fieldName+'"]');
+                                if (typeof errorLabel === 'object' && errorLabel !== null) {
+                                    errorLabel.innerHTML = fieldErrorsList;
+                                    errorLabel.style.display = 'block';
+                                }
                             }
                         }
                     }

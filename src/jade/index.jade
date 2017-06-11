@@ -244,14 +244,14 @@ html(lang='ru')
                                             .quasiform-form-checkbox(data-quasiform='checkbox', data-name='checkbox-agree', data-quasiform-checkbox-off='quasiform-form-checkbox--off')
                                                 i.fa.fa-check
                                             input(type='checkbox', name='checkbox-agree', value='1', data-quasiform='agreement', checked='', style='display: none;')
-                                            |  Agree
+                                            | Agree
                                     .quasiform-form__form-group
                                         .col.s12
                                             label.quasiform-form__input-file-button(data-quasiform='input-file',for='file-2')
-                                                input(type='file', name='file', id='file-2')
+                                                input(type='file', name='file[]', id='file-2')
                                                 i.fa.fa-file-text-o
                                                 span.quasiform-form__input-file-span(data-quasiform='input-file-label')
-                                                    Прикрепить файл
+                                                    | Прикрепить файл
 
                                     .quasiform-form__form-group
                                         button.quasiform-form__submit(type='submit') Send
