@@ -86,15 +86,14 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 		"success": true
 	}
 ## Roadmap ##
+* Custom validation
+* Client validation
 * Rendering response result to separate method
-* Native: https://github.com/oneuijs/You-Dont-Need-jQuery
-* Replace ajax by https://fetch.spec.whatwg.org/
 * ES6
 * Demo of multiple recaptcha
 * Detect offline
 * Check if response is not json
 * Customization of Spinner
 * Customization of Star Rating
-* Custom File Input
-* Positive UX (show success before response complete)
-* Client validation
+* Customization of File Input
+* Positive UX (optional; show success before response complete)
