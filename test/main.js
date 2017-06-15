@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import quasiform from '../src/js/quasiform.js';
 
 function initForms() {

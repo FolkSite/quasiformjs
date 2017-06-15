@@ -9,6 +9,7 @@
   },
   "author": "quasi-art.ru",
   "dependencies": {
+    "babel-polyfill": "^6.23.0",
     "fetch-ie8": "^1.5.0",
     "whatwg-fetch": "^2.0.3"
   },

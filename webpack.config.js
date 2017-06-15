@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
     //entry: './src/js/quasiform.js',
-    entry: './test/main.js',
+    entry: ['babel-polyfill', 'whatwg-fetch', './test/main.js'],
     target: 'web',
     output: {
         path: path.resolve(__dirname, 'dist/js'),
