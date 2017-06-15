@@ -7,6 +7,9 @@ html(lang='ru')
         link(rel='stylesheet', href='../dependencies/grid.min.css')
         link(rel='stylesheet', href='../dist/css/quasiform.min.css?v=4')
         link(rel='stylesheet', href='../node_modules/font-awesome/css/font-awesome.min.css')
+        //[if lt IE 9]
+            script(src='/dependencies/html5shiv.min.js')
+        //<![endif]
     body(itemscope='', itemtype='http://schema.org/WebPage')
         .container
             h1 quasiform
@@ -36,31 +39,31 @@ html(lang='ru')
                 tr
                     td errorCloseTag
                     td
-                        code </li>
+                        code &lt;/li&gt;
                 tr
                     td errorsOpenTag
                     td
-                        code <ul>
+                        code &lt;ul&gt;
                 tr
                     td errorsCloseTag
                     td
-                        code </ul>
+                        code &lt;/ul&gt;
                 tr
                     td messageOpenTag
                     td
-                        code <li>
+                        code &lt;li&gt;
                 tr
                     td messageCloseTag
                     td
-                        code </li>
+                        code &lt;/li&gt;
                 tr
                     td messagesOpenTag
                     td
-                        code <ul>
+                        code &lt;ul&gt;
                 tr
                     td messagesCloseTag
                     td
-                        code </ul>
+                        code &lt;/ul&gt;
                 tr
                     td hideFormOnSuccess
                     td false
@@ -130,6 +133,14 @@ html(lang='ru')
                                                         button.spinner__decrease(type='button', data-quasiform='spinner__decrease') —
                                                         input.spinner__input(type='text', name='count', maxlength='3', readonly='true', value='1')
                                                         button.spinner__increase(type='button', data-quasiform='spinner__increase') +
+                                            .col.m12.s12
+                                                .quasiform-form__form-group
+                                                    .spinner-wrapper(data-quasiform='spinner', data-min='1', data-max='10', data-one='1')
+                                                        label.spinner__label Количество
+                                                        .spinner
+                                                            button.spinner__decrease(type='button', data-quasiform='spinner__decrease') —
+                                                            input.spinner__input(type='text', name='count2', maxlength='3', readonly='true', value='1')
+                                                            button.spinner__increase(type='button', data-quasiform='spinner__increase') +
                                             .quasiform-form__form-group
                                                 button.quasiform-form__submit(type='submit') Send
                         .col.s12.m6
@@ -335,9 +346,6 @@ html(lang='ru')
                                                 label.quasiform-form__label(for='name') Name
                                                 input#name.quasiform-form__input(type='text', name='name', value='', placeholder='Имя')
                                                 .quasiform-form__field-errors(data-quasiform-field-errors='name', style='display: none;')
-                                                    ul
-                                                        li Поле обязательно для заполнения
-                                                        li Поле должно быть пустым
                                         .col.m6.s12
                                             .quasiform-form__form-group
                                                 label.quasiform-form__label(for='contacts') Contacts
@@ -414,7 +422,8 @@ html(lang='ru')
                                         hideFormOnSuccess: false,
                                     };
                                     let quasiformHtml = $('#html').quasiform(optionsHtml);
-        script(src='../node_modules/jquery/dist/jquery.min.js')
+        //script(src='../node_modules/jquery/dist/jquery.min.js')
+        //script(src='/dependencies/jquery-2.2.4.min.js')
         // script src="https://www.google.com/recaptcha/api.js?onload=recaptchaCallBack&render=explicit"></script>
-        script(src='../dist/js/quasiform.min.js?v=4')
-        script(src='main.js?v=4')
+        script(src='../dist/js/quasiform.min.js?v=20')
+        //script(src='main.js?v=4')

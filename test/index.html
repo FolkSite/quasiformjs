@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="../dependencies/grid.min.css">
     <link rel="stylesheet" href="../dist/css/quasiform.min.css?v=4">
     <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css">
+    <!--[if lt IE 9]script(src='/dependencies/html5shiv.min.js')
+    -->
+    <!--<![endif]-->
   </head>
   <body itemscope="" itemtype="http://schema.org/WebPage">
     <div class="container">
@@ -41,31 +44,31 @@
         </tr>
         <tr>
           <td>errorCloseTag</td>
-          <td><code></li></code></td>
+          <td><code>&lt;/li&gt;</code></td>
         </tr>
         <tr>
           <td>errorsOpenTag</td>
-          <td><code><ul></code></td>
+          <td><code>&lt;ul&gt;</code></td>
         </tr>
         <tr>
           <td>errorsCloseTag</td>
-          <td><code></ul></code></td>
+          <td><code>&lt;/ul&gt;</code></td>
         </tr>
         <tr>
           <td>messageOpenTag</td>
-          <td><code><li></code></td>
+          <td><code>&lt;li&gt;</code></td>
         </tr>
         <tr>
           <td>messageCloseTag</td>
-          <td><code></li></code></td>
+          <td><code>&lt;/li&gt;</code></td>
         </tr>
         <tr>
           <td>messagesOpenTag</td>
-          <td><code><ul></code></td>
+          <td><code>&lt;ul&gt;</code></td>
         </tr>
         <tr>
           <td>messagesCloseTag</td>
-          <td><code></ul></code></td>
+          <td><code>&lt;/ul&gt;</code></td>
         </tr>
         <tr>
           <td>hideFormOnSuccess</td>
@@ -148,6 +151,18 @@ let quasiformNotExists = $('#ne').quasiform(optionsNotExists);</pre></code></div
                             <button type="button" data-quasiform="spinner__decrease" class="spinner__decrease">—</button>
                             <input type="text" name="count" maxlength="3" readonly="true" value="1" class="spinner__input">
                             <button type="button" data-quasiform="spinner__increase" class="spinner__increase">+</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col m12 s12">
+                        <div class="quasiform-form__form-group">
+                          <div data-quasiform="spinner" data-min="1" data-max="10" data-one="1" class="spinner-wrapper">
+                            <label class="spinner__label">Количество</label>
+                            <div class="spinner">
+                              <button type="button" data-quasiform="spinner__decrease" class="spinner__decrease">—</button>
+                              <input type="text" name="count2" maxlength="3" readonly="true" value="1" class="spinner__input">
+                              <button type="button" data-quasiform="spinner__increase" class="spinner__increase">+</button>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -388,12 +403,7 @@ let quasiformSuccess = $('#success').quasiform(optionsSuccess);</pre></code></di
                       <div class="quasiform-form__form-group">
                         <label for="name" class="quasiform-form__label">Name</label>
                         <input id="name" type="text" name="name" value="" placeholder="Имя" class="quasiform-form__input">
-                        <div data-quasiform-field-errors="name" style="display: none;" class="quasiform-form__field-errors">
-                          <ul>
-                            <li>Поле обязательно для заполнения</li>
-                            <li>Поле должно быть пустым</li>
-                          </ul>
-                        </div>
+                        <div data-quasiform-field-errors="name" style="display: none;" class="quasiform-form__field-errors"></div>
                       </div>
                     </div>
                     <div class="col m6 s12">
@@ -492,9 +502,10 @@ let quasiformHtml = $('#html').quasiform(optionsHtml);</pre></code></div>
         </div>
       </div>
     </div>
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <!--script(src='../node_modules/jquery/dist/jquery.min.js')-->
+    <!--script(src='/dependencies/jquery-2.2.4.min.js')-->
     <!-- script src="https://www.google.com/recaptcha/api.js?onload=recaptchaCallBack&render=explicit"></script>-->
-    <script src="../dist/js/quasiform.min.js?v=4"></script>
-    <script src="main.js?v=4"></script>
+    <script src="../dist/js/quasiform.min.js?v=20"></script>
+    <!--script(src='main.js?v=4')-->
   </body>
 </html>

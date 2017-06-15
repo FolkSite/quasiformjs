@@ -1,5 +1,7 @@
 var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
+//var babel = require('gulp-babel');
+//var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
 var gulp = require('gulp');
 var jade = require('gulp-jade');
@@ -7,7 +9,7 @@ var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglifyjs');
-
+//global.jQuery = require("jquery")
 var templateMainPath = 'src/';
 var distMainPath = 'dist/';
 var reload = browserSync.reload;
@@ -32,6 +34,12 @@ gulp.task('js-main', function() {
     return gulp.src([
             templateMainPath + 'js/quasiform.js',
         ])
+        /*.pipe(babel({
+			presets: ['es2015']
+		}))*/
+        /*.pipe(browserify({
+            insertGlobals : true
+        }))*/
         .pipe(concat('quasiform.min.js'))
         //.pipe(uglify())
         .pipe(gulp.dest(distMainPath + 'js'))
@@ -41,7 +49,26 @@ gulp.task('js-main', function() {
         .pipe(browserSync.stream());
 });
 
-gulp.task('watch-main', ['sass-main', 'js-main', 'jade-test'], function() {
+gulp.task('js-test', function() {
+    return gulp.src([
+            'test/main.js',
+        ])
+        /*.pipe(babel({
+			presets: ['es2015']
+		}))*/
+        /*.pipe(browserify({
+            insertGlobals : true
+        }))*/
+        .pipe(concat('main.min.js'))
+        //.pipe(uglify())
+        .pipe(gulp.dest('test'))
+        .pipe(reload({
+            stream: true
+        }))
+        .pipe(browserSync.stream());
+});
+
+gulp.task('watch-main', ['sass-main', 'js-main', 'js-test'], function() {
     gulp.watch(templateMainPath + 'sass/*.scss', ['sass-main']);
     gulp.watch(templateMainPath + 'js/*.js', ['js-main']);
     gulp.watch(templateMainPath + 'jade/index.jade', ['jade-test']);

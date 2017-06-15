@@ -1,24 +1,29 @@
+import quasiform from '../src/js/quasiform.js';
+
 function initForms() {
     /**
      * Form does not exists
      */
-    let optionsNotExists = {
+    var optionsNotExists = {
+        selector: '#ne',
         hideFormOnSuccess: false,
     };
-    let quasiformNotExists = $('#ne').quasiform(optionsNotExists);
+    var quasiformNotExists = new quasiform(optionsNotExists);
     
     /**
      * Spinner
      */
-    let optionsSpinner = {
+    var optionsSpinner = {
+        selector: '#spinner',
         hideFormOnSuccess: false,
     };
-    let quasiformSpinner = $('#spinner').quasiform(optionsSpinner);
+    var quasiformSpinner = new quasiform(optionsSpinner);
     
     /**
      * Нулевая форма
      */
-    let optionsPost = {
+    var optionsPost = {
+        selector: '#post',
         debug: true,
         format: 'html',
         hasErrorInputClass: 'quasiform-form__input--has-error',
@@ -45,12 +50,13 @@ function initForms() {
             //console.debug(wrapper);
         },
     };
-    let quasiformPost = $('#post').quasiform(optionsPost);
+    var quasiformPost = new quasiform(optionsPost);
 
     /**
      * Первая форма
      */
-    let optionsSuccess = {
+    var optionsSuccess = {
+        selector: '#success',
         debug: true,
         hasErrorInputClass: 'quasiform-form__input--has-error',
         hasErrorLabelClass: 'quasiform-form__label--has-error',
@@ -76,12 +82,13 @@ function initForms() {
             //console.debug(wrapper);
         },
     };
-    let quasiformSuccess = $('#success').quasiform(optionsSuccess);
+    var quasiformSuccess = new quasiform(optionsSuccess);
 
     /**
      * Вторая форма
      */
-    let optionsFail = {
+    var optionsFail = {
+        selector: '#fail',
         debug: true,
         hasErrorInputClass: 'quasiform-form__input--has-error',
         hasErrorLabelClass: 'quasiform-form__label--has-error',
@@ -107,24 +114,26 @@ function initForms() {
             //console.debug(wrapper);
         },
     };
-    let quasiformFail = $('#fail').quasiform(optionsFail);
+    var quasiformFail = new quasiform(optionsFail);
 
     /**
      * Звёзды
      */
-    let optionsStars = {
+    var optionsStars = {
+        selector: '#stars',
         debug: true,
         hideFormOnSuccess: false,
         callbackOnStarsChange: function callbackOnStarsChange(wrapper) {
             console.log('callbackOnStarsChange');
         }
     };
-    let quasiformStars = $('#stars').quasiform(optionsStars);
+    var quasiformStars = new quasiform(optionsStars);
 
     /**
      * Чекбокс
      */
-    let optionsCheckbox = {
+    var optionsCheckbox = {
+        selector: '#checkbox',
         debug: true,
         hideFormOnSuccess: false,
         callbackOnAgree: function callbackOnAgree(wrapper) {
@@ -134,12 +143,13 @@ function initForms() {
             console.log('disagree');
         }
     };
-    let quasiformCheckbox = $('#checkbox').quasiform(optionsCheckbox);
+    var quasiformCheckbox = new quasiform(optionsCheckbox);
     
     /**
      * HTML-ответ
      */
-    let optionsHtml = {
+    var optionsHtml = {
+        selector: '#html',
         debug: true,
         format: 'html',
         hideFormOnSuccess: false,
@@ -150,11 +160,11 @@ function initForms() {
             console.log('disagree');
         }
     };
-    let quasiformHtml = $('#html').quasiform(optionsHtml);
+    var quasiformHtml = new quasiform(optionsHtml);
 }
 
 if (document.readyState === 'complete' || document.readyState !== 'loading') {
-  initForms();
+    initForms();
 } else {
-  document.addEventListener('DOMContentLoaded', initForms);
+    document.addEventListener('DOMContentLoaded', initForms);
 }
