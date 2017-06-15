@@ -1,5 +1,7 @@
 import 'whatwg-fetch';
 import quasiform from '../src/js/quasiform.js';
+require('es6-promise/auto');
+require('es6-symbol/implement');
 
 function initForms() {
     /**

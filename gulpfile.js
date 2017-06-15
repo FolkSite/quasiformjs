@@ -30,6 +30,7 @@ gulp.task('sass-main', function() {
         .pipe(browserSync.stream());
 });
 
+// Deprecated, use webpack
 gulp.task('js-main', function() {
     return gulp.src([
             templateMainPath + 'js/quasiform.js',
@@ -49,38 +50,19 @@ gulp.task('js-main', function() {
         .pipe(browserSync.stream());
 });
 
-gulp.task('js-test', function() {
-    return gulp.src([
-            'test/main.js',
-        ])
-        /*.pipe(babel({
-			presets: ['es2015']
-		}))*/
-        /*.pipe(browserify({
-            insertGlobals : true
-        }))*/
-        .pipe(concat('main.min.js'))
-        //.pipe(uglify())
-        .pipe(gulp.dest('test'))
-        .pipe(reload({
-            stream: true
-        }))
-        .pipe(browserSync.stream());
-});
-
-gulp.task('watch-main', ['sass-main', 'js-main', 'js-test'], function() {
+gulp.task('watch-main', ['sass-main'/*, 'js-main', 'js-test'*/], function() {
     gulp.watch(templateMainPath + 'sass/*.scss', ['sass-main']);
-    gulp.watch(templateMainPath + 'js/*.js', ['js-main']);
+    //gulp.watch(templateMainPath + 'js/*.js', ['js-main']);
     gulp.watch(templateMainPath + 'jade/index.jade', ['jade-test']);
 });
 
-gulp.task('sync', ['sass-main', 'js-main'], function() {
+gulp.task('sync', ['sass-main', /*'js-main'*/], function() {
     browserSync.init({
         proxy: 'http://quasiform.local/test',
         host: 'quasiform.local',
     });
     gulp.watch(templateMainPath + 'sass/*.scss', ['sass-main']);
-    gulp.watch(templateMainPath + 'js/*.js', ['js-main']);
+    //gulp.watch(templateMainPath + 'js/*.js', ['js-main']);
     browserSync.reload();
 });
 
@@ -96,7 +78,6 @@ gulp.task('jade-test', function() {
 });
 
 gulp.task('default', ['watch-main']);
-
 gulp.task('jade', ['jade-test']);
 gulp.task('sync', ['sync']);
 gulp.task('watch', ['watch-main']);

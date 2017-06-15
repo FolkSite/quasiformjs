@@ -1,8 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
-    entry: ['babel-polyfill', 'whatwg-fetch', './test/main.js'],
+    entry: [/*'babel-polyfill',*/ /*'whatwg-fetch', */ 'fetch-xhr', './test/main.js'],
     target: 'web',
     output: {
         path: path.resolve(__dirname, 'dist/js'),
@@ -17,6 +19,17 @@ module.exports = {
             }
         }]
     },
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': '"production"'
+        }),
+        //new BundleAnalyzerPlugin(),
+        /*new webpack.ProvidePlugin({
+            Promise: 'imports-loader?this=>global!exports-loader?global.Promise!es6-promise',
+            fetch: 'imports-loader?this=>global!exports-loader?global.fetch!fetch'
+        }),*/
+        new UglifyJSPlugin(),
+    ],
     stats: {
         colors: true
     },
