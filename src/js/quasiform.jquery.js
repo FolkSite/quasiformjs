@@ -1,5 +1,9 @@
 "use strict";
 
+import 'whatwg-fetch';
+require('es6-promise/auto');
+require('es6-symbol/implement');
+
 /**
 * @author https://quasi-art.ru
 * @date 30.12.2014-07.02.2017

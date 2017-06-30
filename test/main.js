@@ -1,17 +1,16 @@
-import 'whatwg-fetch';
-import quasiform from '../src/js/quasiform.js';
-require('es6-promise/auto');
-require('es6-symbol/implement');
+"use strict";
+
+import quasiform from '../src/js/quasiform.jquery.js';
 
 function initForms() {
     /**
      * Form does not exists
      */
     var optionsNotExists = {
-        selector: '#ne',
+        //selector: '#ne',
         hideFormOnSuccess: false,
     };
-    var quasiformNotExists = new quasiform(optionsNotExists);
+    var quasiformNotExists = $('#ne').quasiform(optionsNotExists);
     
     /**
      * Spinner
@@ -20,7 +19,7 @@ function initForms() {
         selector: '#spinner',
         hideFormOnSuccess: false,
     };
-    var quasiformSpinner = new quasiform(optionsSpinner);
+    var quasiformSpinner = $('#spinner').quasiform(optionsSpinner);
     
     /**
      * Нулевая форма
@@ -53,7 +52,7 @@ function initForms() {
             //console.debug(wrapper);
         },
     };
-    var quasiformPost = new quasiform(optionsPost);
+    var quasiformPost = $('#post').quasiform(optionsPost);
 
     /**
      * Первая форма
@@ -85,7 +84,7 @@ function initForms() {
             //console.debug(wrapper);
         },
     };
-    var quasiformSuccess = new quasiform(optionsSuccess);
+    var quasiformSuccess = $('#success').quasiform(optionsSuccess);
 
     /**
      * Вторая форма
@@ -117,7 +116,7 @@ function initForms() {
             //console.debug(wrapper);
         },
     };
-    var quasiformFail = new quasiform(optionsFail);
+    var quasiformFail = $('#fail').quasiform(optionsFail);
 
     /**
      * Звёзды
@@ -130,7 +129,7 @@ function initForms() {
             console.log('callbackOnStarsChange');
         }
     };
-    var quasiformStars = new quasiform(optionsStars);
+    var quasiformStars = $('#stars').quasiform(optionsStars);
 
     /**
      * Чекбокс
@@ -146,7 +145,7 @@ function initForms() {
             console.log('disagree');
         }
     };
-    var quasiformCheckbox = new quasiform(optionsCheckbox);
+    var quasiformCheckbox = $('#checkbox').quasiform(optionsCheckbox);
     
     /**
      * HTML-ответ
@@ -163,7 +162,7 @@ function initForms() {
             console.log('disagree');
         }
     };
-    var quasiformHtml = new quasiform(optionsHtml);
+    var quasiformHtml = $('#html').quasiform(optionsHtml);
 }
 
 if (document.readyState === 'complete' || document.readyState !== 'loading') {

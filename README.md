@@ -1,10 +1,8 @@
 # quasiformjs
-This is jQuery plugin that helps submiting and validating your forms asynchronously. Keep your validation logic on server side, and for client side validate with javascript and AJAX.<br />
+This is jQuery plugin that helps submiting and validating your forms asynchronously. Keep your validation logic on server side, and for client side validate with javascript and AJAX.
 Supports multiple reCaptcha 3.
 ## Demo ##
 [https://quasi-art.ru/contacts](https://quasi-art.ru/contacts)
-## Requirements ##
-Requires jQuery 3.1+.
 ## Options ##
 ### debug ###
 Default: false
@@ -86,6 +84,8 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 		"success": true
 	}
 ## Roadmap ##
+* webpack conf
+* http://jsonapi.org/
 * Custom validation
 * Client validation
 * Rendering response result to separate method

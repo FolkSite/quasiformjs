@@ -5,10 +5,12 @@ var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlug
 
 module.exports = {
     entry: ['fetch-xhr', './test/main.js'],
+    //entry: ['fetch-xhr', './src/js/quasiform.jquery.js'],
     target: 'web',
     output: {
         path: path.resolve(__dirname, 'dist/js'),
         filename: 'bundle.min.js'
+        //filename: 'quasiform.min.js'
     },
     module: {
         loaders: [{
