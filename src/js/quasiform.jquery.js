@@ -10,20 +10,19 @@ require('es6-symbol/implement');
 * @license GPLv2
 */
 
-function recaptchaCallBack() {
-    var recaptches = $('[data-quasiform="recaptcha"][data-sitekey][id]');
-    $.each(recaptches, function (index, recaptcha) {
+window.recaptchaCallBack = () => {
+    var recaptches = document.querySelectorAll('[data-quasiform="recaptcha"][data-sitekey][id]');
+	[].forEach.call(recaptches, function(recaptcha, index) {
         var recaptchaOptions = {
             sitekey: null,
         };
-        var sitekey = $(recaptcha).getAttribute('data-sitekey');
+        var sitekey = recaptcha.getAttribute('data-sitekey');
         if (sitekey !== undefined) {
-            recaptchaOptions.sitekey = $(recaptcha).getAttribute('data-sitekey');
-        }
-        else {
+            recaptchaOptions.sitekey = recaptcha.getAttribute('data-sitekey');
+        } else {
             console.log('sitekey is undefined');
         }
-        grecaptcha.render($(recaptcha).getAttribute('id'), recaptchaOptions);
+        grecaptcha.render(recaptcha.getAttribute('id'), recaptchaOptions);
     });
 }
 
