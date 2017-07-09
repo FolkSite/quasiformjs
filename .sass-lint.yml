@@ -1,0 +1,13 @@
+linters:
+  class-name-format:
+    allow-leading-underscore: false
+    convention: strictbem
+  Indentation:
+    enabled: true
+    allow_non_nested_indentation: false
+    character: space
+    width: 2
+  no-color-literals:
+    allow-map-identifiers: true
+    allow-rgba: true
+    allow-variable-identifiers: true
