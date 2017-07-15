@@ -7,6 +7,7 @@ module.exports = {
     entry: ['fetch-xhr', './test/main.js'],
     //entry: ['fetch-xhr', './src/js/quasiform.jquery.js'],
     target: 'web',
+    watch: true,
     output: {
         path: path.resolve(__dirname, 'dist/js'),
         filename: 'bundle.min.js'
