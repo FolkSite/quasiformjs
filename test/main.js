@@ -1,172 +1,171 @@
-"use strict";
+'use strict';
 
+/* eslint-disable no-unused-vars */
 import quasiform from '../src/js/quasiform.jquery.js';
+/* eslint-enable no-unused-vars */
 
 function initForms() {
-    /**
-     * Form does not exists
-     */
-    var optionsNotExists = {
-        //selector: '#ne',
-        hideFormOnSuccess: false,
-    };
-    var quasiformNotExists = $('#ne').quasiform(optionsNotExists);
-    
-    /**
-     * Spinner
-     */
-    var optionsSpinner = {
-        selector: '#spinner',
-        hideFormOnSuccess: false,
-    };
-    var quasiformSpinner = $('#spinner').quasiform(optionsSpinner);
-    
-    /**
-     * Нулевая форма
-     */
-    var optionsPost = {
-        selector: '#post',
-        debug: true,
-        format: 'html',
-        hasErrorInputClass: 'quasiform-form__input--has-error',
-        hasErrorLabelClass: 'quasiform-form__label--has-error',
-        hideFormOnSuccess: false,
-        callbackOnSuccess: function callbackOnSuccess(wrapper) {
-            console.log('callbackOnSuccess');
-            //console.debug(wrapper);
-        },
-        callbackOnFail: function callbackOnFail(wrapper) {
-            console.log('callbackOnFail');
-            //console.debug(wrapper);
-        },
-        callbackOnError: function callbackOnError(wrapper) {
-            console.log('callbackOnError');
-            //console.debug(wrapper);
-        },
-        callbackBeforeSend: function callbackBeforeSend(wrapper) {
-            console.log('callbackBeforeSend');
-            //console.debug(wrapper);
-        },
-        callbackOnComplete: function callbackOnComplete(wrapper) {
-            console.log('callbackOnComplete');
-            //console.debug(wrapper);
-        },
-    };
-    var quasiformPost = $('#post').quasiform(optionsPost);
+  /**
+   * Form does not exists
+   */
+  const optionsNotExists = {
+    hideFormOnSuccess: false,
+  };
+  $('#ne').quasiform(optionsNotExists);
+  
+  /**
+   * Spinner
+   */
+  const optionsSpinner = {
+    hideFormOnSuccess: false,
+  };
+  $('#spinner').quasiform(optionsSpinner);
+  
+  /**
+   * Нулевая форма
+   */
+  const optionsPost = {
+    debug: true,
+    format: 'html',
+    hasErrorInputClass: 'quasiform-form__input--has-error',
+    hasErrorLabelClass: 'quasiform-form__label--has-error',
+    hideFormOnSuccess: false,
+    callbackOnSuccess: (wrapper) => {
+      console.log('callbackOnSuccess');
+      console.debug(wrapper);
+    },
+    callbackOnFail: (wrapper) => {
+      console.log('callbackOnFail');
+      console.debug(wrapper);
+    },
+    callbackOnError: (wrapper) => {
+      console.log('callbackOnError');
+      console.debug(wrapper);
+    },
+    callbackBeforeSend: (wrapper) => {
+      console.log('callbackBeforeSend');
+      console.debug(wrapper);
+    },
+    callbackOnComplete: (wrapper) => {
+      console.log('callbackOnComplete');
+      console.debug(wrapper);
+    },
+  };
+  $('#post').quasiform(optionsPost);
 
-    /**
-     * Первая форма
-     */
-    var optionsSuccess = {
-        selector: '#success',
-        debug: true,
-        hasErrorInputClass: 'quasiform-form__input--has-error',
-        hasErrorLabelClass: 'quasiform-form__label--has-error',
-        hideFormOnSuccess: false,
-        callbackOnSuccess: function callbackOnSuccess(wrapper) {
-            console.log('callbackOnSuccess');
-            //console.debug(wrapper);
-        },
-        callbackOnFail: function callbackOnFail(wrapper) {
-            console.log('callbackOnFail');
-            //console.debug(wrapper);
-        },
-        callbackOnError: function callbackOnError(wrapper) {
-            console.log('callbackOnError');
-            //console.debug(wrapper);
-        },
-        callbackBeforeSend: function callbackBeforeSend(wrapper) {
-            console.log('callbackBeforeSend');
-            //console.debug(wrapper);
-        },
-        callbackOnComplete: function callbackOnComplete(wrapper) {
-            console.log('callbackOnComplete');
-            //console.debug(wrapper);
-        },
-    };
-    var quasiformSuccess = $('#success').quasiform(optionsSuccess);
+  /**
+   * Первая форма
+   */
+  const optionsSuccess = {
+    debug: true,
+    hasErrorInputClass: 'quasiform-form__input--has-error',
+    hasErrorLabelClass: 'quasiform-form__label--has-error',
+    hideFormOnSuccess: false,
+    callbackOnSuccess: (wrapper) => {
+      console.log('callbackOnSuccess');
+      console.debug(wrapper);
+    },
+    callbackOnFail: (wrapper) => {
+      console.log('callbackOnFail');
+      console.debug(wrapper);
+    },
+    callbackOnError: (wrapper) => {
+      console.log('callbackOnError');
+      console.debug(wrapper);
+    },
+    callbackBeforeSend: (wrapper) => {
+      console.log('callbackBeforeSend');
+      console.debug(wrapper);
+    },
+    callbackOnComplete: (wrapper) => {
+      console.log('callbackOnComplete');
+      console.debug(wrapper);
+    },
+  };
+  $('#success').quasiform(optionsSuccess);
 
-    /**
-     * Вторая форма
-     */
-    var optionsFail = {
-        selector: '#fail',
-        debug: true,
-        hasErrorInputClass: 'quasiform-form__input--has-error',
-        hasErrorLabelClass: 'quasiform-form__label--has-error',
-        hideFormOnSuccess: false,
-        callbackOnSuccess: function callbackOnSuccess(wrapper) {
-            console.log('callbackOnSuccess');
-            //console.debug(wrapper);
-        },
-        callbackOnFail: function callbackOnFail(wrapper) {
-            console.log('callbackOnFail');
-            //console.debug(wrapper);
-        },
-        callbackOnError: function callbackOnError(wrapper) {
-            console.log('callbackOnError');
-            //console.debug(wrapper);
-        },
-        callbackBeforeSend: function callbackBeforeSend(wrapper) {
-            console.log('callbackBeforeSend');
-            //console.debug(wrapper);
-        },
-        callbackOnComplete: function callbackOnComplete(wrapper) {
-            console.log('callbackOnComplete');
-            //console.debug(wrapper);
-        },
-    };
-    var quasiformFail = $('#fail').quasiform(optionsFail);
+  /**
+   * Вторая форма
+   */
+  const optionsFail = {
+    debug: true,
+    hasErrorInputClass: 'quasiform-form__input--has-error',
+    hasErrorLabelClass: 'quasiform-form__label--has-error',
+    hideFormOnSuccess: false,
+    callbackOnSuccess: (wrapper) => {
+      console.log('callbackOnSuccess');
+      console.debug(wrapper);
+    },
+    callbackOnFail: (wrapper) => {
+      console.log('callbackOnFail');
+      console.debug(wrapper);
+    },
+    callbackOnError: (wrapper) => {
+      console.log('callbackOnError');
+      console.debug(wrapper);
+    },
+    callbackBeforeSend: (wrapper) => {
+      console.log('callbackBeforeSend');
+      console.debug(wrapper);
+    },
+    callbackOnComplete: (wrapper) => {
+      console.log('callbackOnComplete');
+      console.debug(wrapper);
+    },
+  };
+  $('#fail').quasiform(optionsFail);
 
-    /**
-     * Звёзды
-     */
-    var optionsStars = {
-        selector: '#stars',
-        debug: true,
-        hideFormOnSuccess: false,
-        callbackOnStarsChange: function callbackOnStarsChange(wrapper) {
-            console.log('callbackOnStarsChange');
-        }
-    };
-    var quasiformStars = $('#stars').quasiform(optionsStars);
+  /**
+   * Звёзды
+   */
+  const optionsStars = {
+    debug: true,
+    hideFormOnSuccess: false,
+    callbackOnStarsChange: (wrapper) => {
+      console.log('callbackOnStarsChange');
+      console.debug(wrapper);
+    }
+  };
+  $('#stars').quasiform(optionsStars);
 
-    /**
-     * Чекбокс
-     */
-    var optionsCheckbox = {
-        selector: '#checkbox',
-        debug: true,
-        hideFormOnSuccess: false,
-        callbackOnAgree: function callbackOnAgree(wrapper) {
-            console.log('agree');
-        },
-        callbackOnDisagree: function callbackOnDisagree(wrapper) {
-            console.log('disagree');
-        }
-    };
-    var quasiformCheckbox = $('#checkbox').quasiform(optionsCheckbox);
-    
-    /**
-     * HTML-ответ
-     */
-    var optionsHtml = {
-        selector: '#html',
-        debug: true,
-        format: 'html',
-        hideFormOnSuccess: false,
-        callbackOnAgree: function callbackOnAgree(wrapper) {
-            console.log('agree');
-        },
-        callbackOnDisagree: function callbackOnDisagree(wrapper) {
-            console.log('disagree');
-        }
-    };
-    var quasiformHtml = $('#html').quasiform(optionsHtml);
+  /**
+   * Чекбокс
+   */
+  const optionsCheckbox = {
+    debug: true,
+    hideFormOnSuccess: false,
+    callbackOnAgree: (wrapper) => {
+      console.log('agree');
+      console.debug(wrapper);
+    },
+    callbackOnDisagree: (wrapper) => {
+      console.log('disagree');
+      console.debug(wrapper);
+    }
+  };
+  $('#checkbox').quasiform(optionsCheckbox);
+  
+  /**
+   * HTML-ответ
+   */
+  const optionsHtml = {
+    debug: true,
+    format: 'html',
+    hideFormOnSuccess: false,
+    callbackOnAgree: (wrapper) => {
+      console.log('agree');
+      console.debug(wrapper);
+    },
+    callbackOnDisagree: (wrapper) => {
+      console.log('disagree');
+      console.debug(wrapper);
+    }
+  };
+  $('#html').quasiform(optionsHtml);
 }
 
 if (document.readyState === 'complete' || document.readyState !== 'loading') {
-    initForms();
+  initForms();
 } else {
-    document.addEventListener('DOMContentLoaded', initForms);
+  document.addEventListener('DOMContentLoaded', initForms);
 }

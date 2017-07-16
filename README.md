@@ -46,19 +46,35 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 ## Initialization ##
 ### JavaScript ###
 	$(function () {
-	    let optionsPost = {
-	        debug: true,
-	        hasErrorInputClass: 'has-error',
-	        hasErrorLabelClass: 'has-error',
-	        hideFormOnSuccess: false,
-	        callbackOnSuccess: function callbackOnSuccess(wrapper) {
-	            console.debug(wrapper);
-	        },
-	        callbackOnFail: function callbackOnFail(wrapper) {
-	            console.debug(wrapper);
-	        },
-	    };
-	    let quasiformPost = $('#post').quasiform(optionsPost);
+		const optionsPost = {
+			selector: '#post',
+			debug: true,
+			format: 'html',
+			hasErrorInputClass: 'quasiform-form__input--has-error',
+			hasErrorLabelClass: 'quasiform-form__label--has-error',
+			hideFormOnSuccess: false,
+			callbackOnSuccess: (wrapper) => {
+				console.log('callbackOnSuccess');
+				console.debug(wrapper);
+			},
+			callbackOnFail: (wrapper) => {
+				console.log('callbackOnFail');
+				console.debug(wrapper);
+			},
+			callbackOnError: (wrapper) => {
+				console.log('callbackOnError');
+				console.debug(wrapper);
+			},
+			callbackBeforeSend: (wrapper) => {
+				console.log('callbackBeforeSend');
+				console.debug(wrapper);
+			},
+			callbackOnComplete: (wrapper) => {
+				console.log('callbackOnComplete');
+				console.debug(wrapper);
+			},
+		};
+		$('#post').quasiform(optionsPost);
 	});
 ### HTML ###
 	<div id="post" class="quasiform-wrapper">
@@ -84,14 +100,10 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 		"success": true
 	}
 ## Roadmap ##
-* webpack conf
-* http://jsonapi.org/
-* Custom validation
-* Client validation
-* Rendering response result to separate method
-* ES6
-* Demo of multiple recaptcha
 * Detect offline
+* Nightwatch
+* http://jsonapi.org/
+* Demo of multiple recaptcha
 * Check if response is not json
 * Customization of Spinner
 * Customization of Star Rating

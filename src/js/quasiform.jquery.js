@@ -56,6 +56,8 @@ $.fn.quasiform = function(options) {
     callbackOnComplete: null,
     callbackBeforeSend: null,
     callbackOnAgree: null,
+    callbackOnline: null,
+    callbackOffline: null,
     callbackOnDisagree: null,
     callbackOnStarsChange: null,
   }, options);
@@ -67,6 +69,7 @@ $.fn.quasiform = function(options) {
   this.state = {
     agree: false,
     loading: false,
+    isOnline: true,
     response: null,
   };
 
@@ -122,6 +125,8 @@ $.fn.quasiform = function(options) {
           agree: checkboxAgree.checked
         });
       });
+    } else {
+      this.setState({ agree: true });
     }
   };
 
@@ -391,89 +396,109 @@ $.fn.quasiform = function(options) {
     this.render();
   };
 
-  if (this.form) {
-    this.initCheckboxes();
-    this.initTextareas();
-    this.initStars();
-    this.initSpinners();
-    this.initCustomFileInput('[data-quasiform="input-file"]');
-    this.form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const formData = new FormData(this.form);
-      const formAction = this.form.getAttribute('action');
-      const formMethod = this.form.getAttribute('method');
-      this.setState({
-        loading: true,
-        response: null
-      });
-      // Функция, которую нужно исполнить перед запросом
-      if ('callbackBeforeSend' in this.options && this.isFunction(this.options.callbackBeforeSend)) {
-        this.options.callbackBeforeSend(this.wrapper);
-      }
-      
-      const headers = {};
-      fetch(formAction, {headers: headers, method: formMethod, body: formData})
-      .then((response) => {
-        // Функция, которую нужно исполнить после завершения запроса
-        if ('callbackOnComplete' in this.options && this.isFunction(this.options.callbackOnComplete)) {
-          this.options.callbackOnComplete(this.wrapper);
-        }
-        this.setState({
-          loading: false
-        });
-        switch (this.options.format) {
-        case 'json':
-          return response.json();
-        case 'html':
-          return response.text();
-        }
-      })
-      .then((data) => {
-        if (this.options.format === 'json' && this.isObject(data)) {
-          this.wrapper.responseData = data;
-          this.setState({
-            loading: false,
-            response: data
-          });
+  this.handleOnlineStatus = () => {
+    const isOnline = navigator.onLine;
+    this.setState({
+      isOnline: isOnline
+    });
+    if (isOnline && 'callbackOnline' in this.options && this.isFunction(this.options.callbackOnline)) {
+      this.options.callbackOnline(this.wrapper);
+    }
+    if (!isOnline && 'callbackOffline' in this.options && this.isFunction(this.options.callbackOffline)) {
+      this.options.callbackOffline(this.wrapper);
+    }
+  };
+  
+  this.start = () => {
+    window.addEventListener('online',  this.handleOnlineStatus);
+    window.addEventListener('offline', this.handleOnlineStatus);
 
-          if (this.options.hideFormOnSuccess && 'success' in data && data.success) {
-            this.form.style.display = 'none';
+    if (this.form) {
+      this.initCheckboxes();
+      this.initTextareas();
+      this.initStars();
+      this.initSpinners();
+      this.initCustomFileInput('[data-quasiform="input-file"]');
+      this.form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(this.form);
+        const formAction = this.form.getAttribute('action');
+        const formMethod = this.form.getAttribute('method');
+        this.setState({
+          loading: true,
+          response: null
+        });
+        // Функция, которую нужно исполнить перед запросом
+        if ('callbackBeforeSend' in this.options && this.isFunction(this.options.callbackBeforeSend)) {
+          this.options.callbackBeforeSend(this.wrapper);
+        }
+        
+        const headers = {};
+        fetch(formAction, {headers: headers, method: formMethod, body: formData})
+        .then((response) => {
+          // Функция, которую нужно исполнить после завершения запроса
+          if ('callbackOnComplete' in this.options && this.isFunction(this.options.callbackOnComplete)) {
+            this.options.callbackOnComplete(this.wrapper);
           }
-          if ('success' in data) {
-            if (data.success) {
-              // Функция, которую нужно исполнить после успеха
-              if ('callbackOnSuccess' in this.options && this.isFunction(this.options.callbackOnSuccess)) {
-                this.options.callbackOnSuccess(this.wrapper);
+          this.setState({
+            loading: false
+          });
+          switch (this.options.format) {
+          case 'json':
+            return response.json();
+          case 'html':
+            return response.text();
+          }
+        })
+        .then((data) => {
+          if (this.options.format === 'json' && this.isObject(data)) {
+            this.wrapper.responseData = data;
+            this.setState({
+              loading: false,
+              response: data
+            });
+  
+            if (this.options.hideFormOnSuccess && 'success' in data && data.success) {
+              this.form.style.display = 'none';
+            }
+            if ('success' in data) {
+              if (data.success) {
+                // Функция, которую нужно исполнить после успеха
+                if ('callbackOnSuccess' in this.options && this.isFunction(this.options.callbackOnSuccess)) {
+                  this.options.callbackOnSuccess(this.wrapper);
+                }
+              }
+              else {
+                // Функция, которую нужно исполнить после неуспешного запроса
+                if ('callbackOnFail' in this.options && this.isFunction(this.options.callbackOnFail)) {
+                  this.options.callbackOnFail(this.wrapper);
+                }
               }
             }
             else {
-              // Функция, которую нужно исполнить после неуспешного запроса
-              if ('callbackOnFail' in this.options && this.isFunction(this.options.callbackOnFail)) {
-                this.options.callbackOnFail(this.wrapper);
+              if (options.debug) {
+                console.log('Ответ сервера не содержит поле success');
               }
             }
-          }
-          else {
+          } else if (options.format === 'html' && typeof data === 'string') {
+            this.wrapper.querySelector('[data-quasiform="html"]').innerHTML = data;
+            this.wrapper.querySelector('[data-quasiform="html"]').style.display = 'block';
+          } else {
             if (options.debug) {
-              console.log('Ответ сервера не содержит поле success');
+              console.log('Ответ сервера имеет неверный формат: ' + typeof data);
             }
           }
-        } else if (options.format === 'html' && typeof data === 'string') {
-          this.wrapper.querySelector('[data-quasiform="html"]').innerHTML = data;
-          this.wrapper.querySelector('[data-quasiform="html"]').style.display = 'block';
-        } else {
-          if (options.debug) {
-            console.log('Ответ сервера имеет неверный формат: ' + typeof data);
-          }
-        }
-      })
-      .catch(err => console.error(err));
-    });
-  } else {
-    console.log('Form not found, wrapper id: ' + this.wrapper.id);
-    return this;
-  }
+        })
+        .catch(err => console.error(err));
+      });
+    } else {
+      console.log('Form not found, wrapper id: ' + this.wrapper.id);
+      return this;
+    }
+  };
+
+  this.start();
 
   return this;
 };
