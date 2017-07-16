@@ -436,7 +436,7 @@ $.fn.quasiform = function(options) {
         }
         
         const headers = {};
-        fetch(formAction, {headers: headers, method: formMethod, body: formData})
+        fetch(formAction, {headers: headers, method: formMethod, body: formData, credentials: 'same-origin'})
         .then((response) => {
           // Функция, которую нужно исполнить после завершения запроса
           if ('callbackOnComplete' in this.options && this.isFunction(this.options.callbackOnComplete)) {
