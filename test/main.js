@@ -14,6 +14,22 @@ function initForms() {
   $('#ne').quasiform(optionsNotExists);
   
   /**
+   * Offline
+   */
+  const optionsOffline = {
+    hideFormOnSuccess: false,
+    callbackOffline: (wrapper) => {
+      console.log('callbackOffline');
+      console.debug(wrapper);
+    },
+    callbackOnline: (wrapper) => {
+      console.log('callbackOnline');
+      console.debug(wrapper);
+    }
+  };
+  $('#offline').quasiform(optionsOffline);
+  
+  /**
    * Spinner
    */
   const optionsSpinner = {

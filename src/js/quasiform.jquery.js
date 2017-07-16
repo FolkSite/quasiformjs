@@ -250,7 +250,7 @@ $.fn.quasiform = function(options) {
     const submitSelector = 'button[type="submit"]';
     const submitButton = this.wrapper.querySelector(submitSelector) || false;
     if (submitButton) {
-      if (!this.state.loading && this.state.agree) {
+      if (!this.state.loading && this.state.agree && this.state.isOnline) {
         submitButton.removeAttribute('disabled');
       } else {
         submitButton.setAttribute('disabled', true);
@@ -393,20 +393,21 @@ $.fn.quasiform = function(options) {
   this.setState = (patch) => {
     let newState = Object.assign(this.state, patch);
     this.state = newState;
+    // console.debug(this.state);
     this.render();
   };
 
   this.handleOnlineStatus = () => {
     const isOnline = navigator.onLine;
-    this.setState({
-      isOnline: isOnline
-    });
     if (isOnline && 'callbackOnline' in this.options && this.isFunction(this.options.callbackOnline)) {
       this.options.callbackOnline(this.wrapper);
     }
     if (!isOnline && 'callbackOffline' in this.options && this.isFunction(this.options.callbackOffline)) {
       this.options.callbackOffline(this.wrapper);
     }
+    this.setState({
+      isOnline: isOnline
+    });
   };
   
   this.start = () => {

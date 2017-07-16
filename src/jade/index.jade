@@ -422,6 +422,35 @@ html(lang='ru')
                                         hideFormOnSuccess: false,
                                     };
                                     let quasiformHtml = $('#html').quasiform(optionsHtml);
+                .col.s12.m12
+                    h2 Offline
+                    .row
+                        .col.s12.m6
+                            #offline.quasiform-wrapper
+                                .quasiform-errors(data-quasiform='errors', style='display: none;')
+                                .quasiform-messages(data-quasiform='messages', style='display: none;')
+                                .quasiform-loader(data-quasiform='loader', style='display: none;')
+                                    i.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+                                form.quasiform-form(action='response.html', method='post', accept-charset='utf-8')
+                                    .row
+                                        .col.m12.s12
+                                            .quasiform-form__form-group
+                                                button.quasiform-form__submit(type='submit') Send
+                        .col.s12.m6
+                            code
+                                pre(style='overflow-x: scroll;').
+                                    let optionsOffline = {
+                                        hideFormOnSuccess: false,
+                                        callbackOffile: (wrapper) => {
+                                          console.log('callbackOffile');
+                                          console.debug(wrapper);
+                                        },
+                                        callbackOnline: (wrapper) => {
+                                          console.log('callbackOnline');
+                                          console.debug(wrapper);
+                                        }
+                                    };
+                                    let quasiformHtml = $('#offline').quasiform(optionsOffline);
         // script src="https://www.google.com/recaptcha/api.js?onload=recaptchaCallBack&render=explicit"></script>
         script(src='../dependencies/jquery-3.2.1.min.js')
         script(src='../dist/js/bundle.min.js?v=30062017')
