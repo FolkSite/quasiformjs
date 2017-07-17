@@ -61,11 +61,17 @@ $.fn.quasiform = function(options) {
     callbackOnDisagree: null,
     callbackOnStarsChange: null,
   }, options);
+  
   // Обёртка (внутри находятся сообщения и форма)
   this.wrapper = document.querySelector('#' + $(this).attr('id')) || false;
   if (!this.wrapper) {
     return false;
   }
+  
+  /**
+   * Состояние приложения.
+   * Изменения состояние с помощью метода setState вызывает перерисовку.
+   */
   this.state = {
     agree: false,
     loading: false,
@@ -73,6 +79,10 @@ $.fn.quasiform = function(options) {
     response: null,
   };
 
+  /**
+   * По умолчанию ищется первая попавшаяся форма.
+   * Если форм в обёртке несколько, то можно указать селектор нужной.
+   */
   if (options.formSelector) {
     this.form = this.wrapper.querySelector(options.formSelector) || false;
   } else {
