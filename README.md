@@ -100,12 +100,12 @@ The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on b
 		"success": true
 	}
 ## Roadmap ##
-* Detect offline
+* Animate messages, errors etc by css transition (additional classes)
 * Nightwatch
 * http://jsonapi.org/
 * Demo of multiple recaptcha
 * Check if response is not json
-* Customization of Spinner
+* Customization of Spinner (-/+)
 * Customization of Star Rating
 * Customization of File Input
 * Positive UX (optional; show success before response complete)
