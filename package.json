@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.php",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack"
+    "css": "gulp",
+    "js": "webpack --watch",
+    "start": "webpack --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "quasi-art.ru",
   "dependencies": {

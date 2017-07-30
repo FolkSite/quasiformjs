@@ -100,9 +100,16 @@
             padding: 0 30px;
             text-transform: uppercase;
             width: 100%;
+            
+            &--loading {
+                background-color: #36d;
+                color: #ddd;
+            }
+            
             &:hover {
                 background-color: #b14;
             }
+            
             &:disabled {
                 background-color: #ccc;
                 border: 1px solid #ddd;
@@ -113,6 +120,7 @@
                     color: #eee;
                 }
             }
+            
         }
         &__textarea {
             background-color: #fff;

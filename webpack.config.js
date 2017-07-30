@@ -17,9 +17,23 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       loader: 'babel-loader',
-      query: {
-        presets: ['es2015']
-      }
+      options: {
+        babelrc: false,
+        presets: [
+          ['env', {
+            targets: {
+              browsers: [
+                '>1%',
+                'last 4 versions',
+                'Firefox ESR',
+                'not ie < 11',
+              ],
+            },
+            modules: false,
+            useBuiltIns: true,
+          }],
+        ],
+      },
     }]
   },
   plugins: [
