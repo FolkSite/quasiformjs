@@ -1,5 +1,6 @@
 'use strict';
 
+import $ from 'jquery';
 require('whatwg-fetch');
 require('es6-promise/auto');
 require('es6-symbol/implement');

@@ -1,5 +1,7 @@
 'use strict';
 
+import $ from 'jquery';
+
 /* eslint-disable no-unused-vars */
 import quasiform from '../src/js/quasiform.jquery.js';
 /* eslint-enable no-unused-vars */
