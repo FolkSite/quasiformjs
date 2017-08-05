@@ -13,7 +13,7 @@ require('es6-symbol/implement');
 
 window.recaptchaCallBack = () => {
   const recaptches = document.querySelectorAll('[data-quasiform="recaptcha"][data-sitekey][id]');
-  if (Array.isArray(recaptches)) {
+  if (NodeList.prototype.isPrototypeOf(recaptches)) {
     recaptches.forEach((recaptcha) => {
       const recaptchaOptions = {
         sitekey: null,
