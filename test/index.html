@@ -360,7 +360,7 @@ let quasiformPost = $('#post').quasiform(optionsPost);</pre></code></div>
                     </label>
                   </div>
                   <div class="quasiform-form__form-group">
-                    <button type="submit" class="quasiform-form__submit">Send</button>
+                    <button type="submit" data-quasiform-text-loading=" Sending" data-quasiform-class-loading="quasiform-form__submit--loading" class="quasiform-form__submit">Send</button>
                   </div>
                 </form>
               </div>
@@ -538,6 +538,7 @@ let quasiformHtml = $('#offline').quasiform(optionsOffline);</pre></code></div>
     </div>
     <!-- script src="https://www.google.com/recaptcha/api.js?onload=recaptchaCallBack&render=explicit"></script>-->
     <script src="../dependencies/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.ravenjs.com/3.17.0/raven.min.js" crossorigin="anonymous"></script>
     <script src="../dist/js/bundle.min.js?v=30062017"></script>
     <!--script(src='../dist/js/quasiform.min.js?v=30062017')-->
     <!--script(src='main.js')-->
